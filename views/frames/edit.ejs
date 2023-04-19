@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Frame</title>
+</head>
+<body>
+    <h1>Edit Frame</h1>
+    <form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="frame[title]" placeholder="enter the frame's title/name" value="<%= frame.title %>">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" id="description" name="frame[description]" placeholder="enter the frame's description" value="<%= frame.description %>">
+        </div>
+        <div>
+            <label for="words">Words</label>
+            <% for (let word of frame.words)  { %>
+                <input type="text" id="words" name="frame[words]" placeholder="enter word" value="<%= word %>">
+            <% } %>
+        </div>
+        <button>Update Frame</button>
+    </form>
+    <a href="/frames/<%= frame._id %>">Back To Frame</a>
+</body>
+</html>

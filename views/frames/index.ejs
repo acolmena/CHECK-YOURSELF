@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tropes</title>
+</head>
+<body>
+    <h1>All Frames</h1>
+    <div>
+        <a href="/frames/new">Add A New Frame</a>
+    </div>
+    <% for (let frame of frames) { %>
+        <ul>
+            <li> <a href=/frames/<%= frame._id %>><%= frame.title %></a>
+                <ul>
+                    <li>Description: <%= frame.description %></li>
+                    <li>Words: <%= frame.words %></li>
+                </ul>
+            </li>
+        </ul>
+    <% } %>
+</body>
+</html>
