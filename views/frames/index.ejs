@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Tropes</title>
-</head>
-<body>
-    <h1>All Frames</h1>
-    <div>
-        <a href="/frames/new">Add A New Frame</a>
-    </div>
-    <% for (let frame of frames) { %>
-        <ul>
-            <li> <a href=/frames/<%= frame._id %>><%= frame.title %></a>
-                <ul>
-                    <li>Description: <%= frame.description %></li>
-                    <li>Words: <%= frame.words %></li>
-                </ul>
-            </li>
+<%- layout('layouts/boilerplate') %>
+<h1>All Frames</h1>
+<div>
+    <a class="btn btn-info mb-3" href="/frames/new">Add A New Frame</a>
+</div>
+<% for (let frame of frames) { %>
+    <div class="card mb-3" style="width: 45rem;" >
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h3 class="card-title"><%= frame.title %></h3>
+          <p class="card-text"><%= frame.description %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% for (let word of frame.words) { %>
+            <li class="list-group-item"><%= word %></li>
+          <% } %>
+          <li class="list-group-item">
+            <a class="card-link btn btn-info"href="#">Add New Word</a>
+          </li>
         </ul>
-    <% } %>
-</body>
-</html>
+        <div class="card-body">
+          <a class="card-link btn btn-warning" href="/frames/<%= frame._id %>/edit">Edit</a>
+          <form class="d-inline" action="/frames/<%= frame._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+    </div>
+<% } %>
+<div class="mb-3">
+    <a class="btn btn-success" href="#">Start Scanning</a>
+</div>
+
+

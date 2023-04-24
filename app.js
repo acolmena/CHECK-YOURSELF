@@ -3,6 +3,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const Frame = require('./models/frame')
 const methodOverride = require('method-override')
+const ejsMate = require('ejs-mate')
 
 mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker')  // note: use the number URL rather than the localhost url
 .then(() => {
@@ -15,6 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker')  // note: use the nu
 
 const app = express();
 
+app.engine('ejs', ejsMate);  // for boilerplate 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))   // double underscore
 
