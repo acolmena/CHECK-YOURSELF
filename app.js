@@ -42,13 +42,17 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+app.get('/who-is-behind', (req, res) => {
+    res.render('navbar/about/whoIsBehind')
+})
+
 // Path to view our other tools
-app.get('/our-tools/astrsc', (req, res) => {
-    res.render('frames/astrsc')
+app.get('/astrsc', (req, res) => {
+    res.render('navbar/astrsc')
 })
 
 app.get('/contact-us', (req, res) => {
-    res.render('frames/contact')
+    res.render('navbar/contact')
 })
 
 app.get('/makeframe', catchAsync(async (req, res) => {
