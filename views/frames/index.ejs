@@ -3,12 +3,14 @@
 <div>
     <a class="btn btn-info mb-3" href="/frames/new">Add A New Frame</a>
 </div>
-<% for (let frame of frames) { %>
-    <div class="card mb-3" style="width: 45rem;" >
+<div class="row">
+  <% for (let frame of frames) { %>
+    <div class="col-sm-3 mb-4 mb-sm-0">
+      <div class="card mb-4" >
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-          <h3 class="card-title"><%= frame.title %></h3>
-          <p class="card-text"><%= frame.description %></p>
+          <h3 class="card-title"><%= frame.title %> frame</h3>
+          <p class="card-text"><strong>Description:</strong> <%= frame.description %></p>
         </div>
         <ul class="list-group list-group-flush">
           <% for (let word of frame.words) { %>
@@ -24,10 +26,13 @@
             <button class="btn btn-danger">Delete</button>
           </form>
         </div>
-    </div>
+      </div>
+    </div> 
 <% } %>
-<div class="mb-3">
-    <a class="btn btn-success" href="#">Start Scanning</a>
+</div>
+
+<div class="d-grid gap-2 col-2 mx-auto mb-5">
+    <a class="btn btn-success" href="/frames/scan">Start Scanning</a>
 </div>
 
 
