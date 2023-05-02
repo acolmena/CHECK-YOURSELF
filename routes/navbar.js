@@ -7,7 +7,7 @@ router.get('/who-is-behind', (req, res) => {
 
 // Path to view our other tools
 router.get('/astrsc', (req, res) => {
-    res.render('navbar/astrsc')
+    res.render('navbar/our-tools/astrsc')
 })
 
 router.get('/contact-us', (req, res) => {

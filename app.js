@@ -32,6 +32,7 @@ app.use(methodOverride('_method'))
 // Use routes from "routes" directory
 app.use('/frames', frames);
 app.use('/', navbar);
+app.use(express.static('public'))  // serving public directory
 
 // get request for home page
 app.get('/', (req, res) => {
