@@ -1,28 +1,36 @@
 <%- layout('layouts/boilerplate') %>
-<h1>All Frames</h1>
+<h1 class="text-center">Add Frames</h1>
+<div class="row">
+  <div class="col-8 offset-2">
+    <%- include('../partials/howToUseAdd') %>
+  </div>
+
 <div>
-    <a class="btn btn-info mb-3" href="/frames/new">Add A New Frame</a>
+    <!-- <a class="btn btn-info mb-3" href="/frames/new">Add A New Frame</a> -->
+    <!-- <button class="btn btn-info mb-3" id="nextFrameBtn" onclick="makeNewAccordionWForm()">Add Next Frame</button> -->
+    <%- include('../partials/frameForm') %>
 </div>
 <div class="row">
-  <% for (let frame of frames) { %>
+  <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
-      <div class="card mb-4" >
+      <div class="card mb-4" id="card<%= frames[i]._id%>">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-          <h3 class="card-title"><%= frame.title %> frame</h3>
-          <p class="card-text"><strong>Description:</strong> <%= frame.description %></p>
+          <h3 class="card-title"><%= frames[i].title %> frame</h3>
+          <p class="card-text"><strong>Description:</strong> <%= frames[i].description %></p>
         </div>
         <ul class="list-group list-group-flush">
-          <% for (let word of frame.words) { %>
+          <% for (let word of frames[i].words) { %>
             <li class="list-group-item"><%= word %></li>
           <% } %>
-          <li class="list-group-item">
+          <!-- <li class="list-group-item">
             <a class="card-link btn btn-info"href="#">Add New Word</a>
-          </li>
+          </li> -->
         </ul>
         <div class="card-body">
-          <a class="card-link btn btn-warning" href="/frames/<%= frame._id %>/edit">Edit</a>
-          <form class="d-inline" action="/frames/<%= frame._id%>?_method=DELETE" method="POST">
+          <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
+          <!-- <button id="btn<%= frames[i]._id%>" onclick="showEditForm(this.id)"></button> -->
+          <form class="d-inline" action="/frames/<%= frames[i]._id%>?_method=DELETE" method="POST">
             <button class="btn btn-danger">Delete</button>
           </form>
         </div>
@@ -34,5 +42,4 @@
 <div class="d-grid gap-2 col-2 mx-auto mb-5">
     <a class="btn btn-success" href="/frames/scan">Start Scanning</a>
 </div>
-
 

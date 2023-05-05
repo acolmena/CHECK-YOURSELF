@@ -1,46 +1,36 @@
 <%- layout('layouts/boilerplate') %>
+<h1>Edit Frames</h1>
+<a class="btn btn-primary mb-3" href="/frames">Back To All Frames</a>
 <div class="row">
-    <h1 class="text-center">Edit Frame</h1>
-    <form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
-        <div class="col-6 offset-3">
-            <form action="/frames" method="POST">
-                <div class="mb-3">
-                    <label for="title"  class="form-label">Title</label>
-                    <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>">
-                </div>
-    
-                <div class="mb-3">
-                    <label for="description"  class="form-label">Description</label>
-                    <textarea type="text" class="form-control" placeholder="enter description" id="description" name="frame[description]"><%= frame.description %></textarea>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="words"  class="form-label">Words</label>
-                    <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" value="<%= frame.words %>">
-                </div>            
-                <div class="mb-3">
-                    <button class="btn btn-success">Update Frame</button>
-                </div>
-            </form>
-            <a class="btn btn-info" href="/frames">Back to All Frames</a>
-        </div>
-    </form>
+  <% for (let i = count - 1; i > -1; i--) { %>
+    <div class="col-sm-3 mb-4 mb-sm-0">
+      <div class="card mb-4" id="card<%= frames[i]._id%>">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <% console.log(frames[i]._id, frame._id, frames[i]._id === frame._id) %>
+        <% if (frames[i]._id.equals(frame._id)) { %>
+            <div class="card-body" style="box-shadow: 0 0 40px #9ecaed;" id="cardToEdit">
+                <%- include('../partials/editPartial') %>
+            </div>
+        <% } else { %>
+            <div class="card-body">
+                <h3 class="card-title"><%= frames[i].title %> frame</h3>
+                <p class="card-text"><strong>Description:</strong> <%= frames[i].description %></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <% for (let word of frames[i].words) { %>
+                  <li class="list-group-item"><%= word %></li>
+                <% } %>
+                <!-- <li class="list-group-item">
+                  <a class="card-link btn btn-info"href="#">Add New Word</a>
+                </li> -->
+              </ul>
+              <div class="card-body">
+                <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
+                <!-- <button id="btn<%= frames[i]._id%>" onclick="showEditForm(this.id)"></button> -->
+            </div>
+           
+        <% } %>
+      </div>
+    </div> 
+<% } %>
 </div>
-
-<!-- <h1>Edit Frame</h1>
-<form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="frame[title]" placeholder="enter the frame's title/name" value="<%= frame.title %>">
-    </div>
-    <div>
-        <label for="description">Description</label>
-        <input type="text" id="description" name="frame[description]" placeholder="enter the frame's description" value="<%= frame.description %>">
-    </div>
-    <div>
-        <label for="words">Words</label>
-      
-    </div>
-    <button>Update Frame</button>
-</form>
-<a href="/frames">Back To Frames</a> -->

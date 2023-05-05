@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-6 offset-3">
+            <div class="card card-body mb-3">
+                <form action="/frames" class="needs-validation" method="POST" novalidate>
+                    <div class="mb-3">
+                        <label for="title"  class="form-label">Title</label>
+                        <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter a title/name for the frame!
+                        </div>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="description"  class="form-label">Description</label>
+                        <textarea type="text" class="form-control" placeholder="enter description (optional)" id="description" name="frame[description]"></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="words"  class="form-label">Words</label>
+                        <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter word(s) associated with frame so we can scan for them!
+                        </div>
+                    </div>            
+                    <div class="mb-3">
+                        <button class="btn btn-success">Add Frame</button>
+                    </div>
+                </form>
+             </div>
+    </div>
+ </div>

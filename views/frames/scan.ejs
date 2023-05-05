@@ -2,29 +2,7 @@
 <div class="row">
     <!-- <h1 class="text-center">Scan</h1> -->
     <div class="col-6 offset-3">
-        <div class="accordion mb-3" id="accordionPanelsStayOpenExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                  How to use
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                    <ol>
-                        <li><strong>Write or paste</strong>  your text in the text box below</li>
-                        <li><strong>Click</strong> “Scan Article”</li>
-                        <li>ASTRSC will <strong>highlight</strong> words and expressions in your text that generally reinforce several tropes about Africa</li>
-                        <li><strong>Hover</strong> over the highlighted words to view a brief description of the tropes each word may be reinforcing</li>
-                        <li><strong>Click</strong> on the provided links to learn about their origins, pervasiveness, and effects and see constructive ideas and suggestions</li>
-                        <li>Scroll down to <strong>view</strong> a pie chart visualizing the number of words highlighted</li>
-                        <li><strong>Optional:</strong> click the "Show Breakdown of Voices" button to view a  breakdown of quotes in your text</li>
-                    </ol>
-                </div>
-              </div>
-            </div>
-        </div>
-        
+        <%- include('../partials/howToUseScan') %>
         <form class="mb-3">
             <div class="mb-3">
                 <textarea class="form-control" id="inputText" spellcheck="true" style="height: 350px" placeholder="Enter your article here!"></textarea>
@@ -35,33 +13,31 @@
                 <button class="btn btn-success btn-lg" type="button">SCAN ARTICLE</button>
               </div>
             <br />
-            <div id="clrBlnd">
-                <b>Need color-blind friendly colors?</b> 
-                <br />
-                <label class="switch" for="clrBlndCheckbox"> 
-                    <input id="clrBlndCheckbox" name="clrBlndCheckbox" type="checkbox" /> 
-                </label> Yes, please!
-            </div>
-            
+            <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
+                <div class="card-body">
+                  <h5 class="card-title">Need color-blind friendly colors?</h5>
+                  <div class="form-check form-switch ">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">
+                        Yes, please!
+                    </label>
+                  </div>
+                </div>
+            </div>            
         </form>
         
-        <div><!-- wp:spacer -->
-        <div class="wp-block-spacer" style="height: 40px;" aria-hidden="true"> </div>
-        <!-- /wp:spacer -->
-        <!-- <div>
-        <p id="outputText" class="rounded-text-box"> </p>
+        <div>
+        <p id="outputText" class="rounded-text-box" style="display: none;"> </p>
         </div>
-            <div id="tropeMessage">
-                <aside id="generalization">Do you really mean the whole entire continent? Africa is often treated as a country, and Africans depicted as a monolith! If it's relevant, try to be more specific. <a id="genLink" href="https://astrsc.com/tropes/generalization">Read more about the Generalization Trope.</a></aside>
-                <aside id="tribalism">African issues are often reduced to matters of ethnicity and tribal rivalries, even when that is an incomplete or inaccurate picture. African communities and groups are often described as tribes regardless of social organization, when similar groups would be described as nations, minority groups, or communities elsewhere in the world. The framing of conflicts as driven by tribal hatred is particularly harmful and can contribute to conflict escalation. <a id="tribLink" href="https://astrsc.com/tropes/tribalism" target="_blank" rel="noopener noreferrer">Read more about the Tribalism Trope.</a></aside>
-                <aside id="nature">People love to describe the savanna, the jungles, the wildlife, and the vast empty lands of Africa. Fascinating and thrilling as they are, descriptions of African nature and wildlife should be used carefully. Africa has long been portrayed as an unadulterated natural reservation; a big virgin jungle to tame and explore. If it is not directly related to your subject matter, spare your readers the romanticized natural descriptions. <a id="natLink" href="https://astrsc.com/tropes/nature" target="_blank" rel="noopener noreferrer">Read more about the Nature and Wildlife Trope.</a></aside>
-                <aside id="conflictAndViolence"><span style="font-weight: 400;">To this day, Africa is seen as a place ridden with conflict, violence, and devastation. While crises continue to unfold in certain regions of the continent, the language used to describe them is often particularly bleak and fatalistic. As the 'Dark Continent' stereotype continues to be one of the most harmful ones to Africa's image, it is worth interrogating whether we are seeing the continent through too negative and alarmist a lens.</span> <a id="conLink" href="https://astrsc.com/tropes/conflict-and-violence" target="_blank" rel="noopener noreferrer">Read more about the Conflict and Violence Trope.</a></aside>
-            </div>
+        <div id="tropeMessage" style="display: none;">
+            <% for (let frame of frames) {%>
+                <aside id="<%= frame.title %>"><%= frame.description %></aside>
+            <% } %>
         </div>
-        <!-- wp:html -->
+     
         <p><canvas id="myChart"></canvas> <script id="chartCDNScript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script></p>
-        <!-- /wp:html -->
-        <p>&nbsp;</p> -->
+
+        <p>&nbsp;</p>
     </div>
 </div>
-<script src="/public/scan.js"></script>
+<script src="/scan.js"></script>

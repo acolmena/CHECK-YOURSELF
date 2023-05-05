@@ -18,12 +18,15 @@ const validateFrame = (req, res, next) => {
 
 router.get('/', catchAsync(async (req, res) => {
     const frames = await Frame.find({})  // find all items in dbs
-    res.render('frames/index', {frames})
+    const count = await Frame.find().estimatedDocumentCount();
+    console.log(count)
+    res.render('frames/index', {frames, count})
 }))
 
-router.get('/scan', (req, res) => {
-    res.render('frames/scan')
-})
+router.get('/scan', catchAsync(async (req, res) => {
+    const frames = await Frame.find({})  // find all items in dbs
+    res.render('frames/scan', {frames})
+}))
 
 // Create routes
 // NOTE: order matters, this needs to be before the /frames/:id route below
@@ -37,7 +40,7 @@ router.post('/', validateFrame, catchAsync(async (req, res, next) => {
     const newFrame = new Frame(req.body.frame); 
     await newFrame.save()
     // res.send(newFrame.description)
-    res.redirect(`/frames/${newFrame._id}`)
+    res.redirect(`/frames`)
 }))
 
 // Show route
@@ -49,13 +52,15 @@ router.get('/:id', catchAsync(async (req, res) => {
 // Edit routes
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const frame = await Frame.findById(req.params.id)
-    res.render('frames/edit', {frame})
+    const frames = await Frame.find({})  // find all items in dbs
+    const count = await Frame.find().estimatedDocumentCount();
+    res.render('frames/edit', {frame, frames, count})
 }))
 
 router.put('/:id', validateFrame, catchAsync(async (req, res) => {
     const {id} = req.params;
     await Frame.findByIdAndUpdate(id, {...req.body.frame});
-    res.redirect(`/frames/${id}`);
+    res.redirect(`/frames`);
 }))
 
 // Delete route
