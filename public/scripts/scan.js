@@ -1,6 +1,6 @@
 // import catchAsync from '../utils/catchAsync';
 // import Frame from '../models/frame';
-
+// console.log(frames)
 
 // alert("hello from scan.js")
 // function hasTrope(trope) {
@@ -61,25 +61,69 @@
 // })
 
 // const frames = catchAsync();
-console.log(frames)
 
 
-// This function highlights the words that match the rgx expression below
-function hiliter(word, element, tropeClass, obj, isProbWord, isDupe) {
+const frames = [
+    { "_id" : "643dada82d80f61596f57de6", "title" : "african clawless ott", "description" : "wolf disast crane bush babi tick artillery", "words" : [ "tuna", "reedbuck", "achrioptera manga" ], "__v" : 0 },
+{ "_id" : "643dada82d80f61596f57de8", "title" : "barbary boar", "description" : "fisheri topple gnat sheep barb game warden", "words" : [ "dead", "african development bank group", "sea leopard" ], "__v" : 0 },
+{ "_id" : "643dada82d80f61596f57dea", "title" : "coup d'etat", "description" : "forest cobra egyptian gees africanize european robin senegal parrot power shift africa", "words" : [ "glass lizard", "peafowl", "flycatch" ], "__v" : 0 },
+{ "_id" : "643dada82d80f61596f57dec", "title" : "african tree toad", "description" : "destruct bushbuck overthr dying elephant seal cape bushbuck", "words" : [ "fennec fox", "turaco", "shore bird" ], "__v" : 0 },
+{ "_id" : "643dada82d80f61596f57dee", "title" : "rhino vip", "description" : "mongoos scenic myna bird pelican hostag jail", "words" : [ "amphibian", "pain", "fruit bat" ], "__v" : 0 },
+{ "_id" : "643dada82d80f61596f57df0", "title" : "humpback whal", "description" : "egyptian tortois naturalist linnet osprey galapagos shark paratroop", "words" : [ "reptil", "tarantula hawk", "loot" ], "__v" : 0 }
+];
+
+const string = "dead tuna turaco pain amphibian reptil ya ya ay"
+
+
+// Highlights the words that match the rgx expression below
+function hiliter(word, element, tropeClass) {
+    let wrdCount = 0;
     let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
-
-    element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
-    obj[tropeClass] += x.split(" ").length;
-    return `<mark class=${tropeClass}>${x}</mark>`;
+    // element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
+    //         wrdCount += 1;
+    //         return `<mark class=${tropeClass}>${x}</mark>`;
+    // });
+    element = element.replace(rgxp, function (x) {
+            wrdCount += 1;
+            return `<mark class=${tropeClass}>${x}</mark>`;
     });
 
-    return obj;
+    return wrdCount;
 }
 
-// This function will return the total number of words in the inputted text
+// Returns total number of words in the inputted text
 function getTotWordCount(element) {
     return element.trim().split(/\s+/).length;
 }
+
+
+// Main function: hilights words for outputText and builds up graphObj 
+function hilitFrames(frames) {
+    console.log(typeof frames)
+    const graphObj = {
+                        'totWrdCountAllFrames': 0
+                     }
+    for (let frame of frames) {
+        graphObj[frame.title] = {
+                                    'totWrdCount': 0,
+                                    'indWrdCounts': {}         
+                                }   // start frame object
+        let totFrameCount = 0;  // counter for tot count of words found for a particular frame
+        for (let word of frame.words) {
+            let indFrameWrdCount = hiliter(word, string, frame.title)  // highlights words and returns count of total times an individual word was found
+            graphObj[frame.title].indWrdCounts[word] = indFrameWrdCount;
+            totFrameCount += indFrameWrdCount
+        }
+        graphObj[frame.title].totWrdCount = totFrameCount;
+        graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
+    }
+    console.log(graphObj, string)
+}
+
+
+const scanArticleBtn = document.querySelector('#scanArticleBtn')
+document.querySelector('#scanArticleBtn').addEventListener("click", hilitFrames(frames))
+
 
 
 

@@ -10,7 +10,7 @@
             <p>&nbsp;</p>
             <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
             <div class="d-grid gap-2 col-4 mx-auto">
-                <button class="btn btn-success btn-lg" type="button">SCAN ARTICLE</button>
+                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" >SCAN ARTICLE</button>  <!-- onclick="hilitFrames(`<%= frames %>`)" -->
               </div>
             <br />
             <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
@@ -27,17 +27,20 @@
         </form>
         
         <div>
-        <p id="outputText" class="rounded-text-box" style="display: none;"> </p>
+            <p id="outputText" class="rounded-text-box" style="display: none;"> </p>
         </div>
         <div id="tropeMessage" style="display: none;">
             <% for (let frame of frames) {%>
-                <aside id="<%= frame.title %>"><%= frame.description %></aside>
+                <aside id="<%= frame.title %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
             <% } %>
         </div>
      
-        <p><canvas id="myChart"></canvas> <script id="chartCDNScript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script></p>
+        <p>
+            <canvas id="myChart"></canvas> 
+            <script id="chartCDNScript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        </p>
 
         <p>&nbsp;</p>
     </div>
 </div>
-<script src="/scan.js"></script>
+<script type="text/javascript" src="/scripts/scan.js"></script>
