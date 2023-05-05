@@ -3,7 +3,7 @@
             <div class="card card-body mb-3">
                 <form action="/frames" class="needs-validation" method="POST" novalidate>
                     <div class="mb-3">
-                        <label for="title"  class="form-label">Title</label>
+                        <label for="title"  class="form-label">Title <strong style="color: red;">*</strong></label>
                         <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -22,7 +22,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="words"  class="form-label">Words</label>
+                        <label for="words"  class="form-label">Words <strong style="color: red;">*</strong></label>
                         <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" required>
                         <div class="valid-feedback">
                             Looks good!

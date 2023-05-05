@@ -6,7 +6,6 @@
     <div class="col-sm-3 mb-4 mb-sm-0">
       <div class="card mb-4" id="card<%= frames[i]._id%>">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
-        <% console.log(frames[i]._id, frame._id, frames[i]._id === frame._id) %>
         <% if (frames[i]._id.equals(frame._id)) { %>
             <div class="card-body" style="box-shadow: 0 0 40px #9ecaed;" id="cardToEdit">
                 <%- include('../partials/editPartial') %>
