@@ -87,13 +87,12 @@ function getTotWordCount(element) {
 const string = "dead tuna turaco pain amphibian reptil ya ya ay"
 
 document.querySelector('#scanArticleBtn').addEventListener("click", function() {
-    let inputForm = document.querySelector("#inputText")
-    let rawInput = inputForm.value;
+    let rawInput = document.querySelector("#inputText").value;
     let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
     console.log('totWords:', totWords)
     let outputHTML = rawInput.replace(/\n\r?/g, "<br>");
-    console.log(frames, typeof frames)
-    console.log('input text:', outputHTML)
+    // console.log(frames, typeof frames)
+    // console.log('input text:', outputHTML)
     const graphObj = {
                         'totWrdCountAllFrames': 0
                      }
@@ -112,16 +111,32 @@ document.querySelector('#scanArticleBtn').addEventListener("click", function() {
         graphObj[frame.title].totWrdCount = totFrameCount;
         graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
     }
-    console.log(graphObj, string)
-    document.querySelector("#outputText").innerHTML = outputHTML;
-    document.querySelector('#outputText').style.display = 'block'
-    document.querySelector("#outputText").scrollIntoView({behavior: "smooth"})
+    
+    let outputText = document.querySelector("#outputText");
+    let inputForm = document.querySelector('#inputForm');
+    let newScanBtn = document.querySelector('#newScanBtn');
+    console.log(outputHTML)
+    
+    if (document.querySelector("#outputText").style.display === 'none') {
+        console.log('none')
+        outputText.innerHTML = outputHTML;
+        outputText.style.display = 'block'
+    } else {
+        console.log('else')
+        const outputTextBoxHTML = `<div>
+                                    <p id="subsequentOutText" class="rounded-text-box" style="background-color: #dce0e6; border-radius: 20px; padding: 20px; margin-bottom: 40px;"></p>
+                               </div>`
+        // insert next outputText box below original one
+        newScanBtn.insertAdjacentHTML("beforebegin", outputTextBoxHTML);
+        document.querySelector('#subsequentOutText').innerHTML = outputHTML
+    }
+    outputText.scrollIntoView({behavior: "smooth"})
 
     // hide scanner 
-    document.querySelector('#inputForm').style.display = 'none'
+    inputForm.style.display = 'none'
 
     // show button to show scanner
-    document.querySelector('#newScanBtn').style.display = 'block'
+    newScanBtn.style.display = 'block'
 })
 
 
