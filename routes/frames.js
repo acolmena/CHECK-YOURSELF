@@ -29,6 +29,7 @@ const validateFrame = (req, res, next) => {
 router.get('/', catchAsync(async (req, res) => {
     const frames = await Frame.find({})  // find all items in dbs
     const count = await Frame.find().estimatedDocumentCount();
+    // module.exports.frames = frames;
     res.render('frames/index', {frames, count})
 }))
 

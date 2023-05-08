@@ -1,7 +1,7 @@
 // import catchAsync from '../utils/catchAsync';
 // import Frame from '../models/frame';
 // console.log(frames)
-
+// import frames from '.../routes/frames.js'
 // alert("hello from scan.js")
 // function hasTrope(trope) {
 //     return $("mark").classList.contains(trope);
@@ -63,18 +63,6 @@
 // const frames = catchAsync();
 
 
-const frames = [
-    { "_id" : "643dada82d80f61596f57de6", "title" : "african clawless ott", "description" : "wolf disast crane bush babi tick artillery", "words" : [ "tuna", "reedbuck", "achrioptera manga" ], "__v" : 0 },
-{ "_id" : "643dada82d80f61596f57de8", "title" : "barbary boar", "description" : "fisheri topple gnat sheep barb game warden", "words" : [ "dead", "african development bank group", "sea leopard" ], "__v" : 0 },
-{ "_id" : "643dada82d80f61596f57dea", "title" : "coup d'etat", "description" : "forest cobra egyptian gees africanize european robin senegal parrot power shift africa", "words" : [ "glass lizard", "peafowl", "flycatch" ], "__v" : 0 },
-{ "_id" : "643dada82d80f61596f57dec", "title" : "african tree toad", "description" : "destruct bushbuck overthr dying elephant seal cape bushbuck", "words" : [ "fennec fox", "turaco", "shore bird" ], "__v" : 0 },
-{ "_id" : "643dada82d80f61596f57dee", "title" : "rhino vip", "description" : "mongoos scenic myna bird pelican hostag jail", "words" : [ "amphibian", "pain", "fruit bat" ], "__v" : 0 },
-{ "_id" : "643dada82d80f61596f57df0", "title" : "humpback whal", "description" : "egyptian tortois naturalist linnet osprey galapagos shark paratroop", "words" : [ "reptil", "tarantula hawk", "loot" ], "__v" : 0 }
-];
-
-const string = "dead tuna turaco pain amphibian reptil ya ya ay"
-
-
 // Highlights the words that match the rgx expression below
 function hiliter(word, element, tropeClass) {
     let wrdCount = 0;
@@ -85,10 +73,10 @@ function hiliter(word, element, tropeClass) {
     // });
     element = element.replace(rgxp, function (x) {
             wrdCount += 1;
-            return `<mark class=${tropeClass}>${x}</mark>`;
+            return `<mark class=${tropeClass} style='background-color: yellow; border-radius: 7px;'>${x}</mark>`;
     });
 
-    return wrdCount;
+    return [wrdCount, element];
 }
 
 // Returns total number of words in the inputted text
@@ -96,10 +84,16 @@ function getTotWordCount(element) {
     return element.trim().split(/\s+/).length;
 }
 
+const string = "dead tuna turaco pain amphibian reptil ya ya ay"
 
-// Main function: hilights words for outputText and builds up graphObj 
-function hilitFrames(frames) {
-    console.log(typeof frames)
+document.querySelector('#scanArticleBtn').addEventListener("click", function() {
+    let inputForm = document.querySelector("#inputText")
+    let rawInput = inputForm.value;
+    let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
+    console.log('totWords:', totWords)
+    let outputHTML = rawInput.replace(/\n\r?/g, "<br>");
+    console.log(frames, typeof frames)
+    console.log('input text:', outputHTML)
     const graphObj = {
                         'totWrdCountAllFrames': 0
                      }
@@ -109,8 +103,9 @@ function hilitFrames(frames) {
                                     'indWrdCounts': {}         
                                 }   // start frame object
         let totFrameCount = 0;  // counter for tot count of words found for a particular frame
+        let indFrameWrdCount;
         for (let word of frame.words) {
-            let indFrameWrdCount = hiliter(word, string, frame.title)  // highlights words and returns count of total times an individual word was found
+            [indFrameWrdCount, outputHTML] = hiliter(word, outputHTML, frame.title)  // highlights words and returns count of total times an individual word was found
             graphObj[frame.title].indWrdCounts[word] = indFrameWrdCount;
             totFrameCount += indFrameWrdCount
         }
@@ -118,11 +113,51 @@ function hilitFrames(frames) {
         graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
     }
     console.log(graphObj, string)
-}
+    document.querySelector("#outputText").innerHTML = outputHTML;
+    document.querySelector('#outputText').style.display = 'block'
+    document.querySelector("#outputText").scrollIntoView({behavior: "smooth"})
+
+    // hide scanner 
+    document.querySelector('#inputForm').style.display = 'none'
+
+    // show button to show scanner
+    document.querySelector('#newScanBtn').style.display = 'block'
+})
 
 
-const scanArticleBtn = document.querySelector('#scanArticleBtn')
-document.querySelector('#scanArticleBtn').addEventListener("click", hilitFrames(frames))
+
+
+
+
+
+
+// Main function: hilights words for outputText and builds up graphObj 
+// function hilitFrames(frames, element) {
+//     console.log(typeof frames)
+//     console.log(element)
+//     const graphObj = {
+//                         'totWrdCountAllFrames': 0
+//                      }
+//     for (let frame of frames) {
+//         graphObj[frame.title] = {
+//                                     'totWrdCount': 0,
+//                                     'indWrdCounts': {}         
+//                                 }   // start frame object
+//         let totFrameCount = 0;  // counter for tot count of words found for a particular frame
+//         for (let word of frame.words) {
+//             let indFrameWrdCount = hiliter(word, element, frame.title)  // highlights words and returns count of total times an individual word was found
+//             graphObj[frame.title].indWrdCounts[word] = indFrameWrdCount;
+//             totFrameCount += indFrameWrdCount
+//         }
+//         graphObj[frame.title].totWrdCount = totFrameCount;
+//         graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
+//     }
+//     console.log(graphObj, string)
+//     document.querySelector('#outputText').style.display = 'block'
+// }
+
+
+
 
 
 

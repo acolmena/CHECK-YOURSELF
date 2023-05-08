@@ -3,7 +3,14 @@
     <!-- <h1 class="text-center">Scan</h1> -->
     <div class="col-6 offset-3">
         <%- include('../partials/howToUseScan') %>
-        <form class="mb-3">
+        <div>
+            <p id="outputText" class="rounded-text-box" style="display: none; background-color: #dce0e6;
+            border-radius: 20px; padding: 20px; margin-bottom: 70px;"> </p>
+        </div>
+        <div>
+            <button id="newScanBtn" class="btn btn-primary" style="display: none;">Scan Again</button>
+        </div>
+        <form class="mb-3" id="inputForm">
             <div class="mb-3">
                 <textarea class="form-control" id="inputText" spellcheck="true" style="height: 350px" placeholder="Enter your article here!"></textarea>
             </div>
@@ -13,7 +20,7 @@
                 <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" >SCAN ARTICLE</button>  <!-- onclick="hilitFrames(`<%= frames %>`)" -->
               </div>
             <br />
-            <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
+            <!-- <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
                 <div class="card-body">
                   <h5 class="card-title">Need color-blind friendly colors?</h5>
                   <div class="form-check form-switch ">
@@ -23,13 +30,10 @@
                     </label>
                   </div>
                 </div>
-            </div>            
+            </div>             -->
         </form>
         
-        <div>
-            <p id="outputText" class="rounded-text-box" style="display: none;"> </p>
-        </div>
-        <div id="tropeMessage" style="display: none;">
+        <div id="tropeMessage" style="display: none; ">
             <% for (let frame of frames) {%>
                 <aside id="<%= frame.title %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
             <% } %>
@@ -43,4 +47,7 @@
         <p>&nbsp;</p>
     </div>
 </div>
-<script type="text/javascript" src="/scripts/scan.js"></script>
+<script>
+    const frames = <%- JSON.stringify(frames) %>
+</script>
+<script src="/scripts/scan.js"></script>
