@@ -6,8 +6,15 @@
         <div>
             <p id="outputText" class="rounded-text-box" style="display: none; background-color: #dce0e6;
             border-radius: 20px; padding: 20px; margin-bottom: 40px;"> </p>
+            
+            <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
+                <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
+                    <p>Pie chart breaking down instances of frames found</p>
+                </canvas> 
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            </div>
         </div>
-        <div>
+        <div class="d-grid gap-2 col-3 mx-auto">
             <button id="newScanBtn" class="btn btn-primary" style="display: none; margin-bottom: 40px;">Scan Again</button>
         </div>
         <form class="mb-3" id="inputForm">
@@ -17,7 +24,7 @@
             <p>&nbsp;</p>
             <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
             <div class="d-grid gap-2 col-4 mx-auto">
-                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" >SCAN ARTICLE</button>  <!-- onclick="hilitFrames(`<%= frames %>`)" -->
+                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" >SCAN ARTICLE</button>  
               </div>
             <br />
             <!-- <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
@@ -33,16 +40,12 @@
             </div>             -->
         </form>
         
-        <div id="tropeMessage" style="display: none; ">
+        <div id="frameMessage" style="display: none; ">
             <% for (let frame of frames) {%>
-                <aside id="<%= frame.title %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
+                <aside id="<%= frame._id %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
             <% } %>
         </div>
      
-        <p>
-            <canvas id="myChart"></canvas> 
-            <script id="chartCDNScript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-        </p>
 
         <p>&nbsp;</p>
     </div>
@@ -52,3 +55,6 @@
 </script>
 <script src="/scripts/scan.js"></script>
 <script src="/scripts/newScan.js"></script>
+<script src="path/to/chartjs/dist/chart.umd.js"></script>
+
+

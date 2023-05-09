@@ -84,7 +84,53 @@ function getTotWordCount(element) {
     return element.trim().split(/\s+/).length;
 }
 
-const string = "dead tuna turaco pain amphibian reptil ya ya ay"
+const makeChart = async (titlesArray, valuesArray) => {
+    (async function() {
+      
+        new Chart(
+          document.getElementById(`myChart0`),
+          {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: valuesArray
+                }],
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: titlesArray
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Breakdown of Frames Detected'
+                    },
+                    colors: {
+                        forceOverride: true
+                    }
+                }
+            }
+          }
+        );
+      })();
+}
+
+// const showFrameMessage = (frameId) => {
+//     const frameMessage = document.querySelector('#frameMessage');
+//     frameMessage.style.display = 'block';
+//     document.querySelector('aside').style.display = 'none';
+//     frameMessage.style.backgroundColor = 'yellow';
+//     document.getElementById(`${frameId}`).style.display = 'block';
+
+// //     $("aside").hide();
+// //     $("#genLink").css("color", colors[4]); // change link color
+// //     $("#tropeMessage").css("background-color", colors[0]); // turn background of popup text this color
+// //     $("#generalization").show();
+// }
+
+// const string = "dead tuna turaco pain amphibian reptil ya ya ay"
+
+// // create eventListener when hovering over highlighted frames 
+// document.getElementsByClassName(`${frame._id}`).addEventListener("mouseover", showFrameMessage(frame._id));
 
 document.querySelector('#scanArticleBtn').addEventListener("click", function() {
     let rawInput = document.querySelector("#inputText").value;
@@ -96,19 +142,31 @@ document.querySelector('#scanArticleBtn').addEventListener("click", function() {
     const graphObj = {
                         'totWrdCountAllFrames': 0
                      }
+    let titlesArray = []
+    let valuesArray = []
     for (let frame of frames) {
-        graphObj[frame.title] = {
+        let title = frame.title;
+        titlesArray.push(title)
+        graphObj[title] = {
                                     'totWrdCount': 0,
                                     'indWrdCounts': {}         
                                 }   // start frame object
         let totFrameCount = 0;  // counter for tot count of words found for a particular frame
         let indFrameWrdCount;
         for (let word of frame.words) {
-            [indFrameWrdCount, outputHTML] = hiliter(word, outputHTML, frame.title)  // highlights words and returns count of total times an individual word was found
-            graphObj[frame.title].indWrdCounts[word] = indFrameWrdCount;
+            [indFrameWrdCount, outputHTML] = hiliter(word, outputHTML, frame._id)  // highlights words and returns count of total times an individual word was found
+            graphObj[title].indWrdCounts[word] = indFrameWrdCount;
             totFrameCount += indFrameWrdCount
         }
-        graphObj[frame.title].totWrdCount = totFrameCount;
+        // document.getElementsByClassName(`${frame._id}`).addEventListener("mouseover", function() {
+        //     const frameMessage = document.querySelector('#frameMessage');
+        //     frameMessage.style.display = 'block';
+        //     document.querySelector('aside').style.display = 'none';
+        //     frameMessage.style.backgroundColor = 'yellow';
+        //     document.getElementById(`${frameId}`).style.display = 'block';
+        // });
+        graphObj[title].totWrdCount = totFrameCount;
+        valuesArray.push(totFrameCount)
         graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
     }
     
@@ -124,12 +182,16 @@ document.querySelector('#scanArticleBtn').addEventListener("click", function() {
     } else {
         console.log('else')
         const outputTextBoxHTML = `<div>
-                                    <p id="subsequentOutText" class="rounded-text-box" style="background-color: #dce0e6; border-radius: 20px; padding: 20px; margin-bottom: 40px;"></p>
-                               </div>`
+                                    <p class="rounded-text-box" style="background-color: #dce0e6; border-radius: 20px; padding: 20px; margin-bottom: 40px;">${outputHTML}</p>
+                                   </div>`
         // insert next outputText box below original one
         newScanBtn.insertAdjacentHTML("beforebegin", outputTextBoxHTML);
-        document.querySelector('#subsequentOutText').innerHTML = outputHTML
+        // document.querySelector('#subsequentOutText').innerHTML = outputHTML
     }
+
+    // make chart
+    makeChart(titlesArray, valuesArray)
+
     outputText.scrollIntoView({behavior: "smooth"})
 
     // hide scanner 
