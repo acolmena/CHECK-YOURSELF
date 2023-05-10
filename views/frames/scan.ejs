@@ -1,17 +1,27 @@
 <%- layout('layouts/boilerplate') %>
-<div class="row">
+<!-- <div class="row"> -->
     <!-- <h1 class="text-center">Scan</h1> -->
-    <div class="col-6 offset-3">
+    <!-- <div class="col-8 offset-2"> -->
         <%- include('../partials/howToUseScan') %>
-        <div>
-            <p id="outputText" class="rounded-text-box" style="display: none; background-color: #dce0e6;
-            border-radius: 20px; padding: 20px; margin-bottom: 40px;"> </p>
+        <!-- <div class="accordion" id="accordion" style="margin-bottom: 50px;"></div> -->
+        <div id="results0" style="display: none;">
+            <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
+                border-radius: 20px; width: 50%;
+                min-width: 400px;
+                float: left;
+                height: auto;
+                padding: 3%;
+                border-radius: 10px;
+                margin-left: 5%;
+                background-color: #F4F5F5;
+                margin-bottom: 200px;"> 
+            </p>
             
             <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
                 <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
                     <p>Pie chart breaking down instances of frames found</p>
                 </canvas> 
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                
             </div>
         </div>
         <div class="d-grid gap-2 col-3 mx-auto">
@@ -40,7 +50,16 @@
             </div>             -->
         </form>
         
-        <div id="frameMessage" style="display: none; ">
+        <div id="frameMessage"   style="display: none; 
+                                        color: black;
+                                        position: sticky;
+                                        width: 30%;
+                                        float: right;
+                                        margin-top: -950px;
+                                        padding: 1%;
+                                        right:5%;
+                                        border-radius: 10px;
+                                        top: 0px;">
             <% for (let frame of frames) {%>
                 <aside id="<%= frame._id %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
             <% } %>
@@ -48,13 +67,15 @@
      
 
         <p>&nbsp;</p>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
 <script>
     const frames = <%- JSON.stringify(frames) %>
 </script>
 <script src="/scripts/scan.js"></script>
 <script src="/scripts/newScan.js"></script>
-<script src="path/to/chartjs/dist/chart.umd.js"></script>
+<script src="/scripts/hover.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 

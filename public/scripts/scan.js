@@ -62,144 +62,227 @@
 
 // const frames = catchAsync();
 
+jQuery(document).ready(function ($) { 
+    let i = 0;
+    // Highlights the words that match the rgx expression below
+    function hiliter(word, element, tropeClass) {
+        let wrdCount = 0;
+        let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
+        console.log(element)
+        element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
+                wrdCount += 1;
+                return `<mark class=${tropeClass} style='background-color: yellow; border-radius: 7px;'>${x}</mark>`;
+        });
 
-// Highlights the words that match the rgx expression below
-function hiliter(word, element, tropeClass) {
-    let wrdCount = 0;
-    let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
-    // element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
-    //         wrdCount += 1;
-    //         return `<mark class=${tropeClass}>${x}</mark>`;
-    // });
-    element = element.replace(rgxp, function (x) {
-            wrdCount += 1;
-            return `<mark class=${tropeClass} style='background-color: yellow; border-radius: 7px;'>${x}</mark>`;
-    });
+        return [wrdCount, element];
+    }
 
-    return [wrdCount, element];
-}
+    // Returns total number of words in the inputted text
+    function getTotWordCount(element) {
+        return element.trim().split(/\s+/).length;
+    }
 
-// Returns total number of words in the inputted text
-function getTotWordCount(element) {
-    return element.trim().split(/\s+/).length;
-}
-
-const makeChart = async (titlesArray, valuesArray) => {
-    (async function() {
-      
-        new Chart(
-          document.getElementById(`myChart0`),
-          {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    data: valuesArray
-                }],
-                // These labels appear in the legend and in the tooltips when hovering different arcs
-                labels: titlesArray
-            },
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Breakdown of Frames Detected'
-                    },
-                    colors: {
-                        forceOverride: true
+    const makeChart = async (titlesArray, valuesArray, i) => {
+        (async function() {
+        
+            new Chart(
+            document.getElementById(`myChart${i - 1}`),
+            {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: valuesArray
+                    }],
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: titlesArray
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Breakdown of Frames Detected'
+                        },
+                        colors: {
+                            forceOverride: true
+                        }
                     }
                 }
             }
-          }
-        );
-      })();
-}
+            );
+        })();
+    }
 
-// const showFrameMessage = (frameId) => {
-//     const frameMessage = document.querySelector('#frameMessage');
-//     frameMessage.style.display = 'block';
-//     document.querySelector('aside').style.display = 'none';
-//     frameMessage.style.backgroundColor = 'yellow';
-//     document.getElementById(`${frameId}`).style.display = 'block';
-
-// //     $("aside").hide();
-// //     $("#genLink").css("color", colors[4]); // change link color
-// //     $("#tropeMessage").css("background-color", colors[0]); // turn background of popup text this color
-// //     $("#generalization").show();
-// }
-
-// const string = "dead tuna turaco pain amphibian reptil ya ya ay"
-
-// // create eventListener when hovering over highlighted frames 
-// document.getElementsByClassName(`${frame._id}`).addEventListener("mouseover", showFrameMessage(frame._id));
-
-document.querySelector('#scanArticleBtn').addEventListener("click", function() {
-    let rawInput = document.querySelector("#inputText").value;
-    let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
-    console.log('totWords:', totWords)
-    let outputHTML = rawInput.replace(/\n\r?/g, "<br>");
-    // console.log(frames, typeof frames)
-    // console.log('input text:', outputHTML)
-    const graphObj = {
-                        'totWrdCountAllFrames': 0
-                     }
-    let titlesArray = []
-    let valuesArray = []
-    for (let frame of frames) {
-        let title = frame.title;
-        titlesArray.push(title)
-        graphObj[title] = {
-                                    'totWrdCount': 0,
-                                    'indWrdCounts': {}         
-                                }   // start frame object
-        let totFrameCount = 0;  // counter for tot count of words found for a particular frame
-        let indFrameWrdCount;
-        for (let word of frame.words) {
-            [indFrameWrdCount, outputHTML] = hiliter(word, outputHTML, frame._id)  // highlights words and returns count of total times an individual word was found
-            graphObj[title].indWrdCounts[word] = indFrameWrdCount;
-            totFrameCount += indFrameWrdCount
+    const doHover = (frameID) => {
+        
+        $("mark").bind("mousemove", function (e) {
+            console.log('doOverEnter')
+            $("#frameMessage").css({
+              top: e.pageY,
+            });
+          });
+      
+        $("html").click(function (closeMessage) {
+        if (!($(closeMessage.target).closest("#frameMessage").length > 0)) {
+            if ($("#frameMessage").is(":visible")) {
+            $("#frameMessage").hide();
+            }
         }
-        // document.getElementsByClassName(`${frame._id}`).addEventListener("mouseover", function() {
-        //     const frameMessage = document.querySelector('#frameMessage');
-        //     frameMessage.style.display = 'block';
-        //     document.querySelector('aside').style.display = 'none';
-        //     frameMessage.style.backgroundColor = 'yellow';
-        //     document.getElementById(`${frameId}`).style.display = 'block';
-        // });
-        graphObj[title].totWrdCount = totFrameCount;
-        valuesArray.push(totFrameCount)
-        graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
+        });
+
+        $(`.${frameID}`).hover(function () {
+            $("#frameMessage").show();
+            $("aside").hide();
+            $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
+            $(`#${frameID}`).show();
+            $(`.${frameID}`).css("cursor", "pointer")
+        });
     }
-    
-    let outputText = document.querySelector("#outputText");
-    let inputForm = document.querySelector('#inputForm');
-    let newScanBtn = document.querySelector('#newScanBtn');
-    console.log(outputHTML)
-    
-    if (document.querySelector("#outputText").style.display === 'none') {
-        console.log('none')
-        outputText.innerHTML = outputHTML;
-        outputText.style.display = 'block'
-    } else {
-        console.log('else')
-        const outputTextBoxHTML = `<div>
-                                    <p class="rounded-text-box" style="background-color: #dce0e6; border-radius: 20px; padding: 20px; margin-bottom: 40px;">${outputHTML}</p>
-                                   </div>`
+
+    // const string = "dead tuna turaco pain amphibian reptil ya ya ay"
+
+    $('#scanArticleBtn').click( function() {
+        i++;
+        console.log(i)
+        let rawInput = document.querySelector("#inputText").value;
+        console.log(rawInput)
+        let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
+        console.log('totWords:', totWords)
+        rawInput = rawInput.replace(/\n\r?/g, "<br>");
+        $(`#outputText${i - 1}`).html(rawInput);
+
+        const graphObj = {
+                            'totWrdCountAllFrames': 0
+                        }
+        let titlesArray = []
+        let valuesArray = []
+        let ids = []; // store frame ids of highlighted words
+        for (let frame of frames) {
+            let title = frame.title;
+            titlesArray.push(title)
+            graphObj[title] = {
+                                        'totWrdCount': 0,
+                                        'indWrdCounts': {}         
+                                    }   // start frame object
+            let totFrameCount = 0;  // counter for tot count of words found for a particular frame
+            let indFrameWrdCount;
+            for (let word of frame.words) {
+                [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id)  // highlights words and returns count of total times an individual word was found
+                graphObj[title].indWrdCounts[word] = indFrameWrdCount;
+                totFrameCount += indFrameWrdCount
+            }
+
+            // Add hover event listener to highlighted frames
+            if (totFrameCount) { // if there were words highlighted for a particular frame
+                ids.push(frame._id)
+            }
+
+            
+
+            graphObj[title].totWrdCount = totFrameCount;
+            valuesArray.push(totFrameCount)
+            graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
+        }
+        
+        let outputText = document.querySelector(`#outputText${i - 1}`);
+        let newScanBtn = document.querySelector('#newScanBtn');
+        console.log(outputHTML)
+        
+  
+        $(`#results${i - 1}`).css('display', 'block')
+        let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
+                                                <p class="rounded-text-box" id="outputText${i}" style="background-color: #dce0e6; border-radius: 20px; padding: 20px; margin-bottom: 40px;">${outputHTML}</p>
+                                                <div id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
+                                                    <canvas id="myChart${i}" aria-label="pie chart for scan" role="pie chart">
+                                                        <p>Pie chart breaking down instances of frames found</p>
+                                                    </canvas> 
+                                                    
+                                                </div>
+                                         </div>`
         // insert next outputText box below original one
-        newScanBtn.insertAdjacentHTML("beforebegin", outputTextBoxHTML);
+        newScanBtn.insertAdjacentHTML("beforebegin", nextOutputTextAndChart);
         // document.querySelector('#subsequentOutText').innerHTML = outputHTML
-    }
+   
 
-    // make chart
-    makeChart(titlesArray, valuesArray)
+        // Do hover feature
+        $("mark").bind("mousemove", function (e) {
+            console.log('doOverEnter')
+            $("#frameMessage").css({
+              top: e.pageY,
+            });
+        });
+      
+        $("html").click(function (closeMessage) {
+            if (!($(closeMessage.target).closest("#frameMessage").length > 0)) {
+                if ($("#frameMessage").is(":visible")) {
+                    $("#frameMessage").hide();
+                }
+            }
+        });
 
-    outputText.scrollIntoView({behavior: "smooth"})
+        for (let id of ids) {
+            $(`.${id}`).hover(function () {
+                console.log('hover')
+                $("#frameMessage").show();
+                $("aside").hide();
+                $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
+                $(`#${id}`).show();
+                $(`.${id}`).css("cursor", "pointer")
+            });
+        }
 
-    // hide scanner 
-    inputForm.style.display = 'none'
+        // make chart
+        // makeChart(titlesArray, valuesArray, i)
 
-    // show button to show scanner
-    newScanBtn.style.display = 'block'
-})
+        outputText.scrollIntoView({behavior: "smooth"})
+
+        // hide scanner 
+        document.querySelector('#inputForm').style.display = 'none'
+
+        // show button to show scanner
+        newScanBtn.style.display = 'block'
+    })
+
+
+
+    // scan again functionality
+    const newScanBtn = document.querySelector('#newScanBtn');
+    newScanBtn.addEventListener("click", function() { 
+        let inputForm = document.querySelector('#inputForm');
+        // 1) Show scanner (input box and "scan article" btn)
+        inputForm.style.display = 'block'
+
+        // 2) Clear textarea
+        document.querySelector('#inputText').value = ''
+
+        // 3) Hide 'Scan Again' button
+        newScanBtn.style.display = 'none'
+
+        // 4) Scroll down to scan area
+        inputForm.scrollIntoView({behavior: "smooth"})
+
+        // 5) Wrap outputText in collapsed accordion
+        let resultDiv = document.querySelector(`#results${i - 1}`);
+        let accordionPrevOT = `<div class="accordion" id="accordion${i-1}" style="margin-bottom: 50px;">
+                                <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Scan ${i}
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body" id="accordionBody${i-1}">
+                                    </div>
+                                </div>
+                                </div>
+                              </div>`
+
+        $(`#results${i - 1}`).replaceWith(accordionPrevOT)
+        $(`#accordionBody${i-1}`).html(resultDiv)
+
+                                
+    })
+
+});
 
 
 
