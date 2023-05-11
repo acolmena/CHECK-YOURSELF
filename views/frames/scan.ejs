@@ -3,28 +3,29 @@
     <!-- <h1 class="text-center">Scan</h1> -->
     <!-- <div class="col-8 offset-2"> -->
         <%- include('../partials/howToUseScan') %>
-        <!-- <div class="accordion" id="accordion" style="margin-bottom: 50px;"></div> -->
-        <div id="results0" style="display: none;">
-            <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
-                border-radius: 20px; width: 50%;
-                min-width: 400px;
-                float: left;
-                height: auto;
-                padding: 3%;
-                border-radius: 10px;
-                margin-left: 5%;
-                background-color: #F4F5F5;
-                margin-bottom: 200px;"> 
-            </p>
-            
-            <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
-                <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
-                    <p>Pie chart breaking down instances of frames found</p>
-                </canvas> 
+        <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
+            <div id="results0" style="display: none;">
+                <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
+                    border-radius: 20px; width: 50%;
+                    min-width: 400px;
+                    float: left;
+                    height: auto;
+                    padding: 3%;
+                    border-radius: 10px;
+                    margin-left: 5%;
+                    background-color: #F4F5F5;
+                    margin-bottom: 200px;"> 
+                </p>
                 
+                <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
+                    <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
+                        <p>Pie chart breaking down instances of frames found</p>
+                    </canvas> 
+                    
+                </div>
             </div>
-        </div>
-        <div class="d-grid gap-2 col-3 mx-auto">
+      
+        <div class="d-grid gap-2 col-3 mx-auto" id="newScanBtnDiv">
             <button id="newScanBtn" class="btn btn-primary" style="display: none; margin-bottom: 40px;">Scan Again</button>
         </div>
         <form class="mb-3" id="inputForm">
