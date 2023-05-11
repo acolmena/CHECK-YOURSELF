@@ -141,9 +141,14 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    let graphObj = {
+        'totWrdCountAllFrames': 0
+    }
+
     // const string = "dead tuna turaco pain amphibian reptil ya ya ay"
 
     $('#scanArticleBtn').click( function() {
+        console.log(graphObj, 'beginning')
         i++;
         console.log(i)
 
@@ -156,9 +161,6 @@ jQuery(document).ready(function ($) {
         $(`#outputText${i - 1}`).html(rawInput);
 
         // 2) Initialize arrays for chart, hover feature, and graphObj for exporting .csv file
-        const graphObj = {
-                            'totWrdCountAllFrames': 0
-                        }
         let titlesArray = []
         let valuesArray = []
         let ids = []; // store frame ids of highlighted words
@@ -166,26 +168,32 @@ jQuery(document).ready(function ($) {
         // 3) Loop over all frames and all their words to check if they're in the text that was inputted (& build up graphObj and arrays)
         let indFrameWrdCount;
         let outputHTML;
+        let totFrameCount;
         for (let frame of frames) {
             let title = frame.title;
             titlesArray.push(title)
-            graphObj[title] = {
+            totFrameCount = 0;  // counter for tot count of words found for a particular frame
+            if (!graphObj[title]) {
+                graphObj[title] = {
                                         'totWrdCount': 0,
                                         'indWrdCounts': {}         
                                     }   // start frame object
-            let totFrameCount = 0;  // counter for tot count of words found for a particular frame
-           
+            }         
             for (let word of frame.words) {
                 [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id)  // highlights words and returns count of total times an individual word was found
-                graphObj[title].indWrdCounts[word] = indFrameWrdCount;
+                if (!graphObj[title].indWrdCounts[word]) {
+                    graphObj[title].indWrdCounts[word] = indFrameWrdCount;  // add word and count if word is not already in graphObj
+                } else {
+                    graphObj[title].indWrdCounts[word] += indFrameWrdCount;  // add to count if word is alread
+                }
                 totFrameCount += indFrameWrdCount
             }
 
             // Add hover event listener to highlighted frames
-            if (totFrameCount) { // if there were words highlighted for a particular frame
-                ids.push(frame._id)
-            }
-            graphObj[title].totWrdCount = totFrameCount;
+            ids.push(frame._id)
+
+            // Add word counts to arrays and graphObj
+            graphObj[title].totWrdCount += totFrameCount;
             valuesArray.push(totFrameCount)
             graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
         }
@@ -234,6 +242,7 @@ jQuery(document).ready(function ($) {
 
         // 10) show button to make new scan
         newScanBtn.style.display = 'block'
+        console.log(graphObj)
     })
 
 
@@ -270,29 +279,14 @@ jQuery(document).ready(function ($) {
         $(`#results${i - 1}`).remove();
         if (i === 1) {
             $('#accordion').html(accordionPrevOT);
+            // Show accordion
+            $('#accordion').show()
         } else {
             $(`#accordionItem${i - 2}`).after(accordionPrevOT);  // attach current accordion after previous one
         }
-        
-        // accordionPrevOT = `<div class="accordion" id="accordion${i-1}" style="margin-bottom: 50px;">
-        //                         <div class="accordion-item">
-        //                         <h2 class="accordion-header">
-        //                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        //                                 Scan ${i}
-        //                             </button>
-        //                         </h2>
-        //                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        //                             <div class="accordion-body" id="accordionBody${i-1}">
-        //                             </div>
-        //                         </div>
-        //                         </div>
-        //                       </div>`
-
-        // $(`#results${i - 1}`).replaceWith(accordionPrevOT)
         $(`#accordionBody${i-1}`).html(resultDiv)  
         
-        // Show accordion
-        $('#accordion').show()
+      
     })
 
 });
