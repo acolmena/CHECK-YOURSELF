@@ -9,7 +9,6 @@ const {frameSchema} = require('../schemas.js')
 const validateFrame = (req, res, next) => {
     // converting input string to array before validating and entering into dbs
     let {words} = req.body.frame;
-    console.log(req.body.frame)
     if (words.includes(',')) {
         // const re = /\s*(?:,|$)\s*/;
         req.body.frame.words = words.split(',').map((wrd) => wrd.trim())
@@ -17,7 +16,8 @@ const validateFrame = (req, res, next) => {
      } else {
         req.body.frame.words = [words]
     }
-    console.log(req.body.frame)
+
+    // start of validation
     const { error } = frameSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')  // map over error.details to make a single string message
@@ -51,6 +51,13 @@ router.post('/', validateFrame, catchAsync(async (req, res, next) => {
     // res.send(newFrame.description)
     res.redirect(`/frames`)
 }))
+
+// router.post('/', validateFrame, catchAsync(async (req, res, next) => {
+//     const newFrame = new Frame(req.body.frame); 
+//     await newFrame.save()
+//     // res.send(newFrame.description)
+//     res.redirect(`/frames`)
+// }))
 
 // Show route
 // router.get('/:id', catchAsync(async (req, res) => {

@@ -4,7 +4,7 @@
     <!-- <div class="col-8 offset-2"> -->
         <div class="mb-3" id="exportBtns">
             <button type="button" class="btn btn-outline-warning">Export Results</button>
-            <button type="button" class="btn btn-outline-warning">Export Frames</button>
+            <a href="" class="btn btn-warning" id="exportFramesBtn">Export Frames</a>
         </div>
         <%- include('../partials/howToUseScan') %>
         <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
@@ -87,8 +87,7 @@
     const frames = <%- JSON.stringify(frames) %>
 </script>
 <script src="/scripts/scan.js"></script>
-<script src="/scripts/newScan.js"></script>
-<script src="/scripts/hover.js"></script>
+<script src="/scripts/export.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 

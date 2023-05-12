@@ -1,74 +1,9 @@
-// import catchAsync from '../utils/catchAsync';
-// import Frame from '../models/frame';
-// console.log(frames)
-// import frames from '.../routes/frames.js'
-// alert("hello from scan.js")
-// function hasTrope(trope) {
-//     return $("mark").classList.contains(trope);
-//   }
-
-// function addPieChart(
-// colors,
-// genWrdsHLCount,
-// tribWrdsHLCount,
-// natWrdsHLCount,
-// conWrdsHLCount
-// ) {
-// // update the doughnut chart
-// let pieChartHtml = `<script id="chartScript">
-// var ctx = document.getElementById('myChart').getContext('2d');
-// var chart = new Chart(ctx, {
-//     // The type of chart we want to create
-//     type: 'doughnut',
-
-//     // The data for our dataset
-//     data: {
-//         labels: ['Generalization', 'Tribalism', 'Nature and Wildlife', 'Conflict and Violence'],
-//         datasets: [{
-//             label: ' # Words',
-//             backgroundColor: ['${colors[0]}', '${colors[1]}', '${colors[2]}', '${colors[3]}'],
-//             borderColor: '#ffffff',
-//             borderWidth: '6',
-//             data: [${genWrdsHLCount}, ${tribWrdsHLCount}, ${natWrdsHLCount}, ${conWrdsHLCount}],
-//         }]
-//     },
-
-//     // Configuration options go here
-//     options: {}
-// });
-// </script>`;
-// $("#chartCDNScript").after(pieChartHtml);
-
-// // Add note about pie chart functionality
-// let tropeBreakdownNote = `<p id="tropeBreakdownNote">Hover over the chart to see how many words of each trope we found. <br><br/> <span class="small"><b>Note:</b> If you wish to see certain tropes on the chart in isolation from others, click on any of the tropes in the legend to remove them from the chart. To add them back to the chart, click on the trope(s) again.</span></p>`;
-// // avoid reproducing note if already there
-// if (!document.querySelector("#tropeBreakdownNote"))
-//     $("#tropeBreakdownMessage").after(tropeBreakdownNote);
-// }
-
-// // This function will return the total number of words in the inputted text
-// function getTotHighlightedWords(obj) {
-// // get all counts, add them up, and return them
-// console.log("selecting hilit words", document.querySelectorAll("mark"));
-// let sum = 0;
-// Object.values(obj).forEach((el) => (sum += el));
-// console.log(obj);
-// return sum - obj["wl"]; // subtract wlCount from total sum
-// }
-
-// catchAsync(async () => {
-//     return await Frame.find({});  // find all items in dbs
-// })
-
-// const frames = catchAsync();
-
 jQuery(document).ready(function ($) { 
     let i = 0;
     // Highlights the words that match the rgx expression below
     function hiliter(word, element, tropeClass) {
         let wrdCount = 0;
         let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
-        // console.log(element)
         element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
                 wrdCount += 1;
                 return `<mark class=${tropeClass} style='background-color: yellow; border-radius: 7px;'>${x}</mark>`;
@@ -113,8 +48,7 @@ jQuery(document).ready(function ($) {
     }
 
     const setupNextScan = (i, outputHTML) => {
-        let newScanBtnDiv = document.querySelector('#newScanBtnDiv');
-        // console.log(outputHTML)  
+        let newScanBtnDiv = document.querySelector('#newScanBtnDiv'); 
         let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
                                                 <p class="rounded-text-box" id="outputText${i}" style="background-color: #F4F5F5;
                                                                                                     border-radius: 20px; width: 50%;
@@ -155,8 +89,7 @@ jQuery(document).ready(function ($) {
         // });
 
         for (let id of ids) {
-            $(`.${id}`).hover(function () {
-                console.log('hover')
+            $(`.${id}`).hover(function () {   // for mousenter
                 // $("#frameMessage").show();
                 // $("aside").hide();
                 // $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
@@ -164,7 +97,7 @@ jQuery(document).ready(function ($) {
                 $(`#${id}`).show();
                 $(`.${id}`).css("cursor", "pointer")
             },
-            function() {
+            function() {   // for mouseexit
                 $(`#${id}`).hide();
             });
         }
@@ -183,9 +116,7 @@ jQuery(document).ready(function ($) {
 
         // 1) Grab input text and do preliminary cleanup
         let rawInput = document.querySelector("#inputText").value;
-        console.log(rawInput)
         let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
-        console.log('totWords:', totWords)
         rawInput = rawInput.replace(/\n\r?/g, "<br>");
         $(`#outputText${i - 1}`).html(rawInput);
 
