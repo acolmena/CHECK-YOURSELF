@@ -41,9 +41,9 @@ router.get('/scan', catchAsync(async (req, res) => {
 
 // Create routes
 // NOTE: order matters, this needs to be before the /frames/:id route below
-router.get('/new', (req, res) => {
-    res.render('frames/new');
-})
+// router.get('/new', (req, res) => {
+//     res.render('frames/new');
+// })
 
 router.post('/', validateFrame, catchAsync(async (req, res, next) => {
     const newFrame = new Frame(req.body.frame); 
@@ -53,10 +53,10 @@ router.post('/', validateFrame, catchAsync(async (req, res, next) => {
 }))
 
 // Show route
-router.get('/:id', catchAsync(async (req, res) => {
-    const frame = await Frame.findById(req.params.id)
-    res.render('frames/show', {frame})
-}))
+// router.get('/:id', catchAsync(async (req, res) => {
+//     const frame = await Frame.findById(req.params.id)
+//     res.render('frames/show', {frame})
+// }))
 
 // Edit routes
 router.get('/:id/edit', catchAsync(async (req, res) => {

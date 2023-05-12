@@ -2,6 +2,10 @@
 <!-- <div class="row"> -->
     <!-- <h1 class="text-center">Scan</h1> -->
     <!-- <div class="col-8 offset-2"> -->
+        <div class="mb-3" id="exportBtns">
+            <button type="button" class="btn btn-outline-warning">Export Results</button>
+            <button type="button" class="btn btn-outline-warning">Export Frames</button>
+        </div>
         <%- include('../partials/howToUseScan') %>
         <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
             <div id="results0" style="display: none;">
@@ -34,8 +38,8 @@
             </div>
             <p>&nbsp;</p>
             <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
-            <div class="d-grid gap-2 col-4 mx-auto">
-                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" >SCAN ARTICLE</button>  
+            <div class="d-grid gap-2 col-2 mx-auto">
+                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" style="background-color: lightgreen; border-radius: 30px; border-color: lightgreen;">SCAN ARTICLE</button>  
               </div>
             <br />
             <!-- <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
@@ -51,7 +55,7 @@
             </div>             -->
         </form>
         
-        <div id="frameMessage"   style="display: none; 
+        <!-- <div id="frameMessage"   style="display: none; 
                                         color: black;
                                         position: sticky;
                                         width: 30%;
@@ -60,11 +64,20 @@
                                         padding: 1%;
                                         right:5%;
                                         border-radius: 10px;
-                                        top: 0px;">
+                                        top: 0px;"> -->
             <% for (let frame of frames) {%>
-                <aside id="<%= frame._id %>"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
+                <aside id="<%= frame._id %>"  style="display: none; 
+                    color: black;
+                    position: sticky;
+                    width: 30%;
+                    float: right;
+                    margin-top: -950px;
+                    padding: 1%;
+                    right:5%;
+                    border-radius: 10px;
+                    top: 0px;"><strong><%= frame.title %> frame:</strong> <%= frame.description %></aside>
             <% } %>
-        </div>
+        <!-- </div> -->
      
 
         <p>&nbsp;</p>

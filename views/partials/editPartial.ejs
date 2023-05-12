@@ -2,17 +2,17 @@
     <h1 class="text-center">Edit Frame</h1> -->
     <form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
         <div class="mb-3">
-            <label for="title"  class="form-label">Title</label>
+            <label for="title"  class="form-label" style="font-weight: 500;">Title <strong style="color: red;">*</strong></label>
             <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>">
         </div>
 
         <div class="mb-3">
-            <label for="description"  class="form-label">Description</label>
+            <label for="description"  class="form-label" style="font-weight: 500;">Description</label>
             <textarea type="text" class="form-control" placeholder="enter description" id="description" name="frame[description]"><%= frame.description %></textarea>
         </div>
         
         <div class="mb-3">
-            <label for="words"  class="form-label">Words</label>
+            <label for="words"  class="form-label" style="font-weight: 500;">Words <strong style="color: red;">*</strong></label>
             <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" value="<%= frame.words %>">
         </div>            
         <div class="mb-3">

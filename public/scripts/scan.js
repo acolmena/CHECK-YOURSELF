@@ -112,31 +112,60 @@ jQuery(document).ready(function ($) {
         })();
     }
 
+    const setupNextScan = (i, outputHTML) => {
+        let newScanBtnDiv = document.querySelector('#newScanBtnDiv');
+        // console.log(outputHTML)  
+        let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
+                                                <p class="rounded-text-box" id="outputText${i}" style="background-color: #F4F5F5;
+                                                                                                    border-radius: 20px; width: 50%;
+                                                                                                    min-width: 400px;
+                                                                                                    float: left;
+                                                                                                    height: auto;
+                                                                                                    padding: 3%;
+                                                                                                    border-radius: 10px;
+                                                                                                    margin-left: 5%;
+                                                                                                    background-color: #F4F5F5;
+                                                                                                    margin-bottom: 200px;">${outputHTML}</p>
+                                                <div id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
+                                                    <canvas id="myChart${i}" aria-label="pie chart for scan" role="pie chart">
+                                                        <p>Pie chart breaking down instances of frames found</p>
+                                                    </canvas> 
+                                                    
+                                                </div>
+                                         </div>`
+        // insert next outputText box below original one
+        newScanBtnDiv.insertAdjacentHTML("beforebegin", nextOutputTextAndChart);
+    }
+
     const doHover = (ids) => {
         
-        $("mark").bind("mousemove", function (e) {
-            console.log('doOverEnter')
-            $("#frameMessage").css({
-              top: e.pageY,
-            });
-        });
+        // $("mark").bind("mousemove", function (e) {
+        //     console.log('doOverEnter')
+        //     // $("#frameMessage").css({
+        //     //   top: e.pageY,
+        //     // });
+        // });
       
-        $("html").click(function (closeMessage) {
-            if (!($(closeMessage.target).closest("#frameMessage").length > 0)) {
-                if ($("#frameMessage").is(":visible")) {
-                    $("#frameMessage").hide();
-                }
-            }
-        });
+        // $("html").click(function (closeMessage) {
+        //     // if (!($(closeMessage.target).closest(`#${id}`).length > 0)) {
+        //         if ($(`#${id}`).is(":visible")) {
+        //             $(`#${id}`).hide();
+        //         }
+        //     // }
+        // });
 
         for (let id of ids) {
             $(`.${id}`).hover(function () {
                 console.log('hover')
-                $("#frameMessage").show();
-                $("aside").hide();
-                $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
+                // $("#frameMessage").show();
+                // $("aside").hide();
+                // $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
+                $(`#${id}`).css("background-color", 'lightgreen'); // turn background of popup text this color
                 $(`#${id}`).show();
                 $(`.${id}`).css("cursor", "pointer")
+            },
+            function() {
+                $(`#${id}`).hide();
             });
         }
     }
@@ -205,31 +234,8 @@ jQuery(document).ready(function ($) {
         $(`#results${i - 1}`).css('display', 'block')
         
         // 6) Set up & insert output text and chart for next scan
-        let outputText = document.querySelector(`#outputText${i - 1}`);
-        let newScanBtnDiv = document.querySelector('#newScanBtnDiv');
-        // console.log(outputHTML)  
-        let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
-                                                <p class="rounded-text-box" id="outputText${i}" style="background-color: #F4F5F5;
-                                                                                                    border-radius: 20px; width: 50%;
-                                                                                                    min-width: 400px;
-                                                                                                    float: left;
-                                                                                                    height: auto;
-                                                                                                    padding: 3%;
-                                                                                                    border-radius: 10px;
-                                                                                                    margin-left: 5%;
-                                                                                                    background-color: #F4F5F5;
-                                                                                                    margin-bottom: 200px;">${outputHTML}</p>
-                                                <div id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
-                                                    <canvas id="myChart${i}" aria-label="pie chart for scan" role="pie chart">
-                                                        <p>Pie chart breaking down instances of frames found</p>
-                                                    </canvas> 
-                                                    
-                                                </div>
-                                         </div>`
-        // insert next outputText box below original one
-        newScanBtnDiv.insertAdjacentHTML("beforebegin", nextOutputTextAndChart);
+        setupNextScan(i, outputHTML)
         
-   
 
         // 7) Do hover feature
         doHover(ids);
@@ -244,6 +250,10 @@ jQuery(document).ready(function ($) {
         newScanBtn.style.display = 'block'
         console.log(graphObj)
     })
+
+
+
+
 
 
 
@@ -288,440 +298,4 @@ jQuery(document).ready(function ($) {
         
       
     })
-
 });
-
-
-
-
-
-
-
-
-// Main function: hilights words for outputText and builds up graphObj 
-// function hilitFrames(frames, element) {
-//     console.log(typeof frames)
-//     console.log(element)
-//     const graphObj = {
-//                         'totWrdCountAllFrames': 0
-//                      }
-//     for (let frame of frames) {
-//         graphObj[frame.title] = {
-//                                     'totWrdCount': 0,
-//                                     'indWrdCounts': {}         
-//                                 }   // start frame object
-//         let totFrameCount = 0;  // counter for tot count of words found for a particular frame
-//         for (let word of frame.words) {
-//             let indFrameWrdCount = hiliter(word, element, frame.title)  // highlights words and returns count of total times an individual word was found
-//             graphObj[frame.title].indWrdCounts[word] = indFrameWrdCount;
-//             totFrameCount += indFrameWrdCount
-//         }
-//         graphObj[frame.title].totWrdCount = totFrameCount;
-//         graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
-//     }
-//     console.log(graphObj, string)
-//     document.querySelector('#outputText').style.display = 'block'
-// }
-
-
-
-
-
-
-
-// $("#scanArticle").click(function () {
-// let rawInput = document.getElementById("inputText").value;
-// let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
-// rawInput = rawInput.replace(/\n\r?/g, "<br>");
-// $("#outputText").html(rawInput);
-
-// // initialize graph object (graphObj)
-// let graphObj = { wl: 0, gen: 0, con: 0, trib: 0, nat: 0 };
-
-
-// console.time("gen hilit time");
-// for (let genWord of generalizationArray) {
-//     graphObj = hiliter(
-//     genWord,
-//     document.getElementById("outputText"),
-//     "gen",
-//     graphObj,
-//     false,
-//     false
-//     );
-// }
-// console.timeEnd("gen hilit time");
-
-
-// console.time("wl unhilit time");
-// // Making the wl words not be highlighted
-// let whitelistedWords = document.getElementsByClassName("wl"); // Find the elements
-// console.log(whitelistedWords);
-// let rgxpTropeTag = /gen|trib/i;
-// for (let whitelistWord of whitelistedWords) {
-//     whitelistWord.innerHTML = whitelistWord.innerHTML.replace(
-//     rgxpTropeTag,
-//     "wl"
-//     ); // Change the class name
-// }
-// console.timeEnd("wl unhilit time");
-
-// // // add up all highlighted words
-// // console.time("setting info for pie chart");
-// // console.log(document.querySelectorAll(".nat").length);
-// // let totHighlightedWords = getTotHighlightedWords(graphObj);
-// // console.log(totWords);
-// // let perTropeWrds = ((totHighlightedWords / totWords) * 100).toFixed(0);
-// // // declare these as global variables using window obj to be able to use them for color-blind friendly button
-// // console.log(document.querySelectorAll("mark .con").length);
-// // let wlSubtract = graphObj["wl"] ? 1 : 0;
-// // console.log(wlSubtract);
-// // window.genWrdsHLCount = graphObj["gen"];
-// // window.conWrdsHLCount = graphObj["con"];
-// // window.tribWrdsHLCount = graphObj["trib"];
-// // window.natWrdsHLCount = graphObj["nat"];
-// // console.timeEnd("setting info for pie chart");
-
-// // if CBF colors button is checked, set colors array to be CBF; else, set to original colors
-// let colors;
-// if ($("#clrBlndCheckbox").prop("checked")) {
-//     // order: gen popup background (PB), trib PB, nat PB, con PB, gen link color, trib link color, nat link color, con link color
-//     colors = [
-//     "#3DB7E9",
-//     "#f0e442",
-//     "#d55e00  ",
-//     "black  ",
-//     "#f0e442",
-//     "#3DB7E9",
-//     "#f0e442",
-//     "#f0e442",
-//     ]; // CBF colors for when you hover over word
-//     // change general highlighting colors and font color of highlighted words
-//     $(".gen").css("background-color", "#3DB7E9");
-//     $(".trib").css("background-color", "#f0e442");
-//     $(".nat").css("background-color", "#d55e00");
-//     $(".con").css({ "background-color": "black  ", color: "white" });
-// } else {
-//     // color order: gen PB, trib PB, nat PB, con PB, gen link color, trib link color, con link color
-//     colors = [
-//     "#a8edea",
-//     "#eaa8d2",
-//     "#a7ffa3",
-//     "#ffcc80",
-//     "#ff7451",
-//     "rgb(59, 84, 205)",
-//     "#ff7451",
-//     "rgb(59, 84, 205)",
-//     ];
-// }
-
-// console.log(colors);
-
-// // // Remove previous chart if there was one:
-// // if (document.querySelector("#chartScript")) {
-// //     // remove previous graph
-// //     $("#chartScript").remove();
-// //     $("#myChart").remove(); // IMPORTANT: canvas needs to be removed and added again (next line of code) to avoid pie chart glitch
-// //     $("#chartCDNScript").before('<canvas id="myChart"></canvas>');
-// // }
-// // // Add corresponding heading and text (always)
-// // const h2BreakdownTag = `<h2 id="tropeBreakdownHeader">Breakdown of words found</h2>`;
-// // // add ternary statement to avoid reproducing h2 tags
-// // !document.querySelector("#tropeBreakdownHeader") &&
-// //     $("#tropeMessage").after(h2BreakdownTag);
-// // let tropeBreakdownMessage = `<p id="tropeBreakdownMessage">We found <b>${totHighlightedWords}</b> ${
-// //     totHighlightedWords === 1 ? "word" : "words"
-// // } (~ ${perTropeWrds}% of this article) associated with tropes about Africa.</p>`;
-// // $("#tropeBreakdownMessage").remove(); // remove previous text
-// // $("#tropeBreakdownHeader").after(tropeBreakdownMessage); // update with new text
-// // // add text describing chart feature with legend
-// // // Create pie chart if ASTRSC found any trope words
-// // if (totHighlightedWords) {
-// //     addPieChart(
-// //     colors,
-// //     genWrdsHLCount,
-// //     tribWrdsHLCount,
-// //     natWrdsHLCount,
-// //     conWrdsHLCount
-// //     );
-// // } else {
-// //     $("#tropeBreakdownNote").remove(); // remove previous note
-// // }
-
-// // account for updating values
-
-// $("#outputText").css("display", "block");
-// $("mark").bind("mousemove", function (e) {
-//     $("#tropeMessage").css({
-//     top: e.pageY,
-//     });
-// });
-
-// $("html").click(function (closeMessage) {
-//     if (!($(closeMessage.target).closest("#tropeMessage").length > 0)) {
-//     if ($("#tropeMessage").is(":visible")) {
-//         $("#tropeMessage").hide();
-//     }
-//     }
-// });
-
-// $(".gen").hover(function () {
-//     $("#tropeMessage").show();
-//     $("aside").hide();
-//     $("#genLink").css("color", colors[4]); // change link color
-//     $("#tropeMessage").css("background-color", colors[0]); // turn background of popup text this color
-//     $("#generalization").show();
-// });
-
-// $(".trib").hover(function () {
-//     $("#tropeMessage").show();
-//     $("aside").hide();
-//     $("#tribLink").css("color", colors[5]); // change link color
-//     $("#tropeMessage").css("background-color", colors[1]);
-//     $("#tribalism").show();
-// });
-
-// $(".nat").hover(function () {
-//     $("#tropeMessage").show();
-//     $("aside").hide();
-//     $("#natLink").css("color", colors[6]); // change link color
-//     $("#tropeMessage").css("background-color", colors[2]);
-//     $("#nature").show();
-// });
-
-// $(".con").hover(function () {
-//     $("#tropeMessage").show();
-//     $("aside").hide();
-//     $("#conLink").css("color", colors[7]);
-//     $("#tropeMessage").css("background-color", colors[3]);
-//     $("#conflictAndViolence").show();
-// });
-
-// $("#voiceButton").css("display", "inline-block");
-
-// location.href = "#scannedResults";
-
-// $("html,body").animate(
-//     {
-//     scrollTop: $("#clrBlnd").offset().top,
-//     },
-//     750
-// );
-// });
-
-// // $("#clrBlndCheckbox").change(function () {
-// // if (this.checked) {
-// //     $(".about-links").css("color", "#d55e00");
-// //     $(".about-links").hover(function () {
-// //     $(".about-links").css("color", "#d55e00");
-// //     });
-
-// //     // Make inputText border thicker and black
-// //     $("#inputText").css("border", "3px solid black")
-
-// //     // Change scan article button color
-// //     $("#scanArticle").css("border-color", "#3DB7E9");
-// //     $("#scanArticle").hover(
-// //     function () {
-// //         $(this).css("background-color", "#66ccee");
-// //     },
-// //     function () {
-// //         $(this).css("background-color", "white");
-// //     }
-// //     );
-// //     // Change CBF background color
-// //     $("#clrBlnd").css("background-color", "#f0e442");
-// //     $("#clrBlnd").css("border", "3px solid #f0e442");
-// //     // Change hover colors
-// //     $(".gen").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#3DB7E9");
-// //     $("#generalization").css("color", "white"); // make font color white
-// //     $("#genLink").css("color", "black");
-// //     });
-
-// //     $(".trib").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#f0e442");
-// //     $("#tribLink").css("color", "#3DB7E9");
-// //     });
-
-// //     $(".nat").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#d55e00");
-// //     $("#nature").css("color", "white");
-// //     $("#natLink").css("color", "black");
-// //     });
-
-// //     $(".con").hover(function () {
-// //     $("#tropeMessage").css("background-color", "black");
-// //     $("#conflictAndViolence").css("color", "white");
-// //     $("#conLink").css("color", "#f0e442");
-// //     });
-
-// //     // Change highlight color
-// //     $(".gen").css("background-color", "#3DB7E9");
-// //     $(".trib").css("background-color", "#f0e442");
-// //     $(".nat").css("background-color", "#d55e00");
-// //     $(".con").css({
-// //     "background-color": "black",
-// //     color: "white",
-// //     });
-
-// //     // Change outputText and toolDescrip areas' background color
-// //     $(".rounded-text-box").css("background-color", "#ffffff");
-
-// //     // Show border
-// //     $(".rounded-text-box").css("border", "solid black");
-
-// //     // Change headers' color to black
-// //     $("h2").css("color", "black");
-
-// //     // Change chart colors
-// //     let pieChartColorBlindFriendly = `<script id="chartScript">
-// //     var ctx = document.getElementById('myChart').getContext('2d');
-// //     var chart = new Chart(ctx, {
-// //         // The type of chart we want to create
-// //         type: 'doughnut',
-    
-// //         // The data for our dataset
-// //         data: {
-// //             labels: ['Generalization', 'Tribalism', 'Nature and Wildlife', 'Conflict and Violence'],
-// //             datasets: [{
-// //                 label: ' # Words',
-// //                 backgroundColor: ['#3DB7E9', '#f0e442', '#d55e00', 'black'],
-// //                 borderColor: 'rgb(255, 255, 255)',
-// //                 borderWidth: '6',
-// //                 data: [${window.genWrdsHLCount}, ${window.tribWrdsHLCount}, ${window.natWrdsHLCount}, ${window.conWrdsHLCount}],
-// //             }]
-// //         },
-    
-// //         // Configuration options go here
-// //         options: {}
-// //     });
-// //     </script>`;
-// //     $("#chartScript").remove();
-// //     $("#myChart").remove(); // IMPORTANT: canvas needs to be removed and added again (next line of code) to avoid pie chart glitch
-// //     $("#chartCDNScript").before('<canvas id="myChart"></canvas>');
-// //     $("#chartCDNScript").after(pieChartColorBlindFriendly);
-
-// //     // change 'show voice' button color
-// //     $("#voiceButton").css("border-color", "#d55e00");
-// //     $("#voiceButton").hover(
-// //     function () {
-// //         $(this).css("background-color", "#d55e00");
-// //     },
-// //     function () {
-// //         $(this).css("background-color", "white");
-// //     }
-// //     );
-// //     // Change table background color to yellow
-// //     $("#thead").css("background-color", "#f0e442");
-// // } else {
-// //     $(".about-links").css("color", "#e96656");
-// //     $(".about-links").hover(function () {
-// //     $(".about-links").css("color", "#e96656");
-// //     }); 
-
-// //     // Change inputText border back
-// //     $("#inputText").css("border", "1.5px solid rgba(0, 0, 0, 0.1)")
-
-// //     // Change back scan article button color
-// //     $("#scanArticle").css("border-color", "#34D293");
-// //     $("#scanArticle").hover(
-// //     function () {
-// //         $(this).css("background-color", "#34D293");
-// //     },
-// //     function () {
-// //         $(this).css("background-color", "white");
-// //     }
-// //     );
-// //     // Change back CBF background color
-// //     $("#clrBlnd").css({
-// //     color: "#333333",
-// //     "background-color": "#ffca99",
-// //     border: "3px solid rgb(255, 173, 105)",
-// //     });
-// //     // Change hover to original colors
-// //     $(".gen").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#a8edea");
-// //     $("#generalization").css("color", "black");
-// //     $("#genLink").css("color", "#ff7451");
-// //     });
-
-// //     $(".trib").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#eaa8d2");
-// //     $("#tribLink").css("color", "rgb(59, 84, 205)");
-// //     });
-
-// //     $(".nat").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#a7ffa3");
-// //     $("#nature").css("color", "black");
-// //     $("#natLink").css("color", "#ff7451");
-// //     });
-
-// //     $(".con").hover(function () {
-// //     $("#tropeMessage").css("background-color", "#ffcc80");
-// //     $("#conflictAndViolence").css("color", "black");
-// //     $("#conLink").css("color", "rgb(59, 84, 205)");
-// //     });
-    
-
-// //     // Change highlight to original colors
-// //     $(".gen").css("background-color", "#a8edea");
-// //     $(".trib").css("background-color", "#eaa8d2");
-// //     $(".nat").css("background-color", "#a7ffa3");
-// //     $(".con").css({ "background-color": "#ffcc80", color: "black" });
-
-// //     // Change outputText and toolDescrip areas' color back
-// //     $(".rounded-text-box").css("background-color", "#f5f5f5");
-
-// //     // Hide border again
-// //     $(".rounded-text-box").css("border-style", "hidden");
-
-// //     // Change headers' color back to teal-ish
-// //     $("h2").css("color", "#34D293");
-
-// //     // Change chart colors
-// //     let pieChartOg = `<script id="chartScript">
-// //         var ctx = document.getElementById('myChart').getContext('2d');
-// //         var chart = new Chart(ctx, {
-// //             // The type of chart we want to create
-// //             type: 'doughnut',
-        
-// //             // The data for our dataset
-// //             data: {
-// //                 labels: ['Generalization', 'Tribalism', 'Nature and Wildlife', 'Conflict and Violence'],
-// //                 datasets: [{
-// //                     label: ' # Words',
-// //                     backgroundColor: ['rgb(168, 237, 234)', 'rgb(234, 168, 210)', 'rgb(167, 255, 163)', '#ffcc80'],
-// //                     borderColor: 'rgb(255, 255, 255)',
-// //                     borderWidth: '6',
-// //                     data: [${window.genWrdsHLCount}, ${window.tribWrdsHLCount}, ${window.natWrdsHLCount}, ${window.conWrdsHLCount}],
-// //                 }]
-// //             },
-        
-// //             // Configuration options go here
-// //             options: {}
-// //         });
-// //         </script>`;
-// //     $("#chartScript").remove();
-// //     $("#myChart").remove(); // IMPORTANT: canvas needs to be removed and added again (next line of code) to avoid pie chart glitch
-// //     $("#chartCDNScript").before('<canvas id="myChart"></canvas>');
-// //     $("#chartCDNScript").after(pieChartOg);
-
-// //     // change 'show voice' button color back
-// //     $("#voiceButton").css("border-color", "#A29BDA");
-// //     $("#voiceButton").hover(
-// //     function () {
-// //         $(this).css("background-color", "#A29BDA");
-// //     },
-// //     function () {
-// //         $(this).css("background-color", "white");
-// //     }
-// //     );
-// //     // Change table background color back to teal-ish
-// //     $("#thead").css("background-color", "rgba(0, 233, 117, 0.58)");
-
-// //     // Change h4 color back to teal-ish
-// //     // $("h4").css("color", "#34D293");
-// // }
-
-// // });

@@ -13,19 +13,26 @@
         <% } else { %>
             <div class="card-body">
                 <h3 class="card-title"><%= frames[i].title %> frame</h3>
-                <p class="card-text"><strong>Description:</strong> <%= frames[i].description %></p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <% for (let word of frames[i].words) { %>
-                  <li class="list-group-item"><%= word %></li>
-                <% } %>
-                <!-- <li class="list-group-item">
-                  <a class="card-link btn btn-info"href="#">Add New Word</a>
-                </li> -->
-              </ul>
-              <div class="card-body">
-                <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
-                <!-- <button id="btn<%= frames[i]._id%>" onclick="showEditForm(this.id)"></button> -->
+                <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p>
+                <p  class="card-text"><%= frames[i].description %></p>
+                <!-- </br> -->
+                <center>
+                  <hr style="width: 90%">
+                </center>
+                <!-- </br> -->
+                <p style="font-weight: 500; margin-bottom: 0px; margin-top: 10px;">Words</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% for (let word of frames[i].words) { %>
+                <li class="list-group-item"><%= word %></li>
+              <% } %>
+              <!-- <li class="list-group-item">
+                <a class="card-link btn btn-info"href="#">Add New Word</a>
+              </li> -->
+            </ul>
+            <div class="card-body">
+              <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
+              <!-- <button id="btn<%= frames[i]._id%>" onclick="showEditForm(this.id)"></button> -->
             </div>
            
         <% } %>
