@@ -7,6 +7,7 @@ const {frameSchema} = require('../schemas.js')
 
 // Middleware function for validating frames required fields are filled out
 const validateFrame = (req, res, next) => {
+    console.log(req.body)
     // converting input string to array before validating and entering into dbs
     let {words} = req.body.frame;
     if (words.includes(',')) {
@@ -46,18 +47,13 @@ router.get('/scan', catchAsync(async (req, res) => {
 // })
 
 router.post('/', validateFrame, catchAsync(async (req, res, next) => {
+    console.log(req.body)
     const newFrame = new Frame(req.body.frame); 
     await newFrame.save()
     // res.send(newFrame.description)
     res.redirect(`/frames`)
 }))
 
-// router.post('/', validateFrame, catchAsync(async (req, res, next) => {
-//     const newFrame = new Frame(req.body.frame); 
-//     await newFrame.save()
-//     // res.send(newFrame.description)
-//     res.redirect(`/frames`)
-// }))
 
 // Show route
 // router.get('/:id', catchAsync(async (req, res) => {

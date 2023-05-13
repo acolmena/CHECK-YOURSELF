@@ -208,7 +208,7 @@ jQuery(document).ready(function ($) {
         let resultDiv = document.querySelector(`#results${i - 1}`);
         let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #b3f8f6;">
                                             Scan ${i}
                                         </button>
                                     </h2>

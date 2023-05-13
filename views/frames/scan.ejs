@@ -1,11 +1,12 @@
 <%- layout('layouts/boilerplate') %>
-<!-- <div class="row"> -->
-    <!-- <h1 class="text-center">Scan</h1> -->
-    <!-- <div class="col-8 offset-2"> -->
+<div class="row"> 
+    <div class="col-3 offset-9">
         <div class="mb-3" id="exportBtns">
-            <button type="button" class="btn btn-outline-warning">Export Results</button>
-            <a href="" class="btn btn-warning" id="exportFramesBtn">Export Frames</a>
+            <button type="button" class="btn btn-warning" style="background-color: #ffe69b;">Export Results</button>
+            <a href="" class="btn btn-warning" id="exportFramesBtn" style="background-color: #ffe69b;">Export Frames</a>
         </div>
+    </div>
+    <div class="col-8 offset-2">
         <%- include('../partials/howToUseScan') %>
         <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
             <div id="results0" style="display: none;">
@@ -30,16 +31,16 @@
             </div>
       
         <div class="d-grid gap-2 col-3 mx-auto" id="newScanBtnDiv">
-            <button id="newScanBtn" class="btn btn-primary" style="display: none; margin-bottom: 40px;">Scan Again</button>
+            <button id="newScanBtn" class="btn btn-primary" style="display: none; margin-bottom: 40px; background-color: rgb(255, 169, 199); border-radius: 30px; border-color: rgb(255, 28, 142);">Scan Again</button>
         </div>
         <form class="mb-3" id="inputForm">
             <div class="mb-3">
-                <textarea class="form-control" id="inputText" spellcheck="true" style="height: 350px" placeholder="Enter your article here!"></textarea>
+                <textarea class="form-control" id="inputText" spellcheck="true" style="height: 350px;" placeholder="Enter your text here!" ></textarea>  <!-- background-color: #fee6fc; -->
             </div>
             <p>&nbsp;</p>
             <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
-            <div class="d-grid gap-2 col-2 mx-auto">
-                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" style="background-color: lightgreen; border-radius: 30px; border-color: lightgreen;">SCAN ARTICLE</button>  
+            <div class="d-grid gap-2 col-3 mx-auto">
+                <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" style="background-color: lightgreen; border-radius: 30px; border-color: rgb(0, 143, 0);">Scan Text</button>  
               </div>
             <br />
             <!-- <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
@@ -81,8 +82,8 @@
      
 
         <p>&nbsp;</p>
-    <!-- </div>
-</div> -->
+    </div>
+</div>
 <script>
     const frames = <%- JSON.stringify(frames) %>
 </script>
