@@ -17,14 +17,14 @@
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
           <h3 class="card-title"><%= frames[i].title %> frame</h3>
-          <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p>
-          <p  class="card-text"><%= frames[i].description %></p>
-          </br>
+          <!-- <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p> -->
+          <h6  class="card-subtitle mb-2 text-body-secondary"><%= frames[i].description %></h6>
+          <!-- </br>
           <center>
             <hr style="width: 90%;">
           </center>
           </br>
-          <p style="font-weight: 500; margin-bottom: 0px; margin-top: 10px;">Words</p>
+          <p style="font-weight: 500; margin-bottom: 0px; margin-top: 10px;">Words</p> -->
         </div>
         <ul class="list-group list-group-flush">
           <% for (let word of frames[i].words) { %>

@@ -1,36 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
-const Frame = require('../models/frame')
 const {validateFrame} = require('../middleware')
+const frames = require('../controllers/frames')
 
+// Create & show routes
+router.route('/')
+    .get(catchAsync(frames.index))
+    .post(validateFrame, catchAsync(frames.createFrame))
 
-router.get('/', catchAsync(async (req, res) => {
-    const frames = await Frame.find({})  // find all items in dbs
-    const count = await Frame.find().estimatedDocumentCount();
-    // module.exports.frames = frames;
-    res.render('frames/index', {frames, count})
-}))
+// Scan route
+router.route('/scan')
+    .get(catchAsync(frames.renderScan))
 
-router.get('/scan', catchAsync(async (req, res) => {
-    const frames = await Frame.find({})  // find all items in dbs
-    res.render('frames/scan', {frames})
-}))
-
-// Create routes
+// Render create route
 // NOTE: order matters, this needs to be before the /frames/:id route below
 // router.get('/new', (req, res) => {
 //     res.render('frames/new');
 // })
-
-router.post('/', validateFrame, catchAsync(async (req, res, next) => {
-    console.log(req.body)
-    const newFrame = new Frame(req.body.frame); 
-    await newFrame.save()
-    // res.send(newFrame.description)
-    res.redirect(`/frames`)
-}))
-
 
 // Show route
 // router.get('/:id', catchAsync(async (req, res) => {
@@ -39,23 +26,13 @@ router.post('/', validateFrame, catchAsync(async (req, res, next) => {
 // }))
 
 // Edit routes
-router.get('/:id/edit', catchAsync(async (req, res) => {
-    const frame = await Frame.findById(req.params.id)
-    const frames = await Frame.find({})  // find all items in dbs
-    const count = await Frame.find().estimatedDocumentCount();
-    res.render('frames/edit', {frame, frames, count})
-}))
+router.route('/:id')
+    .put(validateFrame, catchAsync(frames.updateFrame))
+    // Delete route
+    .delete(catchAsync(frames.deleteFrame))
 
-router.put('/:id', validateFrame, catchAsync(async (req, res) => {
-    const {id} = req.params;
-    await Frame.findByIdAndUpdate(id, {...req.body.frame});
-    res.redirect(`/frames`);
-}))
+router.route('/:id/edit')
+    .get(catchAsync(frames.renderEdit))
 
-// Delete route
-router.delete('/:id', catchAsync(async (req, res) => {
-    await Frame.findByIdAndDelete(req.params.id)
-    res.redirect('/frames')
-}))
 
 module.exports = router; 
