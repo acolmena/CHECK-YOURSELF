@@ -1,19 +1,34 @@
 <!-- <div class="row">
     <h1 class="text-center">Edit Frame</h1> -->
-    <form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
+    <form action="/frames/<%= frame._id %>?_method=PUT" class="needs-validation" method="POST" novalidate>
         <div class="mb-3">
             <label for="title"  class="form-label" style="font-weight: 500;">Title <strong style="color: red;">*</strong></label>
-            <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>">
+            <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter a title/name for the frame!
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="description"  class="form-label" style="font-weight: 500;">Description</label>
             <textarea type="text" class="form-control" placeholder="enter description (optional)" id="description" name="frame[description]"><%= frame.description %></textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
         </div>
         
         <div class="mb-3">
             <label for="words"  class="form-label" style="font-weight: 500;">Words <strong style="color: red;">*</strong></label>
-            <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" value="<%= frame.words %>">
+            <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" value="<%= frame.words %>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter word(s) associated with frame so we can scan for them!
+            </div>
         </div>            
         <div class="mb-3">
             <button class="btn btn-outline-success">Update Frame</button>

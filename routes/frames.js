@@ -3,11 +3,17 @@ const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
 const {validateFrame} = require('../middleware')
 const frames = require('../controllers/frames')
+const multer = require('multer')
+const upload = multer({dest: 'uploads/'})
 
 // Create & show routes
 router.route('/')
     .get(catchAsync(frames.index))
     .post(validateFrame, catchAsync(frames.createFrame))
+    // .post(upload.single('reloadedFrames'), importData, (req, res) => {
+    //     console.log(req.body, req.file)
+    //     res.send(document.querySelector('#reloadFramesForm'))
+    // })
 
 // Scan route
 router.route('/scan')

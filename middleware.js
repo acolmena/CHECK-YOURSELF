@@ -4,12 +4,22 @@ const {frameSchema} = require('./schemas')
 // Middleware function for validating frames required fields are filled out
 module.exports.validateFrame = (req, res, next) => {
     console.log(req.body)
+    if (req.body.reloadedFrames) {  // don't validate reloaded frames
+        next();
+        return;
+    }
     // converting input string to array before validating and entering into dbs
     let {words} = req.body.frame;
     if (words.trim()) {
         if (words.includes(',')) {
             // const re = /\s*(?:,|$)\s*/;
-            req.body.frame.words = words.split(',').map((wrd) => wrd.trim())
+            req.body.frame.words = words.split(',').map((wrd) => {
+                wrd.trim()
+                if (wrd.length) {
+                    return wrd
+                }
+                return
+            })
     
          } else {
             req.body.frame.words = [words]

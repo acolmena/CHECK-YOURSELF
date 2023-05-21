@@ -40,13 +40,17 @@
     </div>
     <div class="col-4">
         <div class="card card-body mb-3" style="background-color: #eac4ff;">
-            <form action="/frames" enctype="multipart/form-data" id="reloadFramesForm" method="POST" >
+            <form action="/frames" id="reloadFramesForm" method="POST" >
                 <h3 class="mb-3">Reload Frames</h3>
-                <label for="framesFile" class="mb-3">Select file (must be <strong style="font-weight: 600;">.json</strong>):</label>
+                <div class="mb-3">
+                    <label for="reloadedFrames"  class="form-label" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: red;">*</strong></label>
+                    <textarea type="text" class="form-control" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;"></textarea>
+                </div>
+                <!-- <label for="reloadedFrames" class="mb-3">Select file (must be <strong style="font-weight: 600;">.json</strong>):</label>
         
-                <input type="file" id="framesFile" name="framesFile" accept=".json"/>
+                <input type="file" id="framesFile" name="reloadedFrames" accept=".json"/> -->
                 
-                <br /><br />
+                <!-- <br /><br /> -->
             
                 <!-- <input class="btn btn-outline-success" type="submit" /> -->
                 <div class="mb-3">

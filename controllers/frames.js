@@ -8,10 +8,13 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.createFrame = async (req, res, next) => {
-    console.log(req.body)
-    const newFrame = new Frame(req.body.frame); 
-    await newFrame.save()
-    // res.send(newFrame.description)
+    let reloadedFrames = req.body.reloadedFrames;
+    if (reloadedFrames) {
+        await Frame.insertMany(JSON.parse(reloadedFrames))
+    } else {
+        const newFrame = new Frame(req.body.frame); 
+        await newFrame.save()
+    }
     res.redirect(`/frames`)
 }
 
