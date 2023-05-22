@@ -5,7 +5,8 @@ jQuery(document).ready(function ($) {
             return  {
                         title: f.title,
                         description: f.description,
-                        words: f.words
+                        words: f.words,
+                        color: f.color
                     }
         }) 
         let dataStr = JSON.stringify(obj);
