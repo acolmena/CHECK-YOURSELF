@@ -13,6 +13,10 @@ const FrameSchema = new Schema({
     words: {
         type: [String],
         required: true
+    },
+    color: {
+        type: String,
+        required: true
     }
 })
 

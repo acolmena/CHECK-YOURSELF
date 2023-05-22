@@ -29,7 +29,18 @@
             <div class="invalid-feedback">
                 Please enter word(s) associated with frame so we can scan for them!
             </div>
-        </div>            
+        </div>
+        <div class="mb-3">
+            <label for="color"  class="form-label" style="font-weight: 500;">Color <strong style="color: red;">*</strong></label>
+            </br>
+            <input type="color"  placeholder="enter color" id="color" name="frame[color]" value="<%= frame.color %>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please pick a color for this frame!
+            </div>
+        </div>                 
         <div class="mb-3">
             <button class="btn btn-outline-success">Update Frame</button>
         </div>

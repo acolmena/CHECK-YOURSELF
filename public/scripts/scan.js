@@ -1,12 +1,12 @@
 jQuery(document).ready(function ($) { 
     let i = 0;
     // Highlights the words that match the rgx expression below
-    function hiliter(word, element, tropeClass) {
+    function hiliter(word, element, tropeClass, color) {
         let wrdCount = 0;
         let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
         element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
                 wrdCount += 1;
-                return `<mark class=${tropeClass} style='background-color: yellow; border-radius: 7px;'>${x}</mark>`;
+                return `<mark class=${tropeClass} style='background-color: ${color}; border-radius: 7px;'>${x}</mark>`;
         });
 
         return [wrdCount, element];
@@ -17,28 +17,26 @@ jQuery(document).ready(function ($) {
         return element.trim().split(/\s+/).length;
     }
 
-    const makeChart = async (titlesArray, valuesArray, i) => {
+    const makeChart = async (titlesArray, valuesArray, i, colorsArray) => {
         (async function() {
-        
             new Chart(
             document.getElementById(`myChart${i - 1}`),
             {
                 type: 'doughnut',
                 data: {
+                    labels: titlesArray,
                     datasets: [{
-                        data: valuesArray
+                        label: 'Number of Words Found',
+                        data: valuesArray,
+                         // These labels appear in the legend and in the tooltips when hovering different arcs
+                        backgroundColor: colorsArray,
                     }],
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: titlesArray
                 },
                 options: {
                     plugins: {
                         title: {
                             display: true,
                             text: 'Breakdown of Frames Detected'
-                        },
-                        colors: {
-                            forceOverride: true
                         }
                     }
                 }
@@ -71,7 +69,7 @@ jQuery(document).ready(function ($) {
         newScanBtnDiv.insertAdjacentHTML("beforebegin", nextOutputTextAndChart);
     }
 
-    const doHover = (ids) => {
+    const doHover = (ids, colorsArray) => {
         
         // $("mark").bind("mousemove", function (e) {
         //     console.log('doOverEnter')
@@ -88,17 +86,18 @@ jQuery(document).ready(function ($) {
         //     // }
         // });
 
-        for (let id of ids) {
-            $(`.${id}`).hover(function () {   // for mousenter
+        for (let j = 0; j < ids.length; j++) {
+            console.log(ids[j])
+            $(`.${ids[j]}`).hover(function () {   // for mousenter
                 // $("#frameMessage").show();
                 // $("aside").hide();
                 // $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
-                $(`#${id}`).css("background-color", 'lightgreen'); // turn background of popup text this color
-                $(`#${id}`).show();
-                $(`.${id}`).css("cursor", "pointer")
+                $(`#${ids[j]}`).css("background-color", colorsArray[j]); // turn background of popup text this color
+                $(`#${ids[j]}`).show();
+                $(`.${ids[j]}`).css("cursor", "pointer")
             },
             function() {   // for mouseexit
-                $(`#${id}`).hide();
+                $(`#${ids[j]}`).hide();
             });
         }
     }
@@ -123,6 +122,7 @@ jQuery(document).ready(function ($) {
         // 2) Initialize arrays for chart, hover feature, and graphObj for exporting .csv file
         let titlesArray = []
         let valuesArray = []
+        let colorsArray = []
         let ids = []; // store frame ids of highlighted words
 
         // 3) Loop over all frames and all their words to check if they're in the text that was inputted (& build up graphObj and arrays)
@@ -132,6 +132,8 @@ jQuery(document).ready(function ($) {
         for (let frame of frames) {
             let title = frame.title;
             titlesArray.push(title)
+            let color = frame.color
+            colorsArray.push(color)
             totFrameCount = 0;  // counter for tot count of words found for a particular frame
             if (!graphObj[title]) {
                 graphObj[title] = {
@@ -140,7 +142,7 @@ jQuery(document).ready(function ($) {
                                     }   // start frame object
             }         
             for (let word of frame.words) {
-                [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id)  // highlights words and returns count of total times an individual word was found
+                [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id, color)  // highlights words and returns count of total times an individual word was found
                 if (!graphObj[title].indWrdCounts[word]) {
                     graphObj[title].indWrdCounts[word] = indFrameWrdCount;  // add word and count if word is not already in graphObj
                 } else {
@@ -159,7 +161,7 @@ jQuery(document).ready(function ($) {
         }
 
         // 4) Make chart
-        makeChart(titlesArray, valuesArray, i)
+        makeChart(titlesArray, valuesArray, i, colorsArray)
 
         // 5) Show result block (output text and chart)
         $(`#results${i - 1}`).css('display', 'block')
@@ -169,7 +171,7 @@ jQuery(document).ready(function ($) {
         
 
         // 7) Do hover feature
-        doHover(ids);
+        doHover(ids, colorsArray);
 
         // 8) Make it so that website automatically scrolls to current result
         document.querySelector(`#results${i - 1}`).scrollIntoView({behavior: "smooth"})
@@ -181,10 +183,6 @@ jQuery(document).ready(function ($) {
         newScanBtn.style.display = 'block'
         console.log(graphObj)
     })
-
-
-
-
 
 
 
@@ -229,4 +227,78 @@ jQuery(document).ready(function ($) {
         
       
     })
+
+
+    const createCSV = (obj) => {
+        // array that will store csv values
+        let csvRows = [];
+    
+        // make headers
+        const headers = 'Frame Titles,Total Word Count, Individual Words, Word Count For Individual Word'
+    
+        // push headers onto csvRows
+        csvRows.push(headers)
+    
+        for (let frameKey of Object.keys(obj)) {
+            let indFrameObj = obj[frameKey]
+            let frameRowArr = [frameKey]
+            for (let indFrameKey of Object.keys(indFrameObj)) {
+                if (indFrameKey === 'totWrdCount') {
+                    frameRowArr.push(obj[frameKey][indFrameKey])  // insert total wrd count for frame in row
+                } else {
+                    // loop through each word and make new rows 
+                    let individualWrds = Object.keys(obj[frameKey][indFrameKey]);
+                    for (let k = 0; k < individualWrds.length; k++) {
+                        let wrd = individualWrds[k]
+                        let indWrdCount = obj[frameKey]['indWrdCounts'][wrd]
+                       
+                        // add first word to same row that has frame title
+                        if (k === 0) {
+                            frameRowArr.push(wrd)  // push wrd
+                            frameRowArr.push(indWrdCount)   // push wrd count
+                            console.log(frameRowArr)
+                            console.log('csvRows', csvRows)
+                            csvRows.push(frameRowArr.join(','))  // make into string separated by commas and push into csvRows
+                        } else {
+                            frameRowArr = `,,${wrd},${indWrdCount}`;
+                            csvRows.push(frameRowArr)
+                        }
+    
+                    }
+                }
+            }
+    
+        }
+        return csvRows.join('\n')
+    
+    
+    }
+    
+    
+    const exportToCSVFile = (obj, exportResultsLink) => {
+        let csvData = createCSV(obj)
+    
+        // (from Geeks For Geeks) 
+        // Creating a Blob for having a csv file format and passing the data with type
+        const blob = new Blob([csvData], { type: 'text/csv' });
+      
+        // (from Geeks For Geeks)
+        // Creating an object for downloading url
+        const url = window.URL.createObjectURL(blob);
+
+        
+        exportResultsLink.setAttribute('href', url);
+        exportResultsLink.setAttribute('download', 'results.csv');
+    }
+    
+    $('#exportResultsBtn').click(function () {
+        exportToCSVFile(graphObj, document.querySelector('#exportResultsBtn'))
+    })
+    
+    
+    
 });
+
+
+
+

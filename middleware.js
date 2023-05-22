@@ -3,7 +3,6 @@ const {frameSchema} = require('./schemas')
 
 // Middleware function for validating frames required fields are filled out
 module.exports.validateFrame = (req, res, next) => {
-    console.log(req.body)
     if (req.body.reloadedFrames) {  // don't validate reloaded frames
         next();
         return;
@@ -27,7 +26,6 @@ module.exports.validateFrame = (req, res, next) => {
         }
     }
     
-    console.log(req.body.frame.words)
     // start of validation
     const { error } = frameSchema.validate(req.body);
     if (error) {

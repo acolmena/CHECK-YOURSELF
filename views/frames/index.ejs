@@ -13,7 +13,7 @@
 <div class="row">
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
-      <div class="card mb-4" id="card<%= frames[i]._id%>">
+      <div class="card mb-4" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
           <h3 class="card-title"><%= frames[i].title %> frame</h3>
@@ -30,9 +30,6 @@
           <% for (let word of frames[i].words) { %>
             <li class="list-group-item"><%= word %></li>
           <% } %>
-          <!-- <li class="list-group-item">
-            <a class="card-link btn btn-info"href="#">Add New Word</a>
-          </li> -->
         </ul>
         <div class="card-body">
           <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>

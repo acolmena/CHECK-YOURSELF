@@ -12,6 +12,7 @@ module.exports.createFrame = async (req, res, next) => {
     if (reloadedFrames) {
         await Frame.insertMany(JSON.parse(reloadedFrames))
     } else {
+        console.log(req.body.frame)
         const newFrame = new Frame(req.body.frame); 
         await newFrame.save()
     }

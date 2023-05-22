@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) { 
-    const exportToJsonFile = (jsonData, exportFramesLink) => {
-        jsonData = jsonData.map((f) => {
+    const exportToJsonFile = (obj, exportFramesLink) => {
+        obj = obj.map((f) => {
             // remove _ids & _v's 
             return  {
                         title: f.title,
@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
                         words: f.words
                     }
         }) 
-        let dataStr = JSON.stringify(jsonData);
+        let dataStr = JSON.stringify(obj);
         let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
         let exportFileDefaultName = 'frames.json';
