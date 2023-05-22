@@ -11,11 +11,11 @@ jQuery(document).ready(function ($) {
         let dataStr = JSON.stringify(obj);
         let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
-        let exportFileDefaultName = 'frames.json';
+        let filename = prompt('Enter Filename:') || 'frames.json'
     
         // let linkElement = document.createElement('a');
         exportFramesLink.setAttribute('href', dataUri);
-        exportFramesLink.setAttribute('download', exportFileDefaultName);
+        exportFramesLink.setAttribute('download', filename);
         // linkElement.click();
     }
 

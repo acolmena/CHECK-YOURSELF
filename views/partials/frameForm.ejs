@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label for="color"  class="form-label" style="font-weight: 500;">Color <strong style="color: red;">*</strong></label>
                         </br>
-                        <input type="color"  placeholder="enter color" id="color" name="frame[color]" style="background-color: #fff9e7;" required>
+                        <input type="color"  value="#b3e2ff" id="color" name="frame[color]" style="background-color: #fff9e7;" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -51,11 +51,11 @@
     </div>
     <div class="col-4">
         <div class="card card-body mb-3" style="background-color: #eac4ff;">
-            <form action="/frames" id="reloadFramesForm" method="POST" >
+            <form action="/frames" id="reloadFramesForm" class="needs-validation" method="POST" novalidate> 
                 <h3 class="mb-3">Reload Frames</h3>
                 <div class="mb-3">
                     <label for="reloadedFrames"  class="form-label" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: red;">*</strong></label>
-                    <textarea type="text" class="form-control" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;"></textarea>
+                    <textarea type="text" class="form-control" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;" required></textarea>
                 </div>
                 <!-- <label for="reloadedFrames" class="mb-3">Select file (must be <strong style="font-weight: 600;">.json</strong>):</label>
         

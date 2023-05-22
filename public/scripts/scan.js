@@ -286,9 +286,10 @@ jQuery(document).ready(function ($) {
         // Creating an object for downloading url
         const url = window.URL.createObjectURL(blob);
 
-        
+        let filename = prompt('Enter Filename:') || 'results.csv'
+
         exportResultsLink.setAttribute('href', url);
-        exportResultsLink.setAttribute('download', 'results.csv');
+        exportResultsLink.setAttribute('download', filename);
     }
     
     $('#exportResultsBtn').click(function () {
