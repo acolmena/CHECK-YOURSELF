@@ -10,23 +10,24 @@ module.exports.validateFrame = (req, res, next) => {
     }
     // converting input string to array before validating and entering into dbs
     let {words} = req.body.frame;
-    if (words.trim()) {
+    words = words.trim();
+    if (words) {   // check if user only entered spaces
         if (words.includes(',')) {
             // const re = /\s*(?:,|$)\s*/;
-            req.body.frame.words = words.split(',').map((wrd) => {
-                wrd.trim()
-                if (wrd.length) {
-                    return wrd
+            let finalWrds = []
+            words.split(',').forEach((wrd) => {
+                wrd = wrd.trim()  // remove whitespace from words
+                if (wrd) {   // prevents adding empty strings to array
+                    finalWrds.push(wrd)
                 }
-                return
             })
-    
+            req.body.frame.words = finalWrds
          } else {
             req.body.frame.words = [words]
         }
     }
     
-
+    console.log(req.body.frame.words)
     // start of validation
     const { error } = frameSchema.validate(req.body);
     if (error) {
