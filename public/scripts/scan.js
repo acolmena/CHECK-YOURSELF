@@ -112,28 +112,63 @@ jQuery(document).ready(function ($) {
         console.log(graphObj, 'beginning')
         i++;
         console.log(i)
+        // Start filling in these arrays in the first loop to not have so much info in the restructured obj
+      
+    
+
+        // 0) Restructure words arrays so that the values with > 1 word and the ones that have dashes go before the ones that don't
+        let firstArr;
+        let secondArr;
+        let restructuredFrames = []
+        for (let frame of frames) {
+            // Add hover event listener to highlighted frames
+            firstArr = [];
+            secondArr = [];
+            for (let word of frame.words) {
+                if (word.split(" ").length >= 2 || word.includes('-')) {
+                    firstArr.push(word)
+                } else {
+                    secondArr.push(word)
+                }
+            }
+            console.log(firstArr, secondArr)
+            let restructuredWrds = firstArr.concat(secondArr)
+            restructuredFrames.push(
+                {
+                    "_id": frame._id,
+                    "title": frame.title,
+                    "words": restructuredWrds, 
+                    "color": frame.color             
+                }
+            )
+        }
+        console.log(restructuredFrames)
 
         // 1) Grab input text and do preliminary cleanup
         let rawInput = document.querySelector("#inputText").value;
+        let title = document.querySelector("#inputTitle").value;
         let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
         rawInput = rawInput.replace(/\n\r?/g, "<br>");
-        $(`#outputText${i - 1}`).html(rawInput);
+        $(`#outputText${i - 1}`).html(`<h5>${title}</h5><br>` + rawInput);
 
         // 2) Initialize arrays for chart, hover feature, and graphObj for exporting .csv file
         let titlesArray = []
-        let valuesArray = []
+        let valuesArray = []  // will hold count of wrds found for each frame
         let colorsArray = []
         let ids = []; // store frame ids of highlighted words
+ 
 
         // 3) Loop over all frames and all their words to check if they're in the text that was inputted (& build up graphObj and arrays)
         let indFrameWrdCount;
         let outputHTML;
         let totFrameCount;
-        for (let frame of frames) {
-            let title = frame.title;
-            titlesArray.push(title)
+        for (let frame of restructuredFrames) {
             let color = frame.color
             colorsArray.push(color)
+            ids.push(frame._id)
+
+            let title = frame.title;
+            titlesArray.push(title)
             totFrameCount = 0;  // counter for tot count of words found for a particular frame
             if (!graphObj[title]) {
                 graphObj[title] = {
@@ -151,8 +186,7 @@ jQuery(document).ready(function ($) {
                 totFrameCount += indFrameWrdCount
             }
 
-            // Add hover event listener to highlighted frames
-            ids.push(frame._id)
+            
 
             // Add word counts to arrays and graphObj
             graphObj[title].totWrdCount += totFrameCount;
@@ -162,6 +196,9 @@ jQuery(document).ready(function ($) {
 
         // 4) Make chart
         makeChart(titlesArray, valuesArray, i, colorsArray)
+
+        // 4.5) Add title to outputText html
+        // document.querySelector(`#outputText${i - 1}`).innerHTML = `<h5>${title}<h5><br>`.concat(document.querySelector(`#outputText${i - 1}`).innerHTML)
 
         // 5) Show result block (output text and chart)
         $(`#results${i - 1}`).css('display', 'block')
@@ -193,21 +230,19 @@ jQuery(document).ready(function ($) {
         // 1) Show scanner (input box and "scan article" btn)
         inputForm.style.display = 'block'
 
-        // 2) Clear textarea
-        document.querySelector('#inputText').value = ''
-
-        // 3) Hide 'Scan Again' button
+        // 2) Hide 'Scan Again' button
         newScanBtn.style.display = 'none'
 
-        // 4) Scroll down to scan area
+        // 3) Scroll down to scan area
         inputForm.scrollIntoView({behavior: "smooth"})
 
-        // 5) Wrap outputText in collapsed accordion
+        // 4) Wrap outputText in collapsed accordion
         let resultDiv = document.querySelector(`#results${i - 1}`);
+        let title = document.querySelector("#inputTitle").value;
         let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #b3f8f6;">
-                                            Scan ${i}
+                                            <strong style="font-weight: 600">Scan ${i}: ${title}</strong>
                                         </button>
                                     </h2>
                                     <div id="collapse${i - 1}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -225,6 +260,9 @@ jQuery(document).ready(function ($) {
         }
         $(`#accordionBody${i-1}`).html(resultDiv)  
         
+        // 5) Clear textarea & input title area
+        document.querySelector('#inputText').value = ''
+        document.querySelector('#inputTitle').value = ''
       
     })
 
@@ -234,7 +272,7 @@ jQuery(document).ready(function ($) {
         let csvRows = [];
     
         // make headers
-        const headers = 'Frame Titles,Total Word Count, Individual Words, Word Count For Individual Word'
+        const headers = 'Frame Titles,Total Words Found, Individual Words, Number of Words Found For Individual Word'
     
         // push headers onto csvRows
         csvRows.push(headers)
