@@ -1,9 +1,37 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row"> 
-    <div class="col-3 offset-9">
-        <div class="mb-3" id="exportBtns">
-            <a href="" class="btn btn-warning" id="exportResultsBtn" style="background-color: #ffe69b;" title="export the results of your scans">Export Results</a>
-            <a href="" class="btn btn-warning" id="exportFramesBtn" style="background-color: #ffe69b;" title="export your frames so you can reuse them in the future">Export Frames</a>
+    <div class="mb-3 btn-group col-5 offset-7 " id="exportBtns">
+        <div class="dropdown me-2">
+            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
+                Export Items Analyzed
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="" class="dropdown-item" id="exportTxtContentLink" title="export file with titl and content of text(s) analyzed">Export Text Content</a>
+                </li>
+                <li>
+                    <a href="" class="dropdown-item" id="exportFramesLink" title="export your frames so you can reuse them in the future">Export Frames</a>
+                </li>
+                <li>
+                <a class="dropdown-item" href="" id="exportBothContentLink">Export Both</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown me-2">
+            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
+                Export Analysis Results
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                <a href="" class="dropdown-item" id="exportOverallResultsLink" title="export the results of your scans">Export Overall Results</a>
+                </li>
+                <li>
+                <a href="" class="dropdown-item" id="exportArticleResultsLink" title="export the results of your scans">Export Results Per Article</a>
+                </li>
+                <li>
+                <a class="dropdown-item" href="">Export Both</a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="col-8 offset-2">

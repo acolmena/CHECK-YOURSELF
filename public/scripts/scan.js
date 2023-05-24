@@ -17,14 +17,14 @@ jQuery(document).ready(function ($) {
         return element.trim().split(/\s+/).length;
     }
 
-    const makeChart = async (titlesArray, valuesArray, i, colorsArray) => {
+    const makeChart = async (frameTitlesArray, valuesArray, i, colorsArray) => {
         (async function() {
             new Chart(
             document.getElementById(`myChart${i - 1}`),
             {
                 type: 'doughnut',
                 data: {
-                    labels: titlesArray,
+                    labels: frameTitlesArray,
                     datasets: [{
                         label: 'Number of Words Found',
                         data: valuesArray,
@@ -102,19 +102,19 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    // Initialize objects for exporting .csv files
     let graphObj = {
         'totWrdCountAllFrames': 0
     }
+    let txtContentRows = ['Scan #, Text Title, Text Content']
+    let articleAllRows = ['Article Title,Article Word Count,Total Words Highlighted, Percentage of Article Highlighted, Frames Found, # Words Found For Each Frame,Percentage Breakdown Of Frames Found,Words Found For Each Frame,Frequency of Words in Article,Percentage Breakdown of Words Found'];  // make rows array and insert headers
 
     // const string = "dead tuna turaco pain amphibian reptil ya ya ay"
 
     $('#scanArticleBtn').click( function() {
         console.log(graphObj, 'beginning')
         i++;
-        console.log(i)
-        // Start filling in these arrays in the first loop to not have so much info in the restructured obj
-      
-    
+        console.log(i)   
 
         // 0) Restructure words arrays so that the values with > 1 word and the ones that have dashes go before the ones that don't
         let firstArr;
@@ -144,15 +144,19 @@ jQuery(document).ready(function ($) {
         }
         console.log(restructuredFrames)
 
-        // 1) Grab input text and do preliminary cleanup
+        // 1) Grab input text, do preliminary cleanup, and add to objects for exporting csv files 
         let rawInput = document.querySelector("#inputText").value;
-        let title = document.querySelector("#inputTitle").value;
+        let textTitle = document.querySelector("#inputTitle").value;
+        txtContentRows.push(`${i},${textTitle},${rawInput}`)
         let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
+        // let articleRows = [textTitle, totWords]
         rawInput = rawInput.replace(/\n\r?/g, "<br>");
-        $(`#outputText${i - 1}`).html(`<h5>${title}</h5><br>` + rawInput);
+        $(`#outputText${i - 1}`).html(`<h5>${textTitle}</h5><br>` + rawInput);
 
+        // 1.5) 
+        
         // 2) Initialize arrays for chart, hover feature, and graphObj for exporting .csv file
-        let titlesArray = []
+        let frameTitlesArray = []
         let valuesArray = []  // will hold count of wrds found for each frame
         let colorsArray = []
         let ids = []; // store frame ids of highlighted words
@@ -167,21 +171,21 @@ jQuery(document).ready(function ($) {
             colorsArray.push(color)
             ids.push(frame._id)
 
-            let title = frame.title;
-            titlesArray.push(title)
+            let frameTitle = frame.title;
+            frameTitlesArray.push(frameTitle)
             totFrameCount = 0;  // counter for tot count of words found for a particular frame
-            if (!graphObj[title]) {
-                graphObj[title] = {
+            if (!graphObj[frameTitle]) {
+                graphObj[frameTitle] = {
                                         'totWrdCount': 0,
                                         'indWrdCounts': {}         
                                     }   // start frame object
             }         
             for (let word of frame.words) {
                 [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id, color)  // highlights words and returns count of total times an individual word was found
-                if (!graphObj[title].indWrdCounts[word]) {
-                    graphObj[title].indWrdCounts[word] = indFrameWrdCount;  // add word and count if word is not already in graphObj
+                if (!graphObj[frameTitle].indWrdCounts[word]) {
+                    graphObj[frameTitle].indWrdCounts[word] = indFrameWrdCount;  // add word and count if word is not already in graphObj
                 } else {
-                    graphObj[title].indWrdCounts[word] += indFrameWrdCount;  // add to count if word is alread
+                    graphObj[frameTitle].indWrdCounts[word] += indFrameWrdCount;  // add to count if word is alread
                 }
                 totFrameCount += indFrameWrdCount
             }
@@ -189,16 +193,16 @@ jQuery(document).ready(function ($) {
             
 
             // Add word counts to arrays and graphObj
-            graphObj[title].totWrdCount += totFrameCount;
+            graphObj[frameTitle].totWrdCount += totFrameCount;
             valuesArray.push(totFrameCount)
             graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
         }
 
-        // 4) Make chart
-        makeChart(titlesArray, valuesArray, i, colorsArray)
+        let percentHilited = (graphObj.totWrdCountAllFrames / totWords) * 100;
+        // articleIndRows.push(graphObj.totWrdCountAllFrames, percentHilited)
 
-        // 4.5) Add title to outputText html
-        // document.querySelector(`#outputText${i - 1}`).innerHTML = `<h5>${title}<h5><br>`.concat(document.querySelector(`#outputText${i - 1}`).innerHTML)
+        // 4) Make chart
+        makeChart(frameTitlesArray, valuesArray, i, colorsArray)
 
         // 5) Show result block (output text and chart)
         $(`#results${i - 1}`).css('display', 'block')
@@ -218,7 +222,7 @@ jQuery(document).ready(function ($) {
 
         // 10) show button to make new scan
         newScanBtn.style.display = 'block'
-        console.log(graphObj)
+        console.log(txtContentRows)
     })
 
 
@@ -238,11 +242,11 @@ jQuery(document).ready(function ($) {
 
         // 4) Wrap outputText in collapsed accordion
         let resultDiv = document.querySelector(`#results${i - 1}`);
-        let title = document.querySelector("#inputTitle").value;
+        let textTitle = document.querySelector("#inputTitle").value;
         let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #b3f8f6;">
-                                            <strong style="font-weight: 600">Scan ${i}: ${title}</strong>
+                                            <strong style="font-weight: 600">Scan ${i}: ${textTitle}</strong>
                                         </button>
                                     </h2>
                                     <div id="collapse${i - 1}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -313,25 +317,75 @@ jQuery(document).ready(function ($) {
     }
     
     
-    const exportToCSVFile = (obj, exportResultsLink) => {
-        let csvData = createCSV(obj)
+    const exportToCSVFile = (info, exportResultsLink, defaultName) => {
+            let csvData;
+            if (defaultName === 'overall-results') {
+                csvData = createCSV(info)
+            } else {
+                csvData = info.join('\n')
+            }
+           
     
-        // (from Geeks For Geeks) 
-        // Creating a Blob for having a csv file format and passing the data with type
-        const blob = new Blob([csvData], { type: 'text/csv' });
-      
-        // (from Geeks For Geeks)
-        // Creating an object for downloading url
-        const url = window.URL.createObjectURL(blob);
+            // (from Geeks For Geeks) 
+            // Creating a Blob for having a csv file format and passing the data with type
+            const blob = new Blob([csvData], { type: 'text/csv' });
+        
+            // (from Geeks For Geeks)
+            // Creating an object for downloading url
+            const url = window.URL.createObjectURL(blob);
 
-        let filename = prompt('Enter Filename:') || 'results.csv'
+            let filename = prompt('Enter Filename:') || `${defaultName}.csv`
 
-        exportResultsLink.setAttribute('href', url);
-        exportResultsLink.setAttribute('download', filename);
+            exportResultsLink.setAttribute('href', url);
+            exportResultsLink.setAttribute('download', filename);
+    }
+
+    const exportToJsonFile = (obj, exportFramesLink) => {
+        obj = obj.map((f) => {
+            // remove _ids & _v's 
+            return  {
+                        title: f.title,
+                        description: f.description,
+                        words: f.words,
+                        color: f.color
+                    }
+        }) 
+        let dataStr = JSON.stringify(obj);
+        let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+        let filename = prompt('Enter Filename:') || 'frames.json'
+    
+        // let linkElement = document.createElement('a');
+        exportFramesLink.setAttribute('href', dataUri);
+        exportFramesLink.setAttribute('download', filename);
+        // linkElement.click();
     }
     
-    $('#exportResultsBtn').click(function () {
-        exportToCSVFile(graphObj, document.querySelector('#exportResultsBtn'))
+    // Exporting Results
+    $('#exportOverallResultsLink').click(function () {
+        exportToCSVFile(graphObj, document.querySelector('#exportOverallResultsLink'), 'overall-results')
+    })
+
+    $('#exportArticleResultsLink').click(function () {
+        exportToCSVFile(articleAllRows, document.querySelector('#exportArticleResultsLink'), 'results-of-each-article')
+    })
+
+
+
+    // $('#exportBothContentLink').click(function () {
+    //     exportToJsonFile(frames, document.querySelector('#exportFramesLink'))
+    //     exportToCSVFile(txtContentRows, document.querySelector('#exportTxtContentLink'), 'analyzed-text-content')
+    // })
+
+
+    // Exporting Content
+    $('#exportFramesLink').click(function () {
+        exportToJsonFile(frames, document.querySelector('#exportFramesLink'))
+    })
+
+    $('#exportTxtContentLink').click(function () {
+        console.log(txtContentRows)
+        exportToCSVFile(txtContentRows, document.querySelector('#exportTxtContentLink'), 'analyzed-text-content')
     })
     
     
