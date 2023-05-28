@@ -4,11 +4,15 @@ jQuery(document).ready(function ($) {
     function hiliter(word, element, tropeClass, color) {
         let wrdCount = 0;
         let rgxp = new RegExp(`\\b${word}\\b`, "gi"); // match word exactly
-        element.innerHTML = element.innerHTML.replace(rgxp, function (x) {
-                wrdCount += 1;
-                return `<mark class=${tropeClass} style='background-color: ${color}; border-radius: 7px;'>${x}</mark>`;
+        element.innerHTML = element.innerHTML.replace(rgxp, function (x, offset) {
+            if (
+                element.innerHTML.slice(offset + x.length, offset + x.length + 6) ===
+                  "</mark" ||
+                element.innerHTML.slice(offset - 2, offset) == '">'
+              ) return x;    // if outside has already been highlighted, don't highlight again
+            wrdCount += 1;
+            return `<mark class=${tropeClass} style='background-color: ${color}; border-radius: 7px;'>${x}</mark>`;
         });
-
         return [wrdCount, element];
     }
 
@@ -107,9 +111,8 @@ jQuery(document).ready(function ($) {
         'totWrdCountAllFrames': 0
     }
     let txtContentRows = ['Scan #, Text Title, Text Content']
-    let articleAllRows = ['Article Title,Article Word Count,Total Words Highlighted, Percentage of Article Highlighted, Frames Found, # Words Found For Each Frame,Percentage Breakdown Of Frames Found,Words Found For Each Frame,Frequency of Words in Article,Percentage Breakdown of Words Found'];  // make rows array and insert headers
-
-    // const string = "dead tuna turaco pain amphibian reptil ya ya ay"
+    let articleAllRows = ['Article Title,Article Word Count,Frames Found,Words Found For Each Frame,Frequency of Words in Article,Total # Words Found For Frame,Total Words Highlighted,Percentage of Article Highlighted'];  // make rows array and insert headers
+    // let articleAnalysisObj = {};
 
     $('#scanArticleBtn').click( function() {
         console.log(graphObj, 'beginning')
@@ -147,9 +150,9 @@ jQuery(document).ready(function ($) {
         // 1) Grab input text, do preliminary cleanup, and add to objects for exporting csv files 
         let rawInput = document.querySelector("#inputText").value;
         let textTitle = document.querySelector("#inputTitle").value;
+        let totWords = getTotWordCount(rawInput + " " + textTitle); // get total number of words that were inputted by user
         txtContentRows.push(`${i},${textTitle},${rawInput}`)
-        let totWords = getTotWordCount(rawInput); // get total number of words that were inputted by user
-        // let articleRows = [textTitle, totWords]
+        articleIndRows = `${textTitle},${totWords}`
         rawInput = rawInput.replace(/\n\r?/g, "<br>");
         $(`#outputText${i - 1}`).html(`<h5>${textTitle}</h5><br>` + rawInput);
 
@@ -163,14 +166,17 @@ jQuery(document).ready(function ($) {
  
 
         // 3) Loop over all frames and all their words to check if they're in the text that was inputted (& build up graphObj and arrays)
-        let indFrameWrdCount;
+        let indWrdCount;
         let outputHTML;
         let totFrameCount;
+        let j = 0;
+        let k;
+        let totWrdsHilitedPerText = 0;
         for (let frame of restructuredFrames) {
+            j++;
             let color = frame.color
             colorsArray.push(color)
             ids.push(frame._id)
-
             let frameTitle = frame.title;
             frameTitlesArray.push(frameTitle)
             totFrameCount = 0;  // counter for tot count of words found for a particular frame
@@ -180,26 +186,63 @@ jQuery(document).ready(function ($) {
                                         'indWrdCounts': {}         
                                     }   // start frame object
             }         
+            k = 0;
+            let subsequentWrd = false;
             for (let word of frame.words) {
-                [indFrameWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id, color)  // highlights words and returns count of total times an individual word was found
-                if (!graphObj[frameTitle].indWrdCounts[word]) {
-                    graphObj[frameTitle].indWrdCounts[word] = indFrameWrdCount;  // add word and count if word is not already in graphObj
-                } else {
-                    graphObj[frameTitle].indWrdCounts[word] += indFrameWrdCount;  // add to count if word is alread
+                k++;
+                [indWrdCount, outputHTML] = hiliter(word, document.getElementById(`outputText${i - 1}`), frame._id, color)  // highlights words and returns count of total times an individual word was found
+                // for text analysis results table
+                if (indWrdCount) {
+                    if (!subsequentWrd) {  // if this is the first word of the frame to be added to the table
+                        if (j === 1) {
+                            articleIndRows += `,${frameTitle},${word},${indWrdCount}`;
+                            console.log('enter')
+                        } else {
+                            articleAllRows.push(articleIndRows)
+                            articleIndRows = ''
+                            articleIndRows = `,,${frameTitle},${word},${indWrdCount}`;
+                        }
+                        subsequentWrd = true;
+                        
+                    } else {
+                        articleAllRows.push(articleIndRows)
+                        articleIndRows = ''
+                        articleIndRows = `,,,${word},${indWrdCount}`
+                        // if (k !== frame.words.length) {
+                        //     articleAllRows.push(articleIndRows)
+                        //     articleIndRows = ''
+                        // }
+                    }
+                    
                 }
-                totFrameCount += indFrameWrdCount
+                if (!graphObj[frameTitle].indWrdCounts[word]) {
+                    graphObj[frameTitle].indWrdCounts[word] = indWrdCount;  // add word and count if word is not already in graphObj
+                } else {
+                    graphObj[frameTitle].indWrdCounts[word] += indWrdCount;  // add to count if word is alread
+                }
+                totFrameCount += indWrdCount
             }
 
             
-
+            if (totFrameCount) {
+                articleIndRows += `,${totFrameCount}`
+                if (j !== restructuredFrames.length) {
+                    articleAllRows.push(articleIndRows)
+                    articleIndRows = ''
+                }
+               
+            }
             // Add word counts to arrays and graphObj
             graphObj[frameTitle].totWrdCount += totFrameCount;
             valuesArray.push(totFrameCount)
             graphObj.totWrdCountAllFrames += totFrameCount;  // add total wrdCount of each frame to full total of all frames
+            totWrdsHilitedPerText += totFrameCount;
         }
 
-        let percentHilited = (graphObj.totWrdCountAllFrames / totWords) * 100;
-        // articleIndRows.push(graphObj.totWrdCountAllFrames, percentHilited)
+        let percentHilited = (totWrdsHilitedPerText / totWords) * 100;
+        articleIndRows += `,${totWrdsHilitedPerText},${percentHilited}`
+        articleAllRows.push(articleIndRows)
+        articleIndRows = ''
 
         // 4) Make chart
         makeChart(frameTitlesArray, valuesArray, i, colorsArray)
@@ -223,6 +266,7 @@ jQuery(document).ready(function ($) {
         // 10) show button to make new scan
         newScanBtn.style.display = 'block'
         console.log(txtContentRows)
+        console.log(articleAllRows)
     })
 
 

@@ -3,8 +3,6 @@ const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
 const {validateFrame} = require('../middleware')
 const frames = require('../controllers/frames')
-const multer = require('multer')
-const upload = multer({dest: 'uploads/'})
 
 // Create & show routes
 router.route('/')
