@@ -13,7 +13,7 @@
 <div class="row">
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
-      <div class="card mb-4" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
+      <div class="card mb-4 rounded-4 shadow-sm rounded" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
           <h3 class="card-title"><%= frames[i].title %> frame</h3>

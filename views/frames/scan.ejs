@@ -1,11 +1,14 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row"> 
-    <div class="mb-3 btn-group col-5 offset-7 " id="exportBtns">
-        <div class="dropdown me-2">
-            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
-                Export Items Analyzed
+    <div class="mb-5 btn-group col-2 d-inline">
+        <%- include('../partials/howToUseScanBtn') %>
+    </div>
+    <div class="mb-5 btn-group col-5 offset-7 " id="exportBtns">
+        <div class="dropdown me-2 ">
+            <button class="btn btn-warning dropdown-toggle rounded-5 shadow-sm position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
+                <strong style="font-weight: 500;">Export Items Analyzed</strong> 
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu bg-warning-subtle rounded-4 shadow-lg">
                 <li>
                     <a href="" class="dropdown-item" id="exportTxtContentLink" title="export file with titl and content of text(s) analyzed">Export Text Content</a>
                 </li>
@@ -18,10 +21,10 @@
             </ul>
         </div>
         <div class="dropdown me-2">
-            <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
-                Export Analysis Results
+            <button class="btn btn-warning dropdown-toggle rounded-5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ffe69b;">
+                <strong style="font-weight: 500;">Export Analysis Results</strong>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu bg-warning-subtle rounded-4 shadow-lg">
                 <li>
                 <a href="" class="dropdown-item" id="exportOverallResultsLink" title="export the results of your scans">Export Overall Results</a>
                 </li>
@@ -35,7 +38,6 @@
         </div>
     </div>
     <div class="col-8 offset-2">
-        <%- include('../partials/howToUseScan') %>
         <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
             <div id="results0" style="display: none;">
                 <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
@@ -61,35 +63,24 @@
         <div class="d-grid gap-2 col-3 mx-auto" id="newScanBtnDiv">
             <button id="newScanBtn" class="btn btn-primary" style="display: none; margin-bottom: 40px; background-color: rgb(255, 169, 199); border-radius: 30px; border-color: rgb(255, 28, 142);">Scan Again</button>
         </div>
-        <!-- <div class="card card-body mb-3" style="background-color: #eac4ff;"> -->
+        <div class="card card-body mb-3 rounded-4 shadow-sm" style="background-color: #ffe5a7; padding: 3% 3% 0% 3%;">
             <form class="mb-3" id="inputForm">
                 <div class="mb-3">
                     <label class="form-label" for="inputTitle" style="font-weight: 600">Title</label>
-                    <input class="form-control" id="inputTitle" type="text" spellcheck="true" placeholder="Enter title here!" name="inputTitle">
+                    <input class="form-control shadow-sm border border-0" id="inputTitle" type="text" spellcheck="true" placeholder="Enter title here!" name="inputTitle" style="background-color: #fff8e4;">
                 </div>
-                <div class="mb-3">
+                <div >
                     <label class="form-label" for="inputText" style="font-weight: 600">Text</label>
-                    <textarea class="form-control" id="inputText" spellcheck="true" style="height: 350px;" placeholder="Enter your text here!" name="inputText"></textarea>  <!-- background-color: #fee6fc; -->
+                    <textarea class="form-control shadow-sm border border-0" id="inputText" spellcheck="true" style="height: 350px;background-color: #fff8e4;" placeholder="Enter your text here!" name="inputText"></textarea>  <!-- background-color: #fee6fc; -->
                 </div>
                 <p>&nbsp;</p>
                 <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
                 <div class="d-grid gap-2 col-3 mx-auto">
-                    <button class="btn btn-success btn-lg" type="button" id="scanArticleBtn" style="background-color: rgb(164, 252, 164); border-radius: 30px; color: rgb(30, 30, 30); border-color: rgb(228, 255, 228);">Scan Text</button>  
+                    <button class="btn btn-success rounded-5 shadow" type="button" id="scanArticleBtn" style="background-color: rgb(159, 223, 246); border-radius: 30px; color: rgb(30, 30, 30); border-color: rgb(121, 156, 205);"><strong style="font-weight: 500;">Scan Text</strong></button>  
                   </div>
                 <br />
-                <!-- <div class="card text-center d-grid gap-2 col-6 mx-auto" id="clrBlnd">
-                    <div class="card-body">
-                      <h5 class="card-title">Need color-blind friendly colors?</h5>
-                      <div class="form-check form-switch ">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">
-                            Yes, please!
-                        </label>
-                      </div>
-                    </div>
-                </div>             -->
             </form>
-        <!-- </div> -->
+        </div>
         
         
         <!-- <div id="frameMessage"   style="display: none; 
