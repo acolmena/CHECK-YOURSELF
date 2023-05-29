@@ -1,5 +1,5 @@
 <%- layout('layouts/boilerplate') %>
-<h1 class="text-center">Add Frames</h1>
+<h1 class="text-center mb-3">Create Frames</h1>
 <div class="row">
   <div class="col-8 offset-2">
     <%- include('../partials/howToUseAdd') %>
@@ -32,9 +32,9 @@
           <% } %>
         </ul>
         <div class="card-body">
-          <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
+          <a class="card-link btn rounded-pill border shadow-sm" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(239, 239, 239, 0.722);">Edit</a>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button type="button" class="btn btn-danger rounded-pill border border-danger shadow-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Delete
           </button>
 
@@ -52,9 +52,9 @@
                   This would also delete the <strong style="font-weight: 500;">description</strong> and <strong style="font-weight: 500;">all words</strong> associated with it.
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go Back</button>
+                  <button type="button" class="btn btn-secondary rounded-pill shadow-sm" data-bs-dismiss="modal">Cancel</button>
                   <form class="d-inline" action="/frames/<%= frames[i]._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Confirm Delete</button>
+                    <button class="btn btn-danger rounded-pill border border-danger shadow-sm">Confirm Delete</button>
                   </form>
                 </div>
               </div>
@@ -68,6 +68,6 @@
 </div>
 
 <div class="d-grid gap-2 col-2 mx-auto mb-5">
-    <a class="btn btn-outline-success" href="/frames/scan" role="button">Start Scanning</a>
+    <a class="btn bg-info-subtle rounded-pill border shadow-sm mt-5" href="/frames/scan" role="button">Start Scanning</a>
 </div>
 <script src="/scripts/validateForms.js"></script>
