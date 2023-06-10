@@ -5,7 +5,7 @@
     </div>
     <div class="mb-5 btn-group col-5 offset-7 " id="exportBtns">
         <div class="dropdown me-2 ">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #fcff9e;">
+            <button class="btn dropdown-toggle rounded-5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #fcff9e;" title="Click to export files containing (1) your frames and (2) the texts and their titles">
                 <strong style="font-weight: 500;">Export Items Analyzed</strong> 
             </button>
             <ul class="dropdown-menu bg-warning-subtle rounded-4 shadow-lg">
@@ -21,7 +21,7 @@
             </ul>
         </div>
         <div class="dropdown me-2">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #fcff9e;">
+            <button class="btn dropdown-toggle rounded-5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #fcff9e;" title="Click to export files containing summaries of your scans">
                 <strong style="font-weight: 500;">Export Analysis Results</strong>
             </button>
             <ul class="dropdown-menu bg-warning-subtle rounded-4 shadow-lg">
@@ -66,12 +66,12 @@
         <div class="card card-body mb-3 rounded-4 shadow-sm" style="background-color: #fdff94; padding: 3% 3% 0% 3%;">
             <form class="mb-3" id="inputForm">
                 <div class="mb-3">
-                    <label class="form-label" for="inputTitle" style="font-weight: 600">Title</label>
-                    <input class="form-control shadow-sm border border-0" id="inputTitle" type="text" spellcheck="true" placeholder="Enter title here!" name="inputTitle" style="background-color: #fefff4;">
+                    <label class="form-label" for="inputTitle" style="font-weight: 600">Title (optional) </label>
+                    <input class="form-control shadow-sm border border-0" id="inputTitle" type="text" spellcheck="true" placeholder="Enter text's title here" name="inputTitle" style="background-color: #fefff4;">
                 </div>
                 <div >
-                    <label class="form-label" for="inputText" style="font-weight: 600">Text</label>
-                    <textarea class="form-control shadow-sm border border-0" id="inputText" spellcheck="true" style="height: 350px;background-color: #fefff4;" placeholder="Enter your text here!" name="inputText"></textarea>  <!-- background-color: #fee6fc; -->
+                    <label class="form-label" for="inputText" style="font-weight: 600">Text <strong style="color: red;">*</strong></label>
+                    <textarea class="form-control shadow-sm border border-0" id="inputText" spellcheck="true" style="height: 350px;background-color: #fefff4;" placeholder="Enter text here" name="inputText"></textarea>  <!-- background-color: #fee6fc; -->
                 </div>
                 <p>&nbsp;</p>
                 <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->

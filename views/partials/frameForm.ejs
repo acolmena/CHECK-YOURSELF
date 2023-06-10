@@ -44,7 +44,7 @@
                         </div>
                     </div>        
                     <div class="mb-3">
-                        <button class="btn  rounded-pill shadow rounded " style="background-color: #f2b500;">Add Frame</button>                       
+                        <button class="btn  rounded-pill shadow rounded " style="background-color: #f2b500;" title="Click to make a new frame!">Add Frame</button>                       
                     </div>
                 </form>
              </div>
@@ -55,17 +55,13 @@
                 <h3 class="mb-3">Reload Frames</h3>
                 <div class="mb-3">
                     <label for="reloadedFrames"  class="form-label" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: red;">*</strong></label>
-                    <textarea type="text" class="form-control shadow mb-5 rounded border border-0" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;" required></textarea>
+                    <textarea type="text" class="form-control shadow rounded border border-0" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;" required></textarea>
+                    <div class="invalid-feedback">
+                        Please paste the contents of the <strong style="font-weight: 500;">.json</strong>  file you exported from this website
+                    </div>
                 </div>
-                <!-- <label for="reloadedFrames" class="mb-3">Select file (must be <strong style="font-weight: 600;">.json</strong>):</label>
-        
-                <input type="file" id="framesFile" name="reloadedFrames" accept=".json"/> -->
-                
-                <!-- <br /><br /> -->
-            
-                <!-- <input class="btn btn-outline-success" type="submit" /> -->
-                <div class="mb-3">
-                    <button class="btn rounded-pill shadow rounded" style="background-color: #be46ff; color: white;">Add Frames</button>                       
+                <div class="mb-3 mt-5">
+                    <button class="btn rounded-pill shadow rounded" style="background-color: #be46ff; color: white;" title="Click to reload previous frames!">Add Frames</button>                       
                 </div>
             </form>
         </div>
