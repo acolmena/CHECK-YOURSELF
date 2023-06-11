@@ -378,7 +378,7 @@ jQuery(document).ready(function ($) {
             // Creating an object for downloading url
             const url = window.URL.createObjectURL(blob);
 
-            let filename = prompt('Enter Filename:') || `${defaultName}.csv`
+            let filename = prompt(`Enter Filename (default name is '${defaultName}.csv'):`) || `${defaultName}.csv`
 
             exportResultsLink.setAttribute('href', url);
             exportResultsLink.setAttribute('download', filename);
@@ -397,7 +397,7 @@ jQuery(document).ready(function ($) {
         let dataStr = JSON.stringify(obj);
         let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
-        let filename = prompt('Enter Filename:') || 'frames.json'
+        let filename = prompt("Enter Filename (default name is 'frames.json'):") || 'frames.json'
     
         // let linkElement = document.createElement('a');
         exportFramesLink.setAttribute('href', dataUri);
