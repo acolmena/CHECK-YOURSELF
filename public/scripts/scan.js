@@ -261,7 +261,8 @@ jQuery(document).ready(function ($) {
         document.querySelector(`#results${i - 1}`).scrollIntoView({behavior: "smooth"})
 
         // 9) hide scanner 
-        document.querySelector('#inputForm').style.display = 'none'
+        // document.querySelector('#inputForm').style.display = 'none'
+        $('#inputForm').hide();
 
         // 10) show button to make new scan
         newScanBtn.style.display = 'block'
@@ -276,7 +277,8 @@ jQuery(document).ready(function ($) {
     newScanBtn.addEventListener("click", function() { 
         let inputForm = document.querySelector('#inputForm');
         // 1) Show scanner (input box and "scan article" btn)
-        inputForm.style.display = 'block'
+        // inputForm.style.display = 'block'
+        $('#inputForm').show();
 
         // 2) Hide 'Scan Again' button
         newScanBtn.style.display = 'none'
@@ -287,9 +289,9 @@ jQuery(document).ready(function ($) {
         // 4) Wrap outputText in collapsed accordion
         let resultDiv = document.querySelector(`#results${i - 1}`);
         let textTitle = document.querySelector("#inputTitle").value;
-        let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
+        let accordionPrevOT = `<div class="accordion-item border-secondary-subtle" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #b3f8f6;">
+                                        <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #d5d7bc;">
                                             <strong style="font-weight: 600">Scan ${i}: ${textTitle}</strong>
                                         </button>
                                     </h2>

@@ -1,0 +1,19 @@
+<form class="mb-3" id="inputForm">
+    <div class="mb-3">
+        <label class="form-label text-dark-emphasis" for="inputTitle" style="font-weight: 600">Title (optional) </label>
+        <input class="form-control shadow-sm border border-1" id="inputTitle" type="text" spellcheck="true" placeholder="Enter text's title here" name="inputTitle">
+    </div>
+    <div >
+        <label class="form-label text-dark-emphasis" for="inputText" style="font-weight: 600">Text <strong style="color: red;">*</strong></label>
+        <textarea class="form-control shadow-sm border border-1" id="inputText" spellcheck="true" style="height: 350px;" placeholder="Enter text here" name="inputText" required></textarea>  <!-- background-color: #fee6fc; -->
+        <div class="invalid-feedback">
+            Please enter some text
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <!-- <p><input id="scanArticle" class="btn btn-success btn-large mx-auto" type="button" value="Scan Article" /></p> -->
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <button class="btn btn-success rounded-5 shadow-sm border border-1 border-secondary-subtle text-body-secondary" type="button" id="scanArticleBtn" style="background-color: #d5d7bc; border-radius: 30px;"><strong style="font-weight: 500;">Scan Text</strong></button>  
+    </div>
+    <br />
+</form>

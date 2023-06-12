@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-4 offset-2">
-            <div class="card card-body mb-3 rounded-4 shadow-sm rounded" style="background-color: #ffeaaa;">
+            <div class="card card-body mb-4 rounded-4 shadow-sm rounded" style="background-color: #e5bd84;">
                 <form action="/frames" class="needs-validation p-2" method="POST" novalidate>
-                    <h3 class="mb-3">Make New Frames</h3>
+                    <h3 class="text-secondary-emphasis mb-3">Make New Frames</h3>
                     <div class="mb-4">
-                        <label for="title"  class="form-label" style="font-weight: 500;">Title <strong style="color: red;">*</strong></label>
-                        <input type="text" class="form-control border border-0 shadow rounded" placeholder="enter title" id="title" name="frame[title]" style="background-color: hwb(44 94% 0%);" required>
+                        <label for="title"  class="text-secondary-emphasis form-label" style="font-weight: 500;">Title <strong style="color: rgb(241, 66, 66);">*</strong></label>
+                        <input type="text" class="form-control border border-0 shadow rounded" placeholder="enter title" id="title" name="frame[title]" style="background-color: #f9ebd8;" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -15,16 +15,16 @@
                     </div>
         
                     <div class="mb-4">
-                        <label for="description"  class="form-label" style="font-weight: 500;">Description</label>
-                        <textarea type="text" class="form-control border border-0 shadow rounded " placeholder="enter description (optional)" id="description" name="frame[description]" style="background-color: hwb(44 94% 0%);"></textarea>
+                        <label for="description"  class="text-secondary-emphasis form-label" style="font-weight: 500;">Description</label>
+                        <textarea type="text" class="form-control border border-0 shadow rounded " placeholder="enter description (optional)" id="description" name="frame[description]" style="background-color: #f9ebd8;"></textarea>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     
                     <div class="mb-4">
-                        <label for="words"  class="form-label" style="font-weight: 500;">Words/Phrases (separate with commas) <strong style="color: red;">*</strong></label>
-                        <textarea type="text" class="form-control border border-0 shadow rounded" placeholder="enter words (i.e. word-1, word-2, phrase one, phrase two)" id="words" name="frame[words]" style="background-color: hwb(44 94% 0%);" required></textarea>
+                        <label for="words"  class="text-secondary-emphasis form-label" style="font-weight: 500;">Words/Phrases (separate with commas) <strong style="color: rgb(241, 66, 66);">*</strong></label>
+                        <textarea type="text" class="form-control border border-0 shadow rounded" placeholder="enter words in this format: word, nextWord, phrase one, phrase two" id="words" name="frame[words]" style="background-color: #f9ebd8;" required></textarea>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -33,9 +33,10 @@
                         </div>
                     </div>    
                     <div class="mb-4">
-                        <label for="color"  class="form-label" style="font-weight: 500;">Color <strong style="color: red;">*</strong></label>
+                        <label for="color"  class="text-secondary-emphasis form-label" style="font-weight: 500;">Color <strong style="color: rgb(241, 66, 66);">*</strong></label>                        
                         </br>
-                        <input class="shadow rounded border border-0 p-1" type="color"  value="#b3e2ff" id="color" name="frame[color]" style="background-color: hwb(44 94% 0%);" required>
+                        <input class="shadow rounded border border-0 p-1" type="color"  value="#b3e2ff" id="color" name="frame[color]" style="background-color: #f9ebd8;" required>
+                        <small>Pro tip*: avoid picking the color white</small>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -44,24 +45,24 @@
                         </div>
                     </div>        
                     <div class="mb-3">
-                        <button class="btn  rounded-pill shadow rounded " style="background-color: #f2b500;" title="Click to make a new frame!">Add Frame</button>                       
+                        <button class="btn rounded-pill shadow rounded text-light border border-1 border-secondary" style="background-color: #977e5a;" title="Click to make a new frame!">Add Frame</button>                       
                     </div>
                 </form>
              </div>
     </div>
     <div class="col-4">
-        <div class="card card-body mb-3 rounded-4 shadow-sm rounded" style="background-color: #eac4ff;">
-            <form action="/frames" id="reloadFramesForm" class="needs-validation" method="POST" novalidate> 
-                <h3 class="mb-3">Reload Frames</h3>
+        <div class="card card-body mb-3 rounded-4 shadow-sm rounded" style="background-color: #d5d7bc;">
+            <form action="/frames" id="reloadFramesForm" class="needs-validation p-2" method="POST" novalidate> 
+                <h3 class="mb-3 text-secondary-emphasis">Reload Frames</h3>
                 <div class="mb-3">
-                    <label for="reloadedFrames"  class="form-label" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: red;">*</strong></label>
-                    <textarea type="text" class="form-control shadow rounded border border-0" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #faedff;" required></textarea>
+                    <label for="reloadedFrames"  class="form-label text-secondary-emphasis" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: rgb(241, 66, 66);">*</strong></label>
+                    <textarea type="text" class="form-control shadow rounded border border-0" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #f3f4e6;" required></textarea>
                     <div class="invalid-feedback">
                         Please paste the contents of the <strong>.json</strong>  file you exported from this website
                     </div>
                 </div>
-                <div class="mb-3 mt-5">
-                    <button class="btn rounded-pill shadow rounded" style="background-color: #be46ff; color: white;" title="Click to reload previous frames!">Add Frames</button>                       
+                <div class="mb-3 mt-4">
+                    <button class="btn rounded-pill shadow rounded text-light border border-1 border-secondary" style="background-color: #8c8d7d;" title="Click to reload previous frames!">Add Frames</button>                       
                 </div>
             </form>
         </div>

@@ -1,17 +1,28 @@
 <%- layout('layouts/boilerplate') %>
-<h1>Edit Frames</h1>
-<a class="btn btn-primary mb-3" href="/frames">Back To All Frames</a>
+<div class="row"> 
+  <div class="col-6 col-lg-2">
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/frames">Create Frames</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit </li>
+          </ol>
+      </nav>
+  </div>
+  <div class="col-6 col-lg-2 offset-lg-3 mb-3">
+    <h2 class="text-center mb-3">Edit Frames</h2>
+</div>
+</div>
 <div class="row">
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
-      <div class="card mb-4" id="card<%= frames[i]._id%>">
+      <div class="card mb-4 rounded-4 shadow-sm rounded" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <% if (frames[i]._id.equals(frame._id)) { %>
-            <div class="card-body" style="box-shadow: 0 0 40px #9ecaed;" id="cardToEdit">
+            <div class="card-body rounded-4 rounded" style="box-shadow: 0 0 80px <%= frames[i].color%>;" id="cardToEdit">
                 <%- include('../partials/editPartial') %>
             </div>
         <% } else { %>
-            <div class="card-body">
+            <div class="card-body rounded-4 rounded">
               <h3 class="card-title"><%= frames[i].title %> frame</h3>
               <!-- <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p> -->
               <h6  class="card-subtitle mb-2 text-body-secondary"><%= frames[i].description %></h6>
@@ -31,7 +42,7 @@
               </li> -->
             </ul>
             <div class="card-body">
-              <a class="card-link btn btn-warning" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">Edit</a>
+              <a class="card-link btn rounded-pill border shadow-sm" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(255, 255, 255, 0.722);">Edit</a>
               <!-- <button id="btn<%= frames[i]._id%>" onclick="showEditForm(this.id)"></button> -->
             </div>
            
