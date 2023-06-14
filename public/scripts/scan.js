@@ -291,7 +291,7 @@ jQuery(document).ready(function ($) {
         let textTitle = document.querySelector("#inputTitle").value;
         let accordionPrevOT = `<div class="accordion-item border-secondary-subtle" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #d5d7bc;">
+                                        <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #d5d7bc;padding: 9px 24px">
                                             <strong style="font-weight: 600">Scan ${i}: ${textTitle}</strong>
                                         </button>
                                     </h2>

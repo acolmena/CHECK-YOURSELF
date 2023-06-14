@@ -27,7 +27,7 @@
           Any frame additions, updates, or deletions you make <strong style="font-weight: 500;">will not be reflected</strong> in the scans you have already completed. In other words, if you add a new frame whose words are in texts you have already scanned, they <strong style="font-weight: 500;">will not</strong> be highlighted nor reflected in the pie chart. The scans you have already completed and the results that have been calculated thus far will not change in any way.
         </div>
         <div class="modal-footer" style="background-color: #d5d7bc">
-          <button type="button" class="btn btn-secondary rounded-pill shadow-sm" data-bs-dismiss="modal" style="background-color: #92887E">Cancel</button>
+          <button type="button" class="btn btn-secondary rounded-pill shadow-sm" data-bs-dismiss="modal" style="background-color: #92887E;padding: 9px 24px">Cancel</button>
           <a class="btn rounded-pill shadow-sm" style="background-color: #e77c6c;" href="/frames">Go Back to "Create Frames" Anyway</a>
         </div>
       </div>
@@ -38,13 +38,13 @@
 
 <div class="row"> 
     <div class="col-6 col-lg-2 offset-lg-1 mb-3">
-        <button class="btn rounded-5 shadow-sm mb-2 border border-1 border-secondary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Click to learn how to use!" style="background-color: #c1d5de;">
+        <button class="btn rounded-5 shadow-sm mb-2 border border-1 border-secondary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Click to learn how to use!" style="background-color: #c1d5de;padding: 9px 24px">
             <strong style="font-weight: 500; color:#264856">How To Use</strong>
         </button>
     </div>
-    <div class="col-6 col-lg-2 offset-lg-5 mb-3" id="exportBtns">
+    <div class="col-6 col-lg-2 offset-lg-4 mb-3" id="exportBtns">
         <div class="dropdown me-2 ">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;" title="Click to export files containing (1) your frames and (2) the texts and their titles">
+            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;padding: 9px 24px" title="Click to export files containing (1) your frames and (2) the texts and their titles">
                 <strong style="font-weight: 500;">Export Items Analyzed</strong> 
             </button>
             <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #e5bd84;">
@@ -60,9 +60,9 @@
             </ul>
         </div>
     </div>
-    <div class="col-6 col-lg-2 mb-3" id="exportBtns">
+    <div class="col-6 col-lg-2 mb-3 ml-2" id="exportBtns">
         <div class="dropdown me-2">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;" title="Click to export files containing summaries of your scans">
+            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis ms-4" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;padding: 9px 24px" title="Click to export files containing summaries of your scans">
                 <strong style="font-weight: 500;">Export Analysis Results</strong>
             </button>
             <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #e5bd84;">
@@ -79,35 +79,49 @@
         </div>
     </div>
 </div>
-<%- include('../partials/howToUseScanBtn') %>
 
+<div class="row">
+    <div class="col-10 offset-1">
+        <%- include('../partials/howToUseScanBtn') %>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-8 offset-2">
         <div class="accordion" id="accordion" style=" display: none; margin-bottom: 50px;">  </div>
-            <div id="results0" style="display: none;">
-                <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
-                    border-radius: 20px; width: 50%;
-                    min-width: 400px;
-                    float: left;
-                    height: auto;
-                    padding: 3%;
-                    border-radius: 10px;
-                    margin-left: 5%;
-                    background-color: #F4F5F5;
-                    margin-bottom: 200px;"> 
-                </p>
-                
-                <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
-                    <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
-                        <p>Pie chart breaking down instances of frames found</p>
-                    </canvas> 
-                    
-                </div>
-            </div>
+    </div>
+</div>
+    
+<div id="results0" style="display: none;">
+    <p id="outputText0" class="rounded-text-box" style="background-color: #F4F5F5;
+        border-radius: 20px; width: 50%;
+        min-width: 400px;
+        float: left;
+        height: auto;
+        padding: 3%;
+        border-radius: 10px;
+        margin-left: 5%;
+        background-color: #F4F5F5;
+        margin-bottom: 200px;"> 
+    </p>
+    
+    <div id="chartPar0" style="width: 650px; margin-bottom: 50px">
+        <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
+            <p>Pie chart breaking down instances of frames found</p>
+        </canvas> 
+    </div>
+</div>
       
-        <div class="d-grid gap-2 col-3 mx-auto" id="newScanBtnDiv">
-            <button id="newScanBtn" class="btn btn-primary border border-1 border-secondary-subtle text-secondary-emphasis" style="display: none; margin-bottom: 40px; background-color: #d5d7bc; border-radius: 30px;">Scan Again</button>
-        </div>
+<div class="text-center" id="newScanBtnDiv">
+    <button id="newScanBtn" class="btn btn-primary border border-1 border-secondary-subtle text-secondary-emphasis" style="display: none; margin-bottom: 40px; background-color: #d5d7bc; border-radius: 30px;padding: 9px 24px ">Scan Again</button>
+</div>
+
+<div class="row">
+    <div class="col-8 offset-2">
         <%- include('../partials/inputForm') %>
+    </div>
+</div>
+        
         
         
         <!-- <div id="frameMessage"   style="display: none; 
