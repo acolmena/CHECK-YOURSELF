@@ -1,6 +1,7 @@
 <!-- <div class="row">
     <h1 class="text-center">Edit Frame</h1> -->
     <form action="/frames/<%= frame._id %>?_method=PUT" class="needs-validation" method="POST" novalidate>
+        <p class="mb-1" style="color: rgb(241, 66, 66);"><strong style="color: rgb(241, 66, 66);">*</strong> Indicates required field</p>
         <div class="mb-3">
             <label for="title"  class="form-label" style="font-weight: 500;">Title <strong style="color: red;">*</strong></label>
             <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>" required>
@@ -42,8 +43,8 @@
             </div>
         </div>                 
         <div class="mb-3">
-            <button class="btn rounded-pill border shadow-sm mb-3" style="background-color: rgba(255, 255, 255, 0.722);">Confirm Edit</button>
-            <a class="btn rounded-pill border shadow-sm border border-1 border-secondary" href="/frames" style="background-color: #1c1c1c88;  color:#fafcff">Return to Create Frames</a>
+            <button class="btn rounded-pill border shadow-sm mb-3" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px">Confirm Edit</button>
+            <a class="btn rounded-pill border shadow-sm border border-1 border-secondary mb-3" href="/frames" style="background-color: #1c1c1c88;  color:#fafcff;padding: 9px 24px">Cancel Edit</a>
         </div>
     </form>
 <!-- </div> -->

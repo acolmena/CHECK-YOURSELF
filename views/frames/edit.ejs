@@ -15,7 +15,7 @@
 <div class="row">
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
-      <div class="card mb-4 rounded-4 shadow-sm rounded" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
+      <div class="card mb-4 rounded-4 shadow-sm rounded mt-3" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <% if (frames[i]._id.equals(frame._id)) { %>
             <div class="card-body rounded-4 rounded" style="box-shadow: 0 0 80px <%= frames[i].color%>;" id="cardToEdit">
@@ -42,7 +42,7 @@
               </li> -->
             </ul>
             <div class="card-body">
-              <a class="card-link btn rounded-pill border shadow-sm" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(255, 255, 255, 0.722);">Edit</a>
+              <a class="card-link btn rounded-pill border shadow-sm" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px">Edit</a>
             </div>
            
         <% } %>

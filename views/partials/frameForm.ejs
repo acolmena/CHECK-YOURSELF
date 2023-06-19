@@ -2,7 +2,8 @@
     <div class="col-4 offset-2">
             <div class="card card-body mb-4 rounded-4 shadow-sm rounded" style="background-color: #e5bd84;">
                 <form action="/frames" class="needs-validation p-2" method="POST" novalidate>
-                    <h3 class="text-secondary-emphasis mb-3">Make New Frames</h3>
+                    <h4 class="text-secondary-emphasis mb-1">Make New Frames</h4>
+                    <p class="mb-1" style="color: rgb(241, 66, 66);"><strong style="color: rgb(241, 66, 66);">*</strong> Indicates required field</p>
                     <div class="mb-4">
                         <label for="title"  class="text-secondary-emphasis form-label" style="font-weight: 500;">Title <strong style="color: rgb(241, 66, 66);">*</strong></label>
                         <input type="text" class="form-control border border-0 shadow rounded" placeholder="enter title" id="title" name="frame[title]" style="background-color: #f9ebd8;" required>
@@ -53,7 +54,8 @@
     <div class="col-4">
         <div class="card card-body mb-3 rounded-4 shadow-sm rounded" style="background-color: #d5d7bc;">
             <form action="/frames" id="reloadFramesForm" class="needs-validation p-2" method="POST" novalidate> 
-                <h3 class="mb-3 text-secondary-emphasis">Reload Frames</h3>
+                <h4 class="mb-1 text-secondary-emphasis">Reload Frames</h4>
+                <p class="mb-1" style="color: rgb(241, 66, 66);"><strong style="color: rgb(241, 66, 66);">*</strong> Indicates required field</p>
                 <div class="mb-3">
                     <label for="reloadedFrames"  class="form-label text-secondary-emphasis" style="font-weight: 500;">Content Of Previously Exported Frames File <strong style="color: rgb(241, 66, 66);">*</strong></label>
                     <textarea type="text" class="form-control shadow rounded border border-0" placeholder="enter previous frames" id="reloadedFrames" name="reloadedFrames" style="background-color: #f3f4e6;" required></textarea>
