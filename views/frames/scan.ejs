@@ -1,34 +1,34 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row"> 
-    <div class="col-6 col-lg-2 offset-lg-1">
+    <div class="col-6 col-lg-3">
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><u>Create Frames</u></a></li>
-            <li class="breadcrumb-item active" aria-current="page">Scanner</li>
+            <li class="breadcrumb-item"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="link"><u style="color: #AC73FC;">CREATE FRAMES</u></a></li>
+            <li class="breadcrumb-item active" aria-current="page">SCANNER</li>
             </ol>
         </nav>
     </div>
     <div class="col-6 col-lg-2 offset-lg-2">
-        <h2 class="text-center mb-3">Scanner</h2>
+        <h2 class="text-center mb-3" style="font-family: 'Archivo Black', sans-serif;">SCANNER</h2>
     </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="background-color: #d5d7bc">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">You might lose your progress</h1>
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border border-2 border-black">
+        <div class="modal-header border border-bottom-2 border-black" style="background-color: #D1FA74">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel" style="font-family: 'Archivo Black', sans-serif;">YOU MIGHT LOSE YOUR PROGRESS</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="background-color: #f6f7ee">
+        <div class="modal-body" style="background-color: #EAFFBA">
           <strong style="font-weight: 500;">Are you sure you want to go back to "Create Frames"?</strong> 
           <br></br>
           Any frame additions, updates, or deletions you make <strong style="font-weight: 500;">will not be reflected</strong> in the scans you have already completed. In other words, if you add a new frame whose words are in texts you have already scanned, they <strong style="font-weight: 500;">will not</strong> be highlighted nor reflected in the pie chart. The scans you have already completed and the results that have been calculated thus far will not change in any way.
         </div>
-        <div class="modal-footer" style="background-color: #d5d7bc">
-          <button type="button" class="btn btn-secondary rounded-pill shadow-sm" data-bs-dismiss="modal" style="background-color: #92887E;padding: 9px 24px">Cancel</button>
-          <a class="btn rounded-pill shadow-sm" style="background-color: #e77c6c;" href="/frames">Go Back to "Create Frames" Anyway</a>
+        <div class="modal-footer border-top-0" style="background-color: #EAFFBA">
+          <button type="button" class="btn btn-secondary rounded-pill shadow-sm bg-black border-black" data-bs-dismiss="modal" style="padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">CANCEL</button>
+          <a class="btn rounded-pill shadow-sm border-2 border-black" style="background-color: #e77c6c;font-family: 'Archivo Black', sans-serif;" href="/frames">GO TO "CREATE FRAMES" ANYWAY</a>
         </div>
       </div>
     </div>
@@ -38,42 +38,42 @@
 
 <div class="row"> 
     <div class="col-6 col-lg-2 offset-lg-1 mb-3">
-        <button class="btn rounded-5 shadow-sm mb-2 border border-1 border-secondary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Click to learn how to use!" style="background-color: #c1d5de;padding: 9px 24px">
-            <strong style="font-weight: 500; color:#264856">How To Use</strong>
+        <button class="btn rounded-5 shadow-sm mb-2 border border-2 border-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" title="Click to learn how to use!" style="background-color: #BF97F8;padding: 9px 24px">
+            <strong style="font-family: 'Archivo Black', sans-serif;">HOW TO USE</strong>
         </button>
     </div>
-    <div class="col-6 col-lg-2 offset-lg-4 mb-3" id="exportBtns">
+    <div class="col-6 col-lg-2 offset-lg-4 mb-3 me-4" id="exportBtns">
         <div class="dropdown me-2 ">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;padding: 9px 24px" title="Click to export files containing (1) your frames and (2) the texts and their titles">
-                <strong style="font-weight: 500;">Export Items Analyzed</strong> 
+            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-2 border-black text-black" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #D1FA74;padding: 9px 24px" title="Click to export files containing (1) your frames and (2) the texts and their titles">
+                <strong style="font-family: 'Archivo Black', sans-serif; font-size: 80%;">EXPORT ANALYZED ITEMS</strong> 
             </button>
-            <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #e5bd84;">
+            <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #D1FA74;">
                 <li>
-                    <a href="" class="dropdown-item" id="exportTxtContentLink" title="Exports file with title and content of text(s) analyzed">Export Text Content</a>
+                    <a href="" class="dropdown-item" id="exportTxtContentLink" title="Exports file with title and content of text(s) analyzed" style="font-family: 'Archivo Black', sans-serif">Export Text Content</a>
                 </li>
                 <li>
-                    <a href="" class="dropdown-item" id="exportFramesLink" title="Exports your frames so you can reuse them in the future">Export Frames</a>
+                    <a href="" class="dropdown-item" id="exportFramesLink" title="Exports your frames so you can reuse them in the future" style="font-family: 'Archivo Black', sans-serif">Export Frames</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="" id="exportBothContentLink">Export Both</a>
+                <a class="dropdown-item" href="" id="exportBothContentLink" style="font-family: 'Archivo Black', sans-serif">Export Both</a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="col-6 col-lg-2 mb-3 ml-2" id="exportBtns">
+    <div class="col-6 col-lg-2 mb-3" id="exportBtns">
         <div class="dropdown me-2">
-            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-1 border-secondary-subtle text-warning-emphasis ms-4" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #e5bd84;padding: 9px 24px" title="Click to export files containing summaries of your scans">
-                <strong style="font-weight: 500;">Export Analysis Results</strong>
+            <button class="btn dropdown-toggle rounded-5 shadow-sm border border-2 border-black text-black ms-4" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #D1FA74;padding: 9px 24px" title="Click to export files containing summaries of your scans">
+                <strong style="font-family: 'Archivo Black', sans-serif; font-size: 80%;">EXPORT ANALYSIS RESULTS</strong>
             </button>
-            <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #e5bd84;">
+            <ul class="dropdown-menu rounded-4 shadow-lg" style="background-color: #D1FA74;">
                 <li>
-                <a href="" class="dropdown-item" id="exportOverallResultsLink" title="export the results of your scans">Export Overall Results</a>
+                <a href="" class="dropdown-item" id="exportOverallResultsLink" title="export the results of your scans" style="font-family: 'Archivo Black', sans-serif">Export Overall Results</a>
                 </li>
                 <li>
-                <a href="" class="dropdown-item" id="exportArticleResultsLink" title="export the results of your scans">Export Results Per Article</a>
+                <a href="" class="dropdown-item" id="exportArticleResultsLink" title="export the results of your scans" style="font-family: 'Archivo Black', sans-serif">Export Results Per Article</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="">Export Both</a>
+                <a class="dropdown-item" href="" style="font-family: 'Archivo Black', sans-serif">Export Both</a>
                 </li>
             </ul>
         </div>
@@ -113,7 +113,7 @@
 </div>
       
 <div class="text-center" id="newScanBtnDiv">
-    <button id="newScanBtn" class="btn btn-primary border border-1 border-secondary-subtle text-secondary-emphasis" style="display: none; margin-bottom: 40px; background-color: #d5d7bc; border-radius: 30px;padding: 9px 24px ">Scan Again</button>
+    <button id="newScanBtn" class="btn btn-primary border border-2 border-black text-black" style="display: none; margin-bottom: 40px; background-color: #AC73FC; border-radius: 30px;padding: 9px 24px;font-family: 'Archivo Black', sans-serif; ">SCAN AGAIN</button>
 </div>
 
 <div class="row">
