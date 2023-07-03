@@ -34,8 +34,8 @@ jQuery(document).ready(function ($) {
                         data: valuesArray,
                          // These labels appear in the legend and in the tooltips when hovering different arcs
                         backgroundColor: colorsArray,
-                        borderWidth: 1,
-                        borderColor: 'black'
+                        borderWidth: 2,
+                        borderColor: '#F4F3F3'
                     }],
                 },
                 options: {
@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
                                                                                                     margin-left: 5%;
                                                                                                     background-color: #FFFFFF;
                                                                                                     margin-bottom: 200px;">${outputHTML}</p>
-                                                <div id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
+                                                <div class="d-grid gap-2 col-2 mx-auto" id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
                                                     <canvas id="myChart${i}" aria-label="pie chart for scan" role="pie chart">
                                                         <p>Pie chart breaking down instances of frames found</p>
                                                     </canvas> 
