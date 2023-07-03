@@ -34,12 +34,14 @@ jQuery(document).ready(function ($) {
                         data: valuesArray,
                          // These labels appear in the legend and in the tooltips when hovering different arcs
                         backgroundColor: colorsArray,
+                        borderWidth: 1,
+                        borderColor: 'black'
                     }],
                 },
                 options: {
                     plugins: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Breakdown of Frames Detected'
                         }
                     }
@@ -52,7 +54,8 @@ jQuery(document).ready(function ($) {
     const setupNextScan = (i, outputHTML) => {
         let newScanBtnDiv = document.querySelector('#newScanBtnDiv'); 
         let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
-                                                <p class="rounded-text-box" id="outputText${i}" style="background-color: #F4F5F5;
+                                                <p class="rounded-text-box border border-1 border-black" id="outputText${i}" style="
+                                                                                                    background-color: #F4F5F5;
                                                                                                     border-radius: 20px; width: 50%;
                                                                                                     min-width: 400px;
                                                                                                     float: left;
@@ -60,7 +63,7 @@ jQuery(document).ready(function ($) {
                                                                                                     padding: 3%;
                                                                                                     border-radius: 10px;
                                                                                                     margin-left: 5%;
-                                                                                                    background-color: #F4F5F5;
+                                                                                                    background-color: #FFFFFF;
                                                                                                     margin-bottom: 200px;">${outputHTML}</p>
                                                 <div id="chartPar${i}" style="width: 650px; margin-bottom: 50px">
                                                     <canvas id="myChart${i}" aria-label="pie chart for scan" role="pie chart">
@@ -289,9 +292,9 @@ jQuery(document).ready(function ($) {
         // 4) Wrap outputText in collapsed accordion
         let resultDiv = document.querySelector(`#results${i - 1}`);
         let textTitle = document.querySelector("#inputTitle").value;
-        let accordionPrevOT = `<div class="accordion-item border-secondary-subtle" id="accordionItem${i - 1}">
+        let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #d5d7bc;padding: 9px 24px">
+                                        <button class="accordion-button collapsed text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #BF97F8;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">
                                             <strong style="font-weight: 600">Scan ${i}: ${textTitle}</strong>
                                         </button>
                                     </h2>
