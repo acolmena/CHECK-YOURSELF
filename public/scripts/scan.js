@@ -76,35 +76,36 @@ jQuery(document).ready(function ($) {
         newScanBtnDiv.insertAdjacentHTML("beforebegin", nextOutputTextAndChart);
     }
 
-    const doHover = (ids, colorsArray) => {
+    const doHover = (index, ids, colorsArray) => {
         
-        // $("mark").bind("mousemove", function (e) {
-        //     console.log('doOverEnter')
-        //     // $("#frameMessage").css({
-        //     //   top: e.pageY,
-        //     // });
-        // });
-      
-        // $("html").click(function (closeMessage) {
-        //     // if (!($(closeMessage.target).closest(`#${id}`).length > 0)) {
-        //         if ($(`#${id}`).is(":visible")) {
-        //             $(`#${id}`).hide();
-        //         }
-        //     // }
-        // });
-
         for (let j = 0; j < ids.length; j++) {
             console.log(ids[j])
             $(`.${ids[j]}`).hover(function () {   // for mousenter
-                // $("#frameMessage").show();
-                // $("aside").hide();
+                $("#frameMessage").show();
+                $("aside").hide();
                 // $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
                 $(`#${ids[j]}`).css("background-color", colorsArray[j]); // turn background of popup text this color
                 $(`#${ids[j]}`).show();
                 $(`.${ids[j]}`).css("cursor", "pointer")
-            },
-            function() {   // for mouseexit
-                $(`#${ids[j]}`).hide();
+            })
+            // ,
+            // function() {   // for mouseexit
+            //     $(`#${ids[j]}`).hide();
+            // });
+
+            $(`#outputText${index}`).bind("mousemove", function (e) {
+                console.log('topPage')
+                $("#frameMessage").css({
+                  top: e.pageY,
+                });
+            });
+          
+            $("html").click(function (closeMessage) {
+                if (!($(closeMessage.target).closest(`#${ids[j]}`).length > 0)) {
+                    // if ($(`#${ids[j]}`).is(":visible")) {
+                        $(`#${ids[j]}`).hide();
+                    }
+                // }
             });
         }
     }
@@ -258,7 +259,7 @@ jQuery(document).ready(function ($) {
         
 
         // 7) Do hover feature
-        doHover(ids, colorsArray);
+        doHover(i - 1, ids, colorsArray);
 
         // 8) Make it so that website automatically scrolls to current result
         document.querySelector(`#results${i - 1}`).scrollIntoView({behavior: "smooth"})
