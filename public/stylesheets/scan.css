@@ -11,3 +11,10 @@ mark:hover {
     font-style: italic;
     cursor: pointer;
 }
+
+/* .light-yellow-header {
+    color: #F4FFDA;
+} */
+.dark-yellow-btn {
+    background-color: #DEFF92;
+}
