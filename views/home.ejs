@@ -1,39 +1,75 @@
-<%- layout('/layouts/boilerplate') %>
-<style>
-    .home-pg {
-        font-family: 'Archivo Black', sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    body, html {
-    height: 100%;
-    margin: 0;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckYourself</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+</head>
+<body class="d-flex text-center text-white home-pg bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-left mb-0 upper-logo">Check Yourself</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-right">
+                    <a class="nav-link active text-light" aria-current="page" href="/frames">CHECK YOURSELF</a>
+                    <a class="nav-link dropdown-toggle link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        ABOUT
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item link text-light" href="/what-is">WHAT'S CHECK YOURSELF?</a></li>
+                        <li><a class="dropdown-item link text-light" href="/what-is-a-frame">WHAT'S A FRAME</a></li>
+                        <li><a class="dropdown-item link text-light" href="/who-is-behind">WHO'S BEHIND CHECK YOURSELF?</a></li> 
+                    </ul>
+                    <a class="nav-link dropdown-toggle link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        OUR OTHER TOOLS
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item link text-light" href="/astrsc">ASTRSC</a></li>
+                    </ul>
+                    <a class="nav-link link text-light" href="/contact-us">CONTACT US</a>     
+                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <!-- <a class="nav-link" href="/campgrounds">Campgrounds</a> -->
+                </nav>
+            </div>
+        </header>
+        <main class="px-3">
+            <h1 class="light-yellow-header">WHEN IT COMES TO WRITING,</h1>
+            <h1 class="light-yellow-header">LET US HELP YOU</h1>
+            <h1 class="dark-yellow-header">CHECK YOURSELF</h1>
+            <h1 class="light-yellow-header">OR <strong class="dark-yellow-header">CHECK</strong> OTHER'S WRITING</h1>
+            <h1 class="light-yellow-header">FOR <strong class="dark-yellow-header">YOURSELF</strong></h1>
+            <div >
+                <a class="btn rounded-pill border shadow-sm mt-5 border border-1 border-light" href="/frames" role="button" style="background-color: #EAFFBA;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">START NOW</a>
+            </div>
+            <div >
+                <a class="btn rounded-pill border shadow-sm mt-5 border border-1 border-light" href="/what-is" role="button" style="background-color: #EAFFBA;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">LEARN MORE</a>
+            </div>
+        </main>
 
-    .bg {
-    /* The image used */
-    background-image: url("https://pixabay.com/photos/bundle-jute-rope-newspaper-1853667/");
+        <footer class="mt-auto text-white-50">
+            <p>Copyright &copy; 2023 CHECK YOURSELF. All rights reserved.</p>
+        </footer>
 
-    /* Full height */
-    height: 100%; 
 
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    }
-</style>
-<div class="bg"></div>
-<div class="row home-pg">
-    <h1 style="background-color: #F4FFDA;">WHEN IT COMES TO WRITING,</h1>
-    <h1 style="background-color: #F4FFDA;">LET US HELP YOU</h1>
-    <h1 style="color: #D1FA74;">CHECK YOURSELF</h1>
-    <h1 style="color: #F4FFDA;">OR <strong style="color:#D1FA74">CHECK</strong> OTHER'S WRITING</h1>
-    <h1 style="color: #F4FFDA;">FOR <strong style="color:#D1FA74">YOURSELF</strong></h1>
-</div>
+    </div>
 
-<div class="text-center">
-    <a class="btn rounded-pill border shadow-sm mt-5 border border-1 border-light" href="/frames" role="button" style="background-color: #EAFFBA;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">START NOW</a>
-</div>
-<div class="text-center">
-    <a class="btn rounded-pill border shadow-sm mt-5 border border-1 border-light" href="/what-is" role="button" style="background-color: #EAFFBA;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">LEARN MORE</a>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+

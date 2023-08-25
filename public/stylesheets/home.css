@@ -1,0 +1,39 @@
+.home-pg {
+    font-family: 'Archivo Black', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/images/astrsc_newspaper_bw_warm.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.cover-container {
+    max-width: 80vw;
+}
+
+.light-yellow-header {
+    color: #F4FFDA;
+}
+.dark-yellow-header {
+    color: #D1FA74;
+}
+
+.upper-logo {
+    /* background-image: url("/images/CY_logo.png"); */
+}
+
+.bg {
+/* The image used */
+
+
+/* Full height */
+height: 100%; 
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}

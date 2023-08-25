@@ -3,5 +3,11 @@ mark:hover {
 }
 
 #outputText {
-    background-color: red;
+    /* background-color: red; */
+}
+
+.link:hover {
+    /* background-color: #D1FA74; */
+    font-style: italic;
+    cursor: pointer;
 }
