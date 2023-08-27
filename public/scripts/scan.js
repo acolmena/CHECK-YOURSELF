@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
     const setupNextScan = (i, outputHTML) => {
         let newScanBtnDiv = document.querySelector('#newScanBtnDiv'); 
         let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
-                                                <p class="rounded-text-box border border-1 border-black" id="outputText${i}" style="
+                                                <p class="rounded-text-box border border-1 border-secondary" id="outputText${i}" style="
                                                                                                     background-color: #F4F5F5;
                                                                                                     border-radius: 20px; width: 50%;
                                                                                                     min-width: 400px;

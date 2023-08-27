@@ -1,3 +1,37 @@
-.card.card-body.mb-3.rounded-4.rounded {
+h1 {
+    font-family: 'Antonio', sans-serif;
+}
+
+#edit-btn {
+    background-color: rgba(255, 255, 255, 0.722);
+    padding: 9px 24px;
+}
+
+#delete-btn {
+    background-color: #e77c6c;
+    padding: 9px 24px;
+}
+
+.card.card-body.mb-3.rounded-4.rounded.border-secondary {
  background-color: #EAFFBA;
+}
+
+#how-to-use-add-btn, #how-to-use-add-body, #start-scanning-btn {
+    background-color: #EAFFBA;
+}
+
+.modal-header {
+    background-color: #D1FA74;
+}
+
+.modal-body, .modal-footer.border-top-0 {
+    background-color: #F4FFDA;
+}
+
+#modal-cancel-btn, #modal-delete-btn, #start-scanning-btn {
+    padding: 9px 24px;
+}
+
+#modal-delete-btn {
+    background-color: #e77c6c;
 }

@@ -15,10 +15,6 @@ button {
     background-color: #ffd689;
 }
 
-#outputText {
-    /* background-color: red; */
-}
-
 .nav-link.active {
     color: black;
     border-bottom-color: black;
@@ -56,8 +52,5 @@ body, nav, footer, .how-to-use-add {
     color: #AC73FC;
 }
 
-.google-font-text {
-    font-family: 'Antonio', sans-serif;
-}
 
 

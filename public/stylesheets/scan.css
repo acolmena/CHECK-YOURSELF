@@ -2,15 +2,23 @@
     background-color: #DEFF92;
 }
 
-.modal-body, .modal-footer.border-top-0 {
-    background-color: #EAFFBA;
-}
-
 .btn.rounded-pill.shadow-sm {
     background-color: #e77c6c;
 }
 
-#scanArticleBtn {
+.btn.rounded-pill.shadow-sm:hover {
+    font-style: normal;
+}
+
+#scanArticleBtn, .dropdown-menu.rounded-4.shadow-lg, #export-results-btn, #export-content-btn, .btn.rounded-pill.shadow-sm.mb-2.border-secondary {
+    background-color: #DEFF92;
+}
+
+.dropdown-item:hover {
+    background-color: #DEFF92;
+}
+
+#how-to-use-scan {
     background-color: #DEFF92;
 }
 
@@ -47,4 +55,16 @@
 
 #accordion {
     display: none;
+}
+
+#frameMessage {
+    display: none; 
+    color: black;
+    position: sticky;
+    width: 30%;
+    float: right;
+    margin-top: -150px;
+    padding: 1%;
+    right:5%;
+    border-radius: 10px;
 }

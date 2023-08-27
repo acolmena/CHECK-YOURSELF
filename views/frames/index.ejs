@@ -1,5 +1,5 @@
 <%- layout('layouts/boilerplate') %>
-<h2 class="text-center mb-3" style="font-family: 'Antonio', sans-serif;">Create Frames</h2>
+<h1 class="text-center mb-3">Create Frames</h1>
 <div class="row">
   <div class="col-8 offset-2">
     <%- include('../partials/howToUseAdd') %>
@@ -14,17 +14,9 @@
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
       <div class="card mb-4 rounded-4 shadow-sm rounded" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
           <h3 class="card-title"><%= frames[i].title %></h3>
-          <!-- <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p> -->
           <h6  class="card-subtitle mb-2 text-body-secondary"><%= frames[i].description %></h6>
-          <!-- </br>
-          <center>
-            <hr style="width: 90%;">
-          </center>
-          </br>
-          <p style="font-weight: 500; margin-bottom: 0px; margin-top: 10px;">Words</p> -->
         </div>
         <ul class="list-group list-group-flush">
           <% for (let word of frames[i].words) { %>
@@ -32,9 +24,9 @@
           <% } %>
         </ul>
         <div class="card-body">
-          <a class="card-link btn rounded-pill border shadow-sm border border-2 border-black" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">edit</a>
+          <a id="edit-btn" class="card-link btn rounded-pill border shadow-sm border-secondary" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">edit</a>
           <!-- Button triggers modal -->
-          <button type="button" class="btn rounded-pill shadow-sm border border-2 border-black" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: #e77c6c;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">
+          <button id="delete-btn" type="button" class="btn rounded-pill shadow-sm border-secondary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             delete
           </button>
 
@@ -42,18 +34,18 @@
           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header" style="background-color: #D1FA74">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel" style="font-family: 'Archivo Black', sans-serif;">Are you sure you want to delete this frame?</h1>
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to delete this frame?</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="background-color: #F4FFDA">
+                <div class="modal-body">
                   <br>
-                  This would also delete the <strong style="font-weight: 500;">description</strong> and <strong style="font-weight: 500;">all words</strong> associated with it.
+                  This would also delete the description and all words associated with it.
                 </div>
-                <div class="modal-footer border border-top-0" style="background-color: #F4FFDA">
-                  <button type="button" class="btn btn-secondary rounded-pill shadow-sm border border-2 border-black" data-bs-dismiss="modal" style="background-color: black;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">cancel</button>
+                <div class="modal-footer border-top-0">
+                  <button id="modal-cancel-btn" type="button" class="btn btn-secondary rounded-pill shadow-sm bg-secondary text-light" data-bs-dismiss="modal">cancel</button>
                   <form class="d-inline" action="/frames/<%= frames[i]._id%>?_method=DELETE" method="POST">
-                    <button class="btn rounded-pill shadow-sm border border-2 border-black" style="background-color: #e77c6c;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">confirm delete</button>
+                    <button id="modal-delete-btn" class="btn rounded-pill shadow-sm border-secondary">confirm delete</button>
                   </form>
                 </div>
               </div>
@@ -67,6 +59,6 @@
 </div>
 
 <div class="d-grid gap-2 col-2 mx-auto mb-5">
-    <a class="btn rounded-pill border shadow-sm mt-5 border border-2 border-black" href="/frames/scan" role="button" style="background-color: #DEFF92;padding: 9px 24px; font-family: 'Archivo Black', sans-serif;"><strong style="font-weight: 500;">start scanning</strong></a>
+    <a id="start-scanning-btn" class="btn rounded-pill border shadow-sm mt-5 border-secondary" href="/frames/scan" role="button">start scanning</a>
 </div>
 <script src="/scripts/validateForms.js"></script>
