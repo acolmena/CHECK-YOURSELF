@@ -30,7 +30,7 @@ jQuery(document).ready(function ($) {
                 data: {
                     labels: frameTitlesArray,
                     datasets: [{
-                        label: 'Number of Words Found',
+                        label: 'Words Found',
                         data: valuesArray,
                          // These labels appear in the legend and in the tooltips when hovering different arcs
                         backgroundColor: colorsArray,
@@ -295,8 +295,8 @@ jQuery(document).ready(function ($) {
         let textTitle = document.querySelector("#inputTitle").value;
         let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #BF97F8;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">
-                                            <strong style="font-weight: 600">Scan ${i}: ${textTitle}</strong>
+                                        <button class="accordion-button collapsed text-black fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #BF97F8;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">
+                                            Scan ${i}: ${textTitle}
                                         </button>
                                     </h2>
                                     <div id="collapse${i - 1}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

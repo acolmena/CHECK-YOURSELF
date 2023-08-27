@@ -3,20 +3,19 @@
   <div class="col-6 col-lg-3">
       <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/frames" style="color: #AC73FC;" class="link">CREATE FRAMES</a></li>
+            <li class="breadcrumb-item"><a href="/frames" class="link">CREATE FRAMES</a></li>
             <li class="breadcrumb-item active" aria-current="page">EDIT </li>
           </ol>
       </nav>
   </div>
   <div class="col-6 col-lg-3 offset-lg-2 mb-3">
-  <h2 class="text-center mb-3" style="font-family: 'Archivo Black', sans-serif;">EDIT FRAMES</h2>
+  <h2 class="text-center mb-3">Edit Frames</h2>
 </div>
 </div>
 <div class="row">
   <% for (let i = count - 1; i > -1; i--) { %>
     <div class="col-sm-3 mb-4 mb-sm-0">
       <div class="card mb-4 rounded-4 shadow-sm rounded mt-3" id="card<%= frames[i]._id%>" style="background-color: <%= frames[i].color%>;">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
         <% if (frames[i]._id.equals(frame._id)) { %>
             <div class="card-body rounded-4 rounded" style="box-shadow: 0 0 80px <%= frames[i].color%>;" id="cardToEdit">
                 <%- include('../partials/editPartial') %>
@@ -24,25 +23,15 @@
         <% } else { %>
             <div class="card-body rounded-4 rounded">
               <h3 class="card-title"><%= frames[i].title %></h3>
-              <!-- <p class="card-text" style="font-weight: 500;  margin-bottom: 10px; margin-top: 20px;">Description </p> -->
               <h6  class="card-subtitle mb-2 text-body-secondary"><%= frames[i].description %></h6>
-              <!-- </br>
-              <center>
-                <hr style="width: 90%;">
-              </center>
-              </br>
-              <p style="font-weight: 500; margin-bottom: 0px; margin-top: 10px;">Words</p> -->
             </div>
             <ul class="list-group list-group-flush">
               <% for (let word of frames[i].words) { %>
                 <li class="list-group-item"><%= word %></li>
               <% } %>
-              <!-- <li class="list-group-item">
-                <a class="card-link btn btn-info"href="#">Add New Word</a>
-              </li> -->
             </ul>
             <div class="card-body">
-              <a class="card-link btn rounded-pill shadow-sm border border-2 border-black" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">EDIT</a>
+              <a class="card-link btn rounded-pill shadow-sm border border-2 border-black" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">edit</a>
             </div>
            
         <% } %>

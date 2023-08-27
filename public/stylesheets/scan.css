@@ -1,20 +1,50 @@
-mark:hover {
-    cursor: pointer;
-}
-
-#outputText {
-    /* background-color: red; */
-}
-
-.link:hover {
-    /* background-color: #D1FA74; */
-    font-style: italic;
-    cursor: pointer;
-}
-
-/* .light-yellow-header {
-    color: #F4FFDA;
-} */
-.dark-yellow-btn {
+.modal-header.border-bottom-0 {
     background-color: #DEFF92;
+}
+
+.modal-body, .modal-footer.border-top-0 {
+    background-color: #EAFFBA;
+}
+
+.btn.rounded-pill.shadow-sm {
+    background-color: #e77c6c;
+}
+
+#scanArticleBtn {
+    background-color: #DEFF92;
+}
+
+#inputText {
+    height: 350px;
+}
+
+#newScanBtn {
+    display: none; 
+    background-color: #DEFF92; 
+    padding: 9px 24px;
+}
+
+#chartPar0 {
+    width: 650px; 
+}
+
+#outputText0 {
+    border-radius: 20px; 
+    width: 50%;
+    min-width: 400px;
+    float: left;
+    height: auto;
+    padding: 3%;
+    border-radius: 10px;
+    margin-left: 5%;
+    background-color: #ffffff;
+    margin-bottom: 200px;
+}
+
+#results0 {
+    display: none;
+}
+
+#accordion {
+    display: none;
 }

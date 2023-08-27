@@ -1,0 +1,63 @@
+mark:hover {
+    cursor: pointer;
+}
+
+a:hover {
+    cursor: pointer;
+    font-style: italic;
+}
+
+button {
+    padding: 9px 24px;;
+}
+
+.astrsc-btn {
+    background-color: #ffd689;
+}
+
+#outputText {
+    /* background-color: red; */
+}
+
+.nav-link.active {
+    color: black;
+    border-bottom-color: black;
+}
+
+.link {
+    color: #9950FF;
+}
+
+.link:hover {
+    /* background-color: #D1FA74; */
+    
+}
+
+/* .light-yellow-header {
+    color: #F4FFDA;
+} */
+.dark-yellow-btn {
+    background-color: #DEFF92;
+}
+
+.index-light-yellow-elms {
+    background-color: #EAFFBA;
+}
+
+nav {
+    font-family: 'Antonio', sans-serif;
+}
+
+body, nav, footer, .how-to-use-add {
+    background-image: url('https://global-uploads.webflow.com/5f04dd60cf344a1e1952a8e5/6373345a18c74273453603a7_Sand-Texture.webp');
+}
+
+.dark-purple-text {
+    color: #AC73FC;
+}
+
+.google-font-text {
+    font-family: 'Antonio', sans-serif;
+}
+
+

@@ -1,0 +1,12 @@
+.breadcrumb-item a {
+    color: #AC73FC;
+}
+
+h2 {
+    font-family: 'Antonio', sans-serif;
+}
+
+.card-body a {
+    background-color: rgba(255, 255, 255, 0.722);
+    padding: 9px 24px;
+}
