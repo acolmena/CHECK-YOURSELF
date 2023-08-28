@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
 
 
@@ -44,7 +44,7 @@
     </div>
     <div class="col-6 col-lg-2 offset-lg-4 mb-3 me-4" id="exportBtns">
         <div class="dropdown me-2 ">
-            <button id="export-content-btn" class="btn dropdown-toggle rounded-pill shadow-sm border-secondary text-black" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to export files containing (1) your frames and (2) the texts and their titles">
+            <button id="export-content-btn" class="btn dropdown-toggle rounded-pill shadow-sm border-secondary text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to export files containing (1) your frames and (2) the texts and their titles">
                 export analyzed content
             </button>
             <ul class="dropdown-menu rounded-4 shadow-lg">
@@ -62,7 +62,7 @@
     </div>
     <div class="col-6 col-lg-2 mb-3" id="exportBtns">
         <div class="dropdown me-2">
-            <button id="export-results-btn" class="btn dropdown-toggle rounded-pill shadow-sm border-secondary text-black ms-4" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to export files containing summaries of your scans">
+            <button id="export-results-btn" class="btn dropdown-toggle rounded-pill shadow-sm border-secondary text-dark ms-4" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Click to export files containing summaries of your scans">
                 export analysis results
             </button>
             <ul class="dropdown-menu rounded-4 shadow-lg">
@@ -93,7 +93,7 @@
 </div>
     
 <div id="results0">
-    <p id="outputText0" class="rounded-text-box border border-1 border-secondary"> 
+    <p id="outputText0" class="rounded-text-box border-secondary rounded-3 float-start"> 
     </p>    
     <div class="d-grid gap-2 col-2 mx-auto mb-3" id="chartPar0">
         <canvas id="myChart0" aria-label="pie chart for scan" role="pie chart">
@@ -101,9 +101,15 @@
         </canvas> 
     </div>
 </div>
+
+<div id="frameMessage" class="float-end">
+    <% for (let frame of frames) {%>
+        <aside id="<%= frame._id %>" class="p-3 rounded-3"><strong><%= frame.title %></strong> </br>  <%= frame.description %></aside>
+    <% } %>
+</div>
       
-<div class="d-grid gap-2 col-2 mx-auto" id="newScanBtnDiv">
-    <button id="newScanBtn" class="btn btn-primary border-secondary text-black rounded-pill">scan again</button>
+<div class="d-grid gap-2 col-2 mx-auto mt-5" id="newScanBtnDiv">
+    <button id="newScanBtn" class="btn btn-primary border-secondary text-dark rounded-pill">scan again</button>
 </div>
 
 <div class="row">
@@ -114,16 +120,8 @@
         
         
         
-        <div id="frameMessage">
-            <% for (let frame of frames) {%>
-                <aside id="<%= frame._id %>"><strong><%= frame.title %></strong> </br>  <%= frame.description %></aside>
-            <% } %>
-        </div>
-     
 
-        <p>&nbsp;</p>
-    </div>
-</div>
+     
 <script>
     const frames = <%- JSON.stringify(frames) %>
 </script>

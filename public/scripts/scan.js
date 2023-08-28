@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
                 element.innerHTML.slice(offset - 2, offset) == '">'
               ) return x;    // if outside has already been highlighted, don't highlight again
             wrdCount += 1;
-            return `<mark class=${tropeClass} style='background-color: ${color}; border-radius: 7px;'>${x}</mark>`;
+            return `<mark class=${tropeClass} style='background-color: ${color}; border-radius: 7px;display: inline-block;'>${x}</mark>`;
         });
         return [wrdCount, element];
     }
@@ -54,11 +54,10 @@ jQuery(document).ready(function ($) {
     const setupNextScan = (i, outputHTML) => {
         let newScanBtnDiv = document.querySelector('#newScanBtnDiv'); 
         let nextOutputTextAndChart = `<div id="results${i}"  style="display: none;">
-                                                <p class="rounded-text-box border border-1 border-secondary" id="outputText${i}" style="
+                                                <p class="rounded-text-box border-secondary rounded-3 float-start" id="outputText${i}" style="
                                                                                                     background-color: #F4F5F5;
-                                                                                                    border-radius: 20px; width: 50%;
+                                                                                                    width: 50%;
                                                                                                     min-width: 400px;
-                                                                                                    float: left;
                                                                                                     height: auto;
                                                                                                     padding: 3%;
                                                                                                     border-radius: 10px;
@@ -83,7 +82,6 @@ jQuery(document).ready(function ($) {
             $(`.${ids[j]}`).hover(function () {   // for mousenter
                 $("#frameMessage").show();
                 $("aside").hide();
-                // $("#frameMessage").css("background-color", 'lightgreen'); // turn background of popup text this color
                 $(`#${ids[j]}`).css("background-color", colorsArray[j]); // turn background of popup text this color
                 $(`#${ids[j]}`).show();
                 $(`.${ids[j]}`).css("cursor", "pointer")
@@ -92,22 +90,20 @@ jQuery(document).ready(function ($) {
             // function() {   // for mouseexit
             //     $(`#${ids[j]}`).hide();
             // });
-
-            $(`#outputText${index}`).bind("mousemove", function (e) {
-                console.log('topPage')
-                $("#frameMessage").css({
-                  top: e.pageY,
-                });
-            });
-          
-            $("html").click(function (closeMessage) {
-                if (!($(closeMessage.target).closest(`#${ids[j]}`).length > 0)) {
-                    // if ($(`#${ids[j]}`).is(":visible")) {
-                        $(`#${ids[j]}`).hide();
-                    }
-                // }
-            });
         }
+        $("mark").bind("mousemove", function (e) {
+            $("#frameMessage").css({
+              top: e.pageY,
+            });
+        });
+      
+        $("html").click(function (closeMessage) {
+            if (!($(closeMessage.target).closest("#frameMessage").length > 0)) {
+                if ($("#frameMessage").is(":visible")) {
+                    $("#frameMessage").hide();
+                }
+            }
+        });
     }
 
     // Initialize objects for exporting .csv files
@@ -293,9 +289,9 @@ jQuery(document).ready(function ($) {
         // 4) Wrap outputText in collapsed accordion
         let resultDiv = document.querySelector(`#results${i - 1}`);
         let textTitle = document.querySelector("#inputTitle").value;
-        let accordionPrevOT = `<div class="accordion-item" id="accordionItem${i - 1}">
+        let accordionPrevOT = `<div class="accordion-item border-secondary" id="accordionItem${i - 1}">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed text-black fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #BF97F8;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">
+                                        <button class="accordion-button collapsed text-dark fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i - 1}" aria-expanded="false" aria-controls="collapse${i - 1}" style="background-color: #BF97F8;padding: 9px 24px;">
                                             Scan ${i}: ${textTitle}
                                         </button>
                                     </h2>
