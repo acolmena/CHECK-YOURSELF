@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
-const Frame = require('./models/frame')
 const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate')
 const ExpressError = require('./utils/ExpressError')
@@ -38,6 +37,17 @@ app.use(express.static(path.join(__dirname, 'public')))  // serving public direc
 app.get('/', (req, res) => {
     res.render('home')
 })
+
+app.post('/clear-database', async (req, res) => {
+    try {
+      // Clear the database collection associated with YourModel
+      await YourModel.deleteMany({});
+      res.sendStatus(204); // No Content
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 
 // app.get('/makeframe', catchAsync(async (req, res) => {
