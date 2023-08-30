@@ -2,13 +2,8 @@ mark:hover {
     cursor: pointer;
 }
 
-a:hover {
-    cursor: pointer;
-    font-style: italic;
-}
-
-button {
-    padding: 9px 24px;;
+h1 {
+    font-family: 'Archivo Black', sans-serif;
 }
 
 .astrsc-btn {
@@ -25,13 +20,12 @@ button {
 }
 
 .link:hover {
+    cursor: pointer;
+    font-style: italic;
     /* background-color: #D1FA74; */
     
 }
 
-/* .light-yellow-header {
-    color: #F4FFDA;
-} */
 .dark-yellow-btn {
     background-color: #DEFF92;
 }
@@ -41,7 +35,7 @@ button {
 }
 
 nav {
-    font-family: 'Antonio', sans-serif;
+    font-family: 'Archivo Black', sans-serif;
 }
 
 body, nav, footer, .how-to-use-add {
@@ -51,6 +45,12 @@ body, nav, footer, .how-to-use-add {
 .dark-purple-text {
     color: #AC73FC;
 }
+
+.btn.rounded-pill.text-dark.border-secondary.fw-semibold {
+    background-color: #DEFF92;
+    padding: 9px 24px;  
+}
+
 
 
 

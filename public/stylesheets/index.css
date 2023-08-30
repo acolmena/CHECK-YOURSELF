@@ -1,7 +1,3 @@
-h1 {
-    font-family: 'Antonio', sans-serif;
-}
-
 #edit-btn {
     background-color: rgba(255, 255, 255, 0.722);
     padding: 9px 24px;
@@ -16,9 +12,10 @@ h1 {
  background-color: #EAFFBA;
 }
 
-#how-to-use-add-btn, #how-to-use-add-body, #start-scanning-btn {
+#how-to-use-add-btn, #how-to-use-add-body {
     background-color: #EAFFBA;
-}
+} 
+
 
 .modal-header {
     background-color: #D1FA74;
@@ -28,10 +25,14 @@ h1 {
     background-color: #F4FFDA;
 }
 
-#modal-cancel-btn, #modal-delete-btn, #start-scanning-btn {
+#modal-cancel-btn, #modal-delete-btn {
     padding: 9px 24px;
 }
 
 #modal-delete-btn {
     background-color: #e77c6c;
+}
+
+.required.mb-1, .star {
+    color: rgb(241, 66, 66);
 }

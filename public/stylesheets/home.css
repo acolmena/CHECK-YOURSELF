@@ -1,5 +1,5 @@
 body {
-    font-family: 'Antonio', sans-serif;
+    font-family: 'Archivo Black', sans-serif;
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("/images/astrsc_newspaper_bw_warm.jpg");
@@ -13,13 +13,26 @@ body {
     color: #D1FA74;
 }
 
-/* #check-urself-1:hover {
-    transition: margin-right 2s;
-    background-color: #D1FA74;
-    /* transition-timing-function: ease;
-    transition-property: margin-left, color, background-color;
-    color: rgba(0, 0, 0, 0.669) */
-} */
+#when-it-comes {
+    right: 10rem;
+}
+
+#let-us-help {
+    right: 5rem;
+}
+
+#check-yourself {
+    left: 7rem;
+}
+
+#for-yourself {
+    right: 4rem;
+}
+
+#when-it-comes, #let-us-help, #check-yourself, #or-check-others, #for-yourself  {
+    position: relative;
+    font-size: 4rem;
+}
 
 .nav-link {
     padding: 0.25rem 0;

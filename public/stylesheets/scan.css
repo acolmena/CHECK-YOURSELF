@@ -6,10 +6,6 @@
     background-color: #e77c6c;
 }
 
-.btn.rounded-pill.shadow-sm:hover {
-    font-style: normal;
-}
-
 #scanArticleBtn, .dropdown-menu.rounded-4.shadow-lg, #export-results-btn, #export-content-btn, .btn.rounded-pill.shadow-sm.mb-2.border-secondary {
     background-color: #DEFF92;
 }

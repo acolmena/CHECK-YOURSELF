@@ -1,9 +1,16 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
+const Frame = require('./models/frame')
 const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate')
 const ExpressError = require('./utils/ExpressError')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 
 // require routes 
@@ -32,6 +39,8 @@ app.use(methodOverride('_method'))
 app.use('/frames', frames);
 app.use('/', navbar);
 app.use(express.static(path.join(__dirname, 'public')))  // serving public directory
+app.use(mongoSanitize())
+app.use(helmet())
 
 // get request for home page
 app.get('/', (req, res) => {
@@ -41,13 +50,13 @@ app.get('/', (req, res) => {
 app.post('/clear-database', async (req, res) => {
     try {
       // Clear the database collection associated with YourModel
-      await YourModel.deleteMany({});
+      await Frame.deleteMany({});
       res.sendStatus(204); // No Content
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
-  });
+});
 
 
 // app.get('/makeframe', catchAsync(async (req, res) => {
