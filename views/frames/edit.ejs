@@ -9,7 +9,7 @@
       </nav>
   </div>
   <div class="col-6 col-lg-3 offset-lg-2 mb-3">
-  <h2 class="text-center mb-3">Edit Frames</h2>
+  <h1 class="text-center mb-3">Edit Frames</h1>
 </div>
 </div>
 <div class="row">
@@ -31,7 +31,7 @@
               <% } %>
             </ul>
             <div class="card-body">
-              <a class="card-link btn rounded-pill shadow-sm border border-2 border-secondary" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">edit</a>
+              <a class="card-link btn rounded-pill shadow-sm border-secondary editBtn" href="/frames/<%= frames[i]._id %>/edit/#cardToEdit">edit</a>
             </div>
            
         <% } %>

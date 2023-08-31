@@ -1,3 +1,9 @@
+let converter = require('json-2-csv');
+let json2csvCallback = function (err, csv) {
+    if (err) throw err;
+    console.log(csv);
+};
+
 jQuery(document).ready(function ($) { 
     let i = 0;
     // Highlights the words that match the rgx expression below
@@ -110,7 +116,8 @@ jQuery(document).ready(function ($) {
     let graphObj = {
         'totWrdCountAllFrames': 0
     }
-    let txtContentRows = ['Scan #, Text Title, Text Content']
+    // let txtContentRows = ['Scan #, Text Title, Text Content']
+    let txtContentRows = {};
     let articleAllRows = ['Article Title,Article Word Count,Frames Found,Words Found For Each Frame,Frequency of Words in Article,Total # Words Found For Frame,Total Words Highlighted,Percentage of Article Highlighted'];  // make rows array and insert headers
     // let articleAnalysisObj = {};
 
@@ -151,7 +158,10 @@ jQuery(document).ready(function ($) {
         let rawInput = document.querySelector("#inputText").value;
         let textTitle = document.querySelector("#inputTitle").value;
         let totWords = getTotWordCount(rawInput + " " + textTitle); // get total number of words that were inputted by user
-        txtContentRows.push(`${i},${textTitle},${rawInput}`)
+        // txtContentRows.push(`${i}`,`${textTitle}`,`${'"' + rawInput + '"'}`)
+        txtContentRows['Scan #'] = i;
+        txtContentRows['Text Title'] = textTitle;
+        txtContentRows['Text Content'] = rawInput;
         articleIndRows = `${textTitle},${totWords}`
         rawInput = rawInput.replace(/\n\r?/g, "<br>");
         $(`#outputText${i - 1}`).html(`<h5>${textTitle}</h5><br>` + rawInput);
@@ -431,7 +441,7 @@ jQuery(document).ready(function ($) {
 
     $('#exportTxtContentLink').click(function () {
         console.log(txtContentRows)
-        exportToCSVFile(txtContentRows, document.querySelector('#exportTxtContentLink'), 'analyzed-text-content')
+        exportToCSVFile(converter.json2csv(txtContentRows, json2csvCallback), document.querySelector('#exportTxtContentLink'), 'analyzed-text-content')
     })
     
     

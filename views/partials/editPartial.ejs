@@ -1,9 +1,7 @@
-<!-- <div class="row">
-    <h1 class="text-center">Edit Frame</h1> -->
     <form action="/frames/<%= frame._id %>?_method=PUT" class="needs-validation" method="POST" novalidate>
         <p class="mb-1" style="color: rgb(241, 66, 66);"><strong style="color: rgb(241, 66, 66);">*</strong> Indicates required field</p>
         <div class="mb-3">
-            <label for="title"  class="form-label" style="font-weight: 500;">Title <strong style="color: red;">*</strong></label>
+            <label for="title"  class="form-label">Title <strong style="color: red;">*</strong></label>
             <input type="text" class="form-control" placeholder="enter title" id="title" name="frame[title]" value="<%= frame.title %>" required>
             <div class="valid-feedback">
                 Looks good!
@@ -14,7 +12,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="description"  class="form-label" style="font-weight: 500;">Description</label>
+            <label for="description"  class="form-label">Description</label>
             <textarea type="text" class="form-control" placeholder="enter description (optional)" id="description" name="frame[description]"><%= frame.description %></textarea>
             <div class="valid-feedback">
                 Looks good!
@@ -22,7 +20,7 @@
         </div>
         
         <div class="mb-3">
-            <label for="words"  class="form-label" style="font-weight: 500;">Words <strong style="color: red;">*</strong></label>
+            <label for="words"  class="form-label">Words <strong style="color: red;">*</strong></label>
             <input type="text" class="form-control" placeholder="enter words" id="words" name="frame[words]" value="<%= frame.words %>" required>
             <div class="valid-feedback">
                 Looks good!
@@ -32,9 +30,9 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="color"  class="form-label" style="font-weight: 500;">Color <strong style="color: red;">*</strong></label>
+            <label for="color"  class="form-label">Color <strong style="color: red;">*</strong></label>
             </br>
-            <input class="border border-1 p-0 border-secondary" type="color"  placeholder="enter color" id="color" name="frame[color]" value="<%= frame.color %>" required>
+            <input class="p-0 border-secondary" type="color"  placeholder="enter color" id="color" name="frame[color]" value="<%= frame.color %>" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -43,26 +41,8 @@
             </div>
         </div>                 
         <div class="mb-3">
-            <button class="btn rounded-pill shadow-sm mb-3 border border-1 border-secondary" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">CONFIRM EDIT</button>
-            <a class="btn rounded-pill border shadow-sm border border-1 border-secondary mb-3" href="/frames" style="background-color: #1c1c1c88;  color:#fafcff;padding: 9px 24px;font-family: 'Archivo Black', sans-serif;">CANCEL EDIT</a>
+            <button class="btn rounded-pill shadow-sm mb-3 border border-1 border-secondary" style="background-color: rgba(255, 255, 255, 0.722);padding: 9px 24px;">confirm edit</button>
+            <br>
+            <a class="btn rounded-pill border shadow-sm border border-1 border-secondary mb-3" href="/frames" style="background-color: #1c1c1c88;  color:#fafcff;padding: 9px 24px;">cancel edit</a>
         </div>
     </form>
-<!-- </div> -->
-
-<!-- <h1>Edit Frame</h1>
-<form action="/frames/<%= frame._id %>?_method=PUT" method="POST">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="frame[title]" placeholder="enter the frame's title/name" value="<%= frame.title %>">
-    </div>
-    <div>
-        <label for="description">Description</label>
-        <input type="text" id="description" name="frame[description]" placeholder="enter the frame's description" value="<%= frame.description %>">
-    </div>
-    <div>
-        <label for="words">Words</label>
-      
-    </div>
-    <button>Update Frame</button>
-</form>
-<a href="/frames">Back To Frames</a> -->
