@@ -104,17 +104,6 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-// app.post('/clear-database', async (req, res) => {
-//     try {
-//       // Clear the database collection associated with YourModel
-//       await Frame.deleteMany({});
-//       res.sendStatus(204); // No Content
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Internal Server Error');
-//     }
-// });
-
 
 // app.get('/makeframe', catchAsync(async (req, res) => {
 //     const frame = new Frame({
