@@ -11,7 +11,7 @@ const ExpressError = require('./utils/ExpressError')
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const uri = process.env.DB_URL;
-// const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 // const converter = require('json-2-csv');
 
 // require routes 
@@ -19,7 +19,7 @@ const frames = require('./routes/frames')
 const navbar = require('./routes/navbar')
 
 // 'mongodb://127.0.0.1:27017/scanner-maker
-mongoose.connect(uri, {
+mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
