@@ -1,8 +1,8 @@
-let converter = require('json-2-csv');
-let json2csvCallback = function (err, csv) {
-    if (err) throw err;
-    console.log(csv);
-};
+// let converter = require('json-2-csv');
+// let json2csvCallback = function (err, csv) {
+//     if (err) throw err;
+//     console.log(csv);
+// };
 
 jQuery(document).ready(function ($) { 
     let i = 0;

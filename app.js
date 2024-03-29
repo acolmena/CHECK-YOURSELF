@@ -17,9 +17,10 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 // require routes 
 const frames = require('./routes/frames')
 const navbar = require('./routes/navbar')
+const app = express();
 
 // 'mongodb://127.0.0.1:27017/scanner-maker
-mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker', {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -31,7 +32,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker', {
 //       strict: true,
 //       deprecationErrors: true,
 //     }
-//   });
+// });
+
 // async function run() {
 // try {
 //     // Connect the client to the server	(optional starting in v4.7)
@@ -39,14 +41,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/scanner-maker', {
 //     // Send a ping to confirm a successful connection
 //     await client.db("admin").command({ ping: 1 });
 //     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-// } finally {
+// } 
+
+// finally {
 //     // Ensures that the client will close when you finish/error
 //     await client.close();
 // }
 // }
 // run().catch(console.dir);
 
-const app = express();
+
 
 app.engine('ejs', ejsMate);  // for boilerplate 
 app.set('view engine', 'ejs');
